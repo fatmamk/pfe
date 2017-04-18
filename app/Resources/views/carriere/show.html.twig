@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Carriere</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carriere.id }}</td>
+            </tr>
+            <tr>
+                <th>Libellecarriere</th>
+                <td>{{ carriere.libelleCarriere }}</td>
+            </tr>
+            <tr>
+                <th>Typecontrat</th>
+                <td>{{ carriere.typeContrat }}</td>
+            </tr>
+            <tr>
+                <th>Integre</th>
+                <td>{{ carriere.integre }}</td>
+            </tr>
+            <tr>
+                <th>Debutintergration</th>
+                <td>{% if carriere.debutIntergration %}{{ carriere.debutIntergration|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Finintegration</th>
+                <td>{% if carriere.finIntegration %}{{ carriere.finIntegration|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Daterecrutement</th>
+                <td>{% if carriere.dateRecrutement %}{{ carriere.dateRecrutement|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fichiercontrat</th>
+                <td>{{ carriere.fichierContrat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('carriere_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('carriere_edit', { 'id': carriere.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

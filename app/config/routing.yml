@@ -1,0 +1,103 @@
+gestion_formation_complementaire:
+    resource: "@GestionBundle/Controller/FormationComplementaireController.php"
+    type:     annotation
+
+
+gestion_fichier:
+    resource: "@GestionBundle/Controller/FichierController.php"
+    type:     annotation
+
+
+gestion_evaluation:
+    resource: "@GestionBundle/Controller/EvaluationController.php"
+    type:     annotation
+
+
+gestion_nature:
+    resource: "@GestionBundle/Controller/NatureController.php"
+    type:     annotation
+
+gestion_formateur:
+    resource: "@GestionBundle/Controller/FormateurController.php"
+    type:     annotation
+
+gestion_produit:
+    resource: "@GestionBundle/Controller/ProduitController.php"
+    type:     annotation
+
+gestion_departement:
+    resource: "@GestionBundle/Controller/DepartementController.php"
+    type:     annotation
+
+gestion_type.qualification:
+    resource: "@GestionBundle/Controller/Type_QualificationController.php"
+    type:     annotation
+
+gestion_type.formation:
+    resource: "@GestionBundle/Controller/Type_FormationController.php"
+    type:     annotation
+
+gestion_type.contrat:
+    resource: "@GestionBundle/Controller/Type_ContratController.php"
+    type:     annotation
+
+gestion_type.conge:
+    resource: "@GestionBundle/Controller/Type_CongeController.php"
+    type:     annotation
+
+gestion_site:
+    resource: "@GestionBundle/Controller/SiteController.php"
+    type:     annotation
+
+gestion_service:
+    resource: "@GestionBundle/Controller/ServiceController.php"
+    type:     annotation
+
+
+gestion_nature_absence:
+    resource: "@GestionBundle/Controller/NatureAbsenceController.php"
+    type:     annotation
+
+gestion_groupe:
+    resource: "@GestionBundle/Controller/GroupeController.php"
+    type:     annotation
+
+gestion_formation:
+    resource: "@GestionBundle/Controller/FormationController.php"
+    type:     annotation
+
+gestion_fonction:
+    resource: "@GestionBundle/Controller/FonctionController.php"
+    type:     annotation
+
+gestion_demande.formation:
+    resource: "@GestionBundle/Controller/Demande_FormationController.php"
+    type:     annotation
+
+gestion_conge:
+    resource: "@GestionBundle/Controller/CongeController.php"
+    type:     annotation
+
+gestion_carriere:
+    resource: "@GestionBundle/Controller/CarriereController.php"
+    type:     annotation
+
+gestion_activite:
+    resource: "@GestionBundle/Controller/ActiviteController.php"
+    type:     annotation
+
+gestion_absence:
+    resource: "@GestionBundle/Controller/AbsenceController.php"
+    type:     annotation
+
+gestion_employee:
+    resource: "@GestionBundle/Controller/EmployeeController.php"
+    type:     annotation
+
+gestion_employee:
+    resource: "@GestionBundle/Controller/EmployeeController.php"
+    type:     annotation
+
+gestion:
+    resource: "@GestionBundle/Resources/config/routing.yml"
+    prefix:   /

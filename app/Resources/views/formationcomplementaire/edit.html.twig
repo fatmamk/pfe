@@ -1,0 +1,34 @@
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">Modifier Formation Complementaire </h2>
+</div>
+<div class="modal-body">
+    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('formationcomplementaire_edit',{'id':formationComplementaire.id}),'method':'POST'|trans}})}}
+
+
+    <section>
+        <label class="label">commentaire</label>
+        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+            {{ form_widget ( edit_form.commentaire,{ 'attr': {'type': 'text','name':'competance'|trans } } ) }}
+        </label>
+    </section>
+</div>
+<div class="modal-footer">
+    {{ form_widget(edit_form._token) }}
+
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Modifier
+        </button>
+
+
+    </footer>
+    {{ form_end(edit_form,{'render_rest':false}) }}
+</div>
+
+
+

@@ -1,0 +1,85 @@
+<div class="modal-header" >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label"> Ajouter demande formation </h2>
+</div>
+<div class="modal-body">
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demande_formation_new',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
+
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">Théme </label>
+                <label class="input"> <i class="icon-append fa fa-pencil"></i>
+                    {{ form_widget(form.theme,{'attr': {'type':'text','name':'libelleFromation','placeholder':'theme'|trans}}) }}
+                    {{ form_errors(form.theme)}}
+                    </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">Date de demande </label>
+
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget(form.dateDedemande,{'attr':{'class':'startdate'|trans}})}}
+                    {{ form_errors(form.dateDedemande)}}
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">Date Souhaite </label>
+
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget(form.dateSouhaite,{'attr':{'class':'startdate'|trans}})}}
+                    {{ form_errors(form.dateSouhaite)}}
+                </label>
+            </section>
+
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">Justification </label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( form.justification,{ 'attr': {'name':'justification','placeholder':'justification'|trans}}) }}
+                    {{ form_errors(form.justification)}}
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the justification </b> </label>
+            </section>
+
+            <section class="col col-6 ">
+                <label class="label">Description </label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( form.description,{ 'attr': {'name':'description','placeholder':'description'|trans}}) }}
+                    {{ form_errors(form.description)}}
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the description </b> </label>
+            </section>
+            <section class="col col-4">
+                <label class="label">Etat
+                    <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
+
+
+                </label>
+            </section>
+        </div>
+    </fieldset>
+
+    <fieldset>
+
+    </fieldset>
+</div>
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+
+    <footer>
+
+        <div class="btn-group dropup">
+            <button type="submit" class="btn btn-primary">
+                Validate Form
+            </button>
+
+        </div>
+    </footer>
+
+
+
+    {{ form_end(form,{'render_rest':false}) }}
+
+</div>

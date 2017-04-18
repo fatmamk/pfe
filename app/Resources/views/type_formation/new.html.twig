@@ -1,0 +1,41 @@
+
+<div class="modal-header" style="
+    background: cornflowerblue;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title">
+        <i class="fa fa-edit"> TYPE Formation </i>
+    </h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('type_formation_new'),'method':'POST'|trans}})}}
+    <section>
+        <label class="label">LibelleTypeFormtion</label>
+        <label class="input">
+            <i class="icon-append fa fa-tag"></i>
+            {{ form_widget(form.libelleTypeF,{'attr': {'type':'text','name':'libelleTypeF','placeholder':'libelleTypeF'|trans}}) }}
+            {{ form_errors(form.libelleTypeF)}}
+
+
+        </label>
+
+    </section>
+
+</div>
+
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+
+
+    </footer>
+    {{ form_end(form,{'render_rest':false}) }}
+</div>
+

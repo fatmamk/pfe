@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">Ajouter fichier </h2>
+</div>
+<div class="modal-body">
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('fichier_new'),'method':'POST'|trans}})}}
+    <div class="row">
+        <section class="col col-6">
+            <label class="label">nomfichier</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(form.nomfichier,{'attr': {'type':'text','name':'site','placeholder':'nomfichier'|trans}}) }}
+                {{ form_errors(form.nomfichier)}}
+            </label>
+        </section>
+        <section class="col col-6">
+            <label class="label">natureFichier</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(form.natureFichier,{'attr': {'type':'text','name':'site','placeholder':'natureFichier'|trans}}) }}
+                {{ form_errors(form.natureFichier)}}
+            </label>
+        </section> <section class="col col-6">
+            <label class="label">commentaire</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(form.commentaire,{'attr': {'type':'text','name':'site','placeholder':'commentaire'|trans}}) }}
+                {{ form_errors(form.commentaire)}}
+            </label>
+        </section>
+
+        <section class="col col-6">
+            <label class="label">cv</label>
+
+            {{ form_widget(form.file)}}
+            {{ form_errors(form.file)}}
+        </section>
+    </div>
+</div>
+
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Enregister
+        </button>
+
+
+    </footer>
+    {{ form_end(form,{'render_rest':false}) }}
+</div>
+
+
+

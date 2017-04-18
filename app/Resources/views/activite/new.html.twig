@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title" id="myModalLabel"> Ajouter Activite</h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('activite_new'),'method':'POST'|trans}})}}
+    <section>
+        <label class="label">Activite</label>
+        <label class="input">
+            <i class="icon-append fa fa-tag"></i>
+            {{ form_widget(form.libelleActivite,{'attr': {'type':'text','name':'libelleActivite','placeholder':'libelleActivite'|trans}}) }}
+            {{ form_errors(form.libelleActivite)}}
+
+
+        </label>
+
+        <label class="label">Abreviation Activite</label>
+        <label class="input">
+            <i class="icon-append fa fa-tag"></i>
+            {{ form_widget(form.abreviationActivite,{'attr': {'type':'text','name':'abreviationActivite','placeholder':'Abreviation Activite'|trans}}) }}
+            {{ form_errors(form.abreviationActivite)}}
+
+
+        </label>
+        <section class="">
+            <label class="label">Employee</label>
+            <label class="select"> {{ form_widget ( form.employees,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+            <i></i>
+        </section>
+
+    </section>
+
+</div>
+
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Enregiser
+        </button>
+
+
+    </footer>
+    {{ form_end(form,{'render_rest':false}) }}
+</div>
+

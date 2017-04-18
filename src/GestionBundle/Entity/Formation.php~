@@ -1,0 +1,233 @@
+<?php
+
+namespace GestionBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Formation
+ *
+ * @ORM\Table(name="formation")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\FormationRepository")
+ */
+class Formation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=30,nullable=true)
+     */
+    private $titre;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objectif", type="string", length=255,nullable=true)
+     */
+    private $objectif;
+   
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieu", type="string", length=255,nullable=true)
+     */
+
+    private $lieu;
+
+   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=255,nullable=true)
+     */
+    private $etat;
+
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CoutImateriel", type="string", length=255,nullable=true)
+     */
+    private $coutImateriel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="coutMateriel", type="string", length=255,nullable=true)
+     */
+    private $coutMateriel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="theme", type="string", length=255,nullable=true)
+     */
+    private $theme;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="FormateurInterne", type="boolean",nullable=true)
+     */
+    private $FormateurInterne;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="FormateurExterne", type="boolean",nullable=true)
+     */
+    private $FormateurExterne;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenue", type="string", length=255,nullable=true)
+     */
+    private $contenue;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="reccurence", type="boolean",nullable=true)
+     */
+    
+    private $reccurence;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="chaque", type="integer",nullable=true)
+     *  
+     */
+
+    private $chaque;
+
+
+    /**
+     *  @var string
+     *
+     * @ORM\Column(name="periode", type="string",nullable=true)
+     */
+
+    private $periode;
+
+    /**
+     *@var boolean
+     *
+     * @ORM\Column(name="finApres", type="boolean",nullable=true)
+     */
+
+    private $finApres;
+
+    /**
+     * @var /DateTime
+     *
+     * @ORM\Column(name="date_Debut", type="date", nullable=true)
+     */
+    private $dateDebut;
+
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_Fin", type="date", nullable=true)
+     *
+     */
+
+    private $dateFin;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="terminerA", type="boolean",nullable=true)
+     */
+
+    private $terminerA;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Ocurrancedate", type="date",nullable=true)
+     */
+    private $Ocurrancedate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="OcurranceNbj", type="integer",nullable=true)
+     */
+    private $OcurranceNbj;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Type_Formation",inversedBy="formations",cascade={"persist"})
+     * @ORM\JoinColumn(name="type_id" ,referencedColumnName="id",nullable=true, onDelete="SET NULL")
+     */
+
+
+    private $typeFormation;
+
+
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Employee", inversedBy="formations",cascade={"persist"})
+     * @ORM\JoinTable(name="employees_id" )
+     */
+
+    private $employees;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Fichier", mappedBy="fichiers")
+     */
+
+    private $formation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Jour", mappedBy="formation")
+     */
+
+    private $jours;
+    /**
+     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="employeeinterne" ,cascade={"persist"})
+     *@ORM\JoinColumn(name="employeeinterne_id" ,referencedColumnName="id")
+     */
+    private $formationsemployee;
+    
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Demande_Formation",inversedBy="formation" )
+     * @ORM\JoinColumn(name="demande_formation_id" ,referencedColumnName="id" , nullable=true, onDelete="SET NULL")
+     */
+    private $demandeFormation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Formateur",inversedBy="formation" ,cascade={"persist"})
+     * @ORM\JoinColumn(name="formateur_id" ,referencedColumnName="id" , nullable=true, onDelete="SET NULL")
+     */
+    private $formateur;
+
+
+    public function __toString() {
+        return $this->titre;
+    }
+    
+
+   
+}

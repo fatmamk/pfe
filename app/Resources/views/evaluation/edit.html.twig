@@ -1,0 +1,192 @@
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">ADD Absence </h2>
+</div>
+<div class="modal-body">
+    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('evaluation_edit',{'id':evaluation.id}),'method':'POST'|trans}})}}
+
+    <div class="row">
+        <section class="col col-4">
+            <label class="label">Matricule</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.matricule,{'attr': {'type':'text','name':'site','placeholder':'Site'|trans}}) }}
+                {{ form_errors(edit_form.matricule)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">Effectue</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.effectue,{'attr': {'type':'text','name':'site','placeholder':'effectue'|trans}}) }}
+                {{ form_errors(edit_form.effectue)}}
+            </label>
+        </section>
+
+
+
+    </div>
+
+    <div class="row">
+        <section class="col col-4">
+            <label class="label">Afroid</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.afroid,{'attr': {'type':'text','name':'site','placeholder':'afroid'|trans}}) }}
+                {{ form_errors(edit_form.afroid)}}
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="label">achaud</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.achaud,{'attr': {'type':'text','name':'site','placeholder':'achaud'|trans}}) }}
+                {{ form_errors(edit_form.achaud)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">datePrevue</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.datePrevue,{'attr': {'type':'text','name':'site','placeholder':'datePrevue'|trans}}) }}
+                {{ form_errors(edit_form.datePrevue)}}
+            </label>
+        </section>
+    </div>
+
+
+    <div class="row">
+        <section class="col col-4">
+            <label class="label">Commantaire</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.commantaire,{'attr': {'type':'text','name':'site','placeholder':'commantaire'|trans}}) }}
+                {{ form_errors(edit_form.commantaire)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">Methodepedalogique</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.methodePedalogique,{'attr': {'type':'text','name':'site','placeholder':'methodePedalogique'|trans}}) }}
+                {{ form_errors(edit_form.methodePedalogique)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">Conference</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.conference,{'attr': {'type':'text','name':'site','placeholder':'conference'|trans}}) }}
+                {{ form_errors(edit_form.conference)}}
+            </label>
+        </section>
+    </div>
+    <div class="row">
+
+        <section class="col col-4">
+            <label class="label">Supportdecours</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.supportDeCours,{'attr': {'type':'text','name':'site','placeholder':'supportDeCours'|trans}}) }}
+                {{ form_errors(edit_form.supportDeCours)}}
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="label">Lieu</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.lieu,{'attr': {'type':'text','name':'site','placeholder':'lieu'|trans}}) }}
+                {{ form_errors(edit_form.lieu)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">Duree</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.duree,{'attr': {'type':'text','name':'site','placeholder':'duree'|trans}}) }}
+                {{ form_errors(edit_form.duree)}}
+            </label>
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-4">
+            <label class="label">Recpecthumain</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.recpectHumain,{'attr': {'type':'text','name':'site','placeholder':'recpectHumain'|trans}}) }}
+                {{ form_errors(edit_form.recpectHumain)}}
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="label">Contenuecours</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.contenueCours,{'attr': {'type':'text','name':'site','placeholder':'contenueCours'|trans}}) }}
+                {{ form_errors(edit_form.contenueCours)}}
+            </label>
+        </section>
+        <section class="col col-4">
+            <label class="label">Travauxpratique</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.travauxPratique,{'attr': {'type':'text','name':'site','placeholder':'travauxPratique'|trans}}) }}
+                {{ form_errors(edit_form.travauxPratique)}}
+            </label>
+        </section>
+    </div>
+    <div class="row">
+        <section class="col col-4">
+            <label class="label">Objectif</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.objectif,{'attr': {'type':'text','name':'site','placeholder':'objectif'|trans}}) }}
+                {{ form_errors(edit_form.objectif)}}
+            </label>
+        </section>
+
+
+        <section class="col col-4">
+            <label class="label">Annimateur</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.annimateur,{'attr': {'type':'text','name':'site','placeholder':'annimateur'|trans}}) }}
+                {{ form_errors(edit_form.annimateur)}}
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="label">Ambiancegenerale</label>
+            <label class="input">
+                <i class="icon-append fa fa-tag"></i>
+                {{ form_widget(edit_form.ambianceGenerale,{'attr': {'type':'text','name':'site','placeholder':'ambianceGenerale'|trans}}) }}
+                {{ form_errors(edit_form.ambianceGenerale)}}
+            </label>
+        </section>
+
+
+    </div>
+    </div>
+<div class="modal-footer">
+    {{ form_widget(edit_form._token) }}
+
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Modifier
+        </button>
+
+
+    </footer>
+    {{ form_end(edit_form,{'render_rest':false}) }}
+</div>
+
+
+

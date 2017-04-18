@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Evaluation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evaluation.id }}</td>
+            </tr>
+            <tr>
+                <th>Matricule</th>
+                <td>{{ evaluation.matricule }}</td>
+            </tr>
+            <tr>
+                <th>Effectue</th>
+                <td>{{ evaluation.effectue }}</td>
+            </tr>
+            <tr>
+                <th>Afroid</th>
+                <td>{{ evaluation.afroid }}</td>
+            </tr>
+            <tr>
+                <th>Achaud</th>
+                <td>{{ evaluation.achaud }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{% if evaluation.reference %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateprevue</th>
+                <td>{% if evaluation.datePrevue %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Commantaire</th>
+                <td>{{ evaluation.commantaire }}</td>
+            </tr>
+            <tr>
+                <th>Methodepedalogique</th>
+                <td>{{ evaluation.methodePedalogique }}</td>
+            </tr>
+            <tr>
+                <th>Conference</th>
+                <td>{{ evaluation.conference }}</td>
+            </tr>
+            <tr>
+                <th>Supportdecours</th>
+                <td>{{ evaluation.supportDeCours }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ evaluation.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ evaluation.duree }}</td>
+            </tr>
+            <tr>
+                <th>Recpecthumain</th>
+                <td>{{ evaluation.recpectHumain }}</td>
+            </tr>
+            <tr>
+                <th>Contenuecours</th>
+                <td>{{ evaluation.contenueCours }}</td>
+            </tr>
+            <tr>
+                <th>Travauxpratique</th>
+                <td>{{ evaluation.travauxPratique }}</td>
+            </tr>
+            <tr>
+                <th>Objectif</th>
+                <td>{{ evaluation.objectif }}</td>
+            </tr>
+            <tr>
+                <th>Annimateur</th>
+                <td>{{ evaluation.annimateur }}</td>
+            </tr>
+            <tr>
+                <th>Ambiancegenerale</th>
+                <td>{{ evaluation.ambianceGenerale }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('evaluation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('evaluation_edit', { 'id': evaluation.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

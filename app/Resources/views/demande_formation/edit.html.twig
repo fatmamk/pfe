@@ -1,0 +1,92 @@
+<div class="modal-header" >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label"> Modifier demande formation </h2>
+</div>
+<div class="modal-body">
+            {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demande_formation_edit',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
+
+
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">Théme </label>
+                <label class="input"> <i class="icon-append fa fa-pencil"></i>
+                    {{ form_widget(edit_form.theme,{'attr': {'type':'text','name':'theme','placeholder':'theme'|trans}}) }}
+                    {{ form_errors(edit_form.theme)}}
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the theme </b> </label>
+                </label>
+            </section>
+
+
+
+            <section class="col col-6">
+                <label class="label">Date de demande </label>
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget ( edit_form.dateDedemande,{ 'attr': { 'class':'startdate'|trans}}) }}
+                </label>
+            </section>
+
+            <section class="col col-6">
+                <label class="label">Date Souhaite </label>
+
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget(edit_form.dateSouhaite,{'attr':{'class':'finishdate'|trans}})}}
+                    {{ form_errors(edit_form.dateSouhaite)}}
+                </label>
+            </section>
+
+
+        </div>
+    </fieldset>
+
+    <fieldset>
+
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">Justification </label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( edit_form.justification,{ 'attr': {'name':'justification','placeholder':'justification'|trans}}) }}
+                    {{ form_errors(edit_form.justification)}}
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the justification </b> </label>
+            </section>
+
+            <section class="col col-6 ">
+                <label class="label">description </label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( edit_form.description,{ 'attr': {'name':'description','placeholder':'description'|trans}}) }}
+                    {{ form_errors(edit_form.description)}}
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the description </b> </label>
+            </section>
+
+        </div>
+    </fieldset>
+
+    <fieldset>
+
+
+    </fieldset>
+</div>
+<div class="modal-footer">
+    {{ form_widget(edit_form._token) }}
+
+    <footer>
+        <div class="btn-group dropup">
+            <button type="submit" class="btn btn-primary">
+                Edit
+            </button>
+            <button class="btn bg-color-pink dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu">
+                <li>
+                    <a  href="#formation" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal">Accepter</a>
+                </li>
+
+
+            </div>
+            <a class="btn btn-danger btn-sm" href="{{ path('demande_formation_refusee', { 'id': demande_Formation.id }) }}">Danger</a>
+        </div>
+    </footer>
+    {{ form_end(edit_form,{'render_rest':false}) }}
+
+</div>

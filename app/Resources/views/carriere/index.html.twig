@@ -1,0 +1,56 @@
+
+
+{% block body %}
+	<h1>Carrieres list</h1>
+
+	<table>
+		<thead>
+		<tr>
+											<th>Id</th>
+											<th>Libellecarriere</th>
+											<th>Typecontrat</th>
+											<th>Integre</th>
+											<th>Debutintergration</th>
+											<th>Finintegration</th>
+											<th>Daterecrutement</th>
+											<th>Fichiercontrat</th>
+											<th>Type_Carriere</th>
+
+											<th>Actions</th>
+										</tr>
+
+
+										</thead>
+
+										<tbody>
+										{% for carriere in carrieres %}
+											<tr>
+												<td><a href="{{ path('carriere_show', { 'id': carriere.id }) }}">{{ carriere.id }}</a></td>
+												<td>{{ carriere.libelleCarriere }}</td>
+												<td>{{ carriere.typeContrat }}</td>
+												<td width="10%">{{ carriere.integre }}</td>
+												<td>{% if carriere.debutIntergration %}{{ carriere.debutIntergration|date('Y-m-d') }}{% endif %}</td>
+												<td>{% if carriere.finIntegration %}{{ carriere.finIntegration|date('Y-m-d') }}{% endif %}</td>
+												<td>{% if carriere.dateRecrutement %}{{ carriere.dateRecrutement|date('Y-m-d') }}{% endif %}</td>
+												<td>{{ carriere.fichierContrat }}</td>
+												<td>{{ carriere.fichierContrat }}</td>
+												<td> <ul>
+														<li>
+															<a href="{{ path('carriere_show', { 'id': carriere.id }) }}">show</a>
+														</li>
+														<li>
+															<a href="{{ path('carriere_edit', { 'id': carriere.id }) }}">edit</a>
+														</li>
+													</ul>
+												</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+
+	<ul>
+		<li>
+			<a href="{{ path('carriere_new') }}">Create a new carriere</a>
+		</li>
+	</ul>
+{% endblock %}

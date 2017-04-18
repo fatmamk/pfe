@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div id="main" role="main">
+
+
+    <!-- MAIN CONTENT -->
+    <div id="content">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">
+                    <i class="fa fa-table fa-fw "></i>
+                    Table
+							<span>
+								Data Tables
+							</span>
+                </h1>
+            </div>
+
+        </div>
+
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+
+            <!-- row -->
+            <div class="row">
+
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="jarviswidget jarviswidget-color-red jarviswidget-sortable" id="wid-id-5" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" role="widget">
+        <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+        -->
+        <header role="heading"><div class="jarviswidget-ctrls" role="menu">     <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div>
+            <h2><strong>Delete</strong> <i>Widget </i></h2>
+
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
+        <!-- widget div-->
+        <div role="content">
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body">
+                <div class="badge bg-color-purple">
+                    <h1>Employee</h1>
+                </div>
+
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ employee.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ employee.nom }}</td>
+
+                    </tr>
+                    <tr>
+                        <th>Image Profil</th>
+                        <td><td><img src="{{ asset('upload/images/'~employee.imageName ) }}"
+                                     width="70px" height="70px" style="border-radius: 50%;">
+                        </td></td>
+                    </tr>
+                    <tr>
+                        <th class="txt-color-pink">Prenom</th>
+                        <td>{{ employee.prenom }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Datenaiss</th>
+                        <td>{% if employee.dateNaiss %}{{ employee.dateNaiss|date('Y-m-d') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Cinemployee</th>
+                        <td>{{ employee.cINEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sexe</th>
+                        <td>{{ employee.sexe }}</td>
+                    </tr>
+                    <tr>
+                        <th>Adresseemploye</th>
+                        <td>{{ employee.adresseEmploye }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numtelemployee</th>
+                        <td>{{ employee.numTelEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Emailemployee</th>
+                        <td>{{ employee.emailEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Emailsecondaireemployee</th>
+                        <td>{{ employee.emailSecondaireEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Matriculeemployee</th>
+                        <td>{{ employee.matriculeEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gradeemployee</th>
+                        <td>{{ employee.gradeEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ribemployee</th>
+                        <td>{{ employee.rIBEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numsecuritesocialeemployee</th>
+                        <td>{{ employee.numSecuriteSocialeEmployee }}</td>
+                    </tr>
+                    <tr>
+                        <th>Competance</th>
+                        <td>{{ employee.competance }}</td>
+                    </tr>
+                    <tr>
+                        <th>Diplome</th>
+                        <td>{{ employee.diplome }}</td>
+                    </tr>
+                    <tr>
+                        <th>Experience</th>
+                        <td>{{ employee.experience }}</td>
+                    </tr>
+                    <tr>
+                        <th>Aptitudephysique</th>
+                        <td>{{ employee.aptitudePhysique }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ul>
+                    <li>
+                        <a href="{{ path('employee_index') }}">Back to the list</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('employee_edit', { 'id': employee.id }) }}">Edit</a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+</article>
+                </div></section></div></div>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+<?php
+
+namespace GestionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FichierJoins
+ *
+ * @ORM\Table(name="fichier_joins")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\FichierJoinsRepository")
+ */
+class FichierJoins
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="string", length=255, nullable=true)
+     */
+    private $commentaire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="natureFichier", type="string", length=255, nullable=true)
+     */
+    private $natureFichier;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fichier", type="string", length=255)
+     */
+    private $fichier;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     * @return FichierJoins
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string 
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+
+    /**
+     * Set natureFichier
+     *
+     * @param string $natureFichier
+     * @return FichierJoins
+     */
+    public function setNatureFichier($natureFichier)
+    {
+        $this->natureFichier = $natureFichier;
+
+        return $this;
+    }
+
+    /**
+     * Get natureFichier
+     *
+     * @return string 
+     */
+    public function getNatureFichier()
+    {
+        return $this->natureFichier;
+    }
+
+    /**
+     * Set fichier
+     *
+     * @param string $fichier
+     * @return FichierJoins
+     */
+    public function setFichier($fichier)
+    {
+        $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    /**
+     * Get fichier
+     *
+     * @return string 
+     */
+    public function getFichier()
+    {
+        return $this->fichier;
+    }
+}

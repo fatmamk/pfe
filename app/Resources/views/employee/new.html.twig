@@ -1,0 +1,320 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <div class="row" >
+        <h4 class="modal-title pull-left " id="myModalLabel"><i class="icon-append fa  fa-user"   style="margin-left: 30px"></i>  Ajouter employé </h4>
+        <span id="bdg" class="badge bg-color-red bounceIn animated pull-left " style="padding:6px; display: none; margin-left: 15px;" ></span>
+
+    </div>
+</div>
+
+
+
+<div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
+    {{ form_start(form,{ 'attr': {'enctype':'multipart/form-data','class': 'smart-form ','action': path('employee_new'), 'method': 'POST'|trans }} ) }}
+
+    <div class="panel-group smart-accordion-default" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading " style="background-color: #71843F">
+                <h4 class="panel-title txt-color-white"><a data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapseOne">
+                        <i class="fa fa-lg fa-angle-down pull-right txt-color-white"></i>
+                        <i class="fa fa-lg fa-angle-up pull-right txt-color-white"></i>
+                        Création d'un nouveau employé </a></h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body padding-7 ">
+
+
+                    <div class="row" >
+                        <article class="col col-6">
+
+
+                            <section class="">
+                                <label class="label">Nom</label>
+                                <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                    {{ form_widget ( form.nom,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                            </section>
+
+                            <section class="">
+                                <label class="label">Prénom</label>
+                                <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                    {{ form_widget ( form.prenom,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                            </section>
+
+
+                            <section class="">
+                                <label class="label">Fonction</label>
+                                <label class="select"> {{ form_widget ( form.fonctions,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                                <i></i>
+                            </section>
+
+
+
+                        </article>
+                        <article class="col col-6 " >
+
+
+                            <section class="" style="width: 150px; height: 150px; margin: 0 auto; "  >
+                                <div class="slim " data-label="Drop profile photo here"  data-ratio="1:1" style="border-radius: 40%; ">
+                                    <input type="file" name="imageFile" />
+
+
+                                </div>
+
+                            </section>
+                            <section class="">
+                                <label class="label">Genre </label>
+                                <label class="select">
+                                    {{ form_widget ( form.sexe) }}
+                                    <i></i>
+                                </label>
+                            </section>
+                        </article>
+                        <section class="col col-6">
+                            <label class="label">Adresse </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.adresseEmploye,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
+                        </section>
+
+
+                        <section class="col col-6">
+                            <label class="label">Date de naissance</label>
+                            <label  class="input"> <i class="icon-append fa fa-calendar"></i>
+                                {{ form_widget ( form.dateNaiss,{ 'attr': { 'class':' date'|trans } } ) }}
+
+                            </label>
+                        </section>
+
+
+
+                    </div>
+
+
+
+
+                    <div class="row">
+
+                        <section class="col col-6">
+                            <label class="label">Email principal</label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_errors ( form.emailEmployee)}}
+                                {{ form_widget ( form.emailEmployee,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                        </section>
+
+                        <section class="col col-6">
+                            <label class="label">Email secondaire</label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.emailSecondaireEmployee,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                        </section>
+
+                        <section class="col col-6">
+                            <label class="label">Cin </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.cINEmployee,{'attr': {'type': 'text'|trans } } ) }}</label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Matricule </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.matriculeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
+                        </section>
+
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: #AC5287">
+                <h4 class="panel-title txt-color-white ">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+
+                        <i class="fa fa-lg fa-angle-down pull-right txt-color-white"></i>
+                        <i class="fa fa-lg fa-angle-up pull-right txt-color-white"></i>
+                        Informations </a></h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse ">
+                <div class="panel-body padding-7 ">
+
+                    <div class="row">
+
+
+
+
+
+                    </div>
+
+                    <div class="row">
+
+
+
+                        <section class="col col-6">
+                            <label class="label">numéro teléphone </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.numTelEmployee,{ 'attr': {'type': 'text','name':'numTelEmployee'|trans } } ) }}</label>
+                        </section>
+
+
+                        <section class="col col-6">
+                            <label class="label">Rib</label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.rIBEmployee,{ 'attr': {'type': 'text','name':'rIBEmployee'|trans } } ) }}</label>
+                        </section>
+                    </div>
+
+                    <section>
+                        <label class="label">Numéro sécurité sociale</label>
+                        <label class="input"> <i class="icon-append fa fa-tag"></i>
+                            {{ form_widget ( form.numSecuriteSocialeEmployee,{ 'attr': {'type': 'text','name':'numSecuriteSocialeEmployee'|trans } } ) }}</label>
+                    </section>
+                        <section class="col col-6">
+                            <label class="label">Grade</label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.gradeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
+                        </section>
+
+                    </div>
+
+
+
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Département
+                                <a href="#myNewdepartementModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                            </label>
+                            <label class="select">
+                                {{ form_widget ( form.departement ) }}
+                                <i></i>
+                            </label>
+                        </section>
+
+
+
+                        <section class="col col-6">
+                            <label class="label">Site
+                                <a href="#myNewsiteModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                            </label>
+                            <label class="select">
+                                {{ form_widget ( form.site ) }}
+                                <i></i>
+                            </label>
+                        </section>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: #6E587A">
+                <h4 class="panel-title txt-color-white">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">
+                        <i class="fa fa-lg fa-angle-down pull-right txt-color-white"></i>
+                        <i class="fa fa-lg fa-angle-up pull-right txt-color-white"></i>
+                        Profil</a></h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse ">
+                <div class="panel-body padding-7 ">
+
+
+                    <div class="row">
+                        <section class="col col-4">
+                            <label class="label">Délivré le</label>
+                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                {{ form_widget ( form.delivreLe,{ 'attr': { 'class':' date'|trans } } ) }}
+                            </label>
+                        </section>
+                        <section class="col col-4">
+                            <label class="label">Délivré à </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.delivreA,{'attr': {'type': 'text'|trans } } ) }}</label>
+                        </section>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default" >
+            <div class="panel-heading" style="border-color:#ba871f; background-color: #C79121 ; ">
+                <h4 class="panel-title txt-color-white"><a data-toggle="collapse" data-parent="#accordion"
+                                                           href="#collapseFour" class="collapsed">
+                        <i class="fa fa-lg fa-angle-down pull-right txt-color-white"></i>
+                        <i class="fa fa-lg fa-angle-up pull-right txt-color-white "></i>
+                        Autre détails</a></h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse ">
+                <div class="panel-body padding-7">
+
+
+
+
+                    <section>
+                        <label class="label">Compétence</label>
+                        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                            {{ form_widget ( form.competance,{ 'attr': {'type': 'text','name':'competance'|trans } } ) }}
+                        </label>
+                    </section>
+                    <section>
+                        <label class="label">Diplome</label>
+                        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                            {{ form_widget ( form.diplome,{ 'attr': {'type': 'text','name':'diplome'|trans } } ) }}
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="label">Expérience</label>
+                        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                            {{ form_widget ( form.experience,{ 'attr': {'type': 'text','name':'experience'|trans } } ) }}
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="label">Aptitude physique</label>
+                        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                            {{ form_widget ( form.aptitudePhysique,{ 'attr': {'type': 'text','name':'aptitudePhysique'|trans } } ) }}
+                        </label>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+
+    <button type="button" class="btn btn-default"   data-dismiss="modal">
+        Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">
+        Ajouter
+    </button>
+</div>
+
+{{ form_end(form, {'render_rest': false}) }}
+
+
+
+
+
+
+
+
+
+

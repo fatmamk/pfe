@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Demande_formation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande_Formation.id }}</td>
+            </tr>
+            <tr>
+                <th>Libellefromation</th>
+                <td>{{ demande_Formation.libelleFromation }}</td>
+            </tr>
+            <tr>
+                <th>Datededemande</th>
+                <td>{% if demande_Formation.dateDedemande %}{{ demande_Formation.dateDedemande|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ demande_Formation.sujet }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ demande_Formation.description }}</td>
+            </tr>
+            <tr>
+                <th>Justification</th>
+                <td>{{ demande_Formation.justification }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('demande_formation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('demande_formation_edit', { 'id': demande_Formation.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

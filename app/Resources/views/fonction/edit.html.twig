@@ -1,0 +1,36 @@
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">Modifier fonction </h2>
+</div>
+<div class="modal-body">
+    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('fonction_edit',{'id':fonction.id}),'method':'POST'|trans}})}}
+
+    <section>
+        <label class="label">Fonction</label>
+        <label class="input">
+            <i class="icon-append fa fa-tag"></i>
+            {{ form_widget(edit_form.libelleFonction,{'attr': {'type':'text','name':'site','placeholder':'Site'|trans}}) }}
+            {{ form_errors(edit_form.libelleFonction)}}
+        </label>
+
+
+    </section>
+</div>
+<div class="modal-footer">
+    {{ form_widget(edit_form._token) }}
+
+    <footer>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                Annuler
+            </button>
+            <button type="submit" class="btn btn-primary">
+                Modifier
+            </button>
+
+
+    </footer>
+    {{ form_end(edit_form,{'render_rest':false}) }}
+</div>
+
