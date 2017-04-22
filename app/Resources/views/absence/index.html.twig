@@ -64,15 +64,6 @@
                                             <th class="hasinput" style="width:10%">
                                                 <input type="text" class="form-control" placeholder="Date fin " />
                                             </th>
-                                            <th class="hasinput" style="width:17%">
-                                                <input type="text" class="form-control" placeholder="Etat" />
-                                            </th>
-                                            <th class="hasinput" style="width:17%">
-                                                <input type="text" class="form-control" placeholder="Integere" />
-                                            </th>
-                                            <th class="hasinput" style="width:17%">
-                                                <input type="text" class="form-control" placeholder="Nature" />
-                                            </th>
 
                                             <th class="hasinput" >
                                                 <div class="text-right"><a href="#myModal"  data-toggle="modal" id="modal_link" class="btn btn-primary">
@@ -85,9 +76,7 @@
 
                                             <th data-hide="phone">Datedebut</th>
                                             <th>Datefin</th>
-                                            <th>Etat</th>
-                                            <th>Integere</th>
-                                            <th>Nature</th>
+
                                             <th>Actions</th>
 
                                         </tr>
@@ -101,9 +90,7 @@
                                             <tr>
                                                 <td>{% if absence.dateDebut %}{{ absence.dateDebut|date('Y-m-d') }}{% endif %}</td>
                                                 <td>{% if absence.dateFin %}{{ absence.dateFin|date('Y-m-d') }}{% endif %}</td>
-                                                <td>{{ absence.etat }}</td>
-                                                <td>{{ absence.integere }}</td>
-                                                <td>{{ absence.commentaire }}</td>
+
 
 
 
@@ -476,10 +463,13 @@
             });
 
 
-
-
-
-
+            $('input[name=justifier]').click(function () {
+                if (this.id == "justifier_1") {
+                    $("#file").show(1000);
+                } else {
+                    $("#file").hide(1000);
+                }
+            });
 
 
 

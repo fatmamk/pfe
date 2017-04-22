@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Intergration</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ intergration.id }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ intergration.responsable }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{% if intergration.dateDebut %}{{ intergration.dateDebut|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{% if intergration.dateFin %}{{ intergration.dateFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ intergration.etat }}</td>
+            </tr>
+            <tr>
+                <th>Informations</th>
+                <td>{{ intergration.informations }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('intergration_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('intergration_edit', { 'id': intergration.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

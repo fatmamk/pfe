@@ -2,11 +2,12 @@
 
 namespace GestionBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CongeType extends AbstractType
+class DemandeCongeType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,8 +15,6 @@ class CongeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('statutsConge')
-
-
             ->add('dateDebutConge','date',array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',)))
             ->add('dateFinConge','date',array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
@@ -23,9 +22,17 @@ class CongeType extends AbstractType
 
             ->add('typeconge')
 
-            ->add('employee')
+            ->add('employe',EntityType::class,
+                array(
 
-        ;
+                    'required' => false,
+                    'class' => 'GestionBundle:Employee',
+                    'property' => 'toString',
+
+
+
+                ))
+         ;
     }
     
     /**
@@ -34,7 +41,7 @@ class CongeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GestionBundle\Entity\Conge'
+            'data_class' => 'GestionBundle\Entity\DemandeConge'
         ));
     }
 
@@ -43,10 +50,8 @@ class CongeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_conge';
+        return null;
     }
 
-
-  
 
 }

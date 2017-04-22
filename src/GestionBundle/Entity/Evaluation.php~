@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,7 +32,14 @@ class Evaluation
     /**
      * @var string
      *
-     * @ORM\Column(name="effectue", type="integer",  nullable=true)
+     * @ORM\Column(name="effectue", type="integer")
+     *  @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "le numbre  {{ value }}doit etre >0",
+     *      maxMessage = "le numbre  {{ value }}doit etre <5",
+     *
+     * )
      */
     private $effectue;
 

@@ -28,20 +28,21 @@ class Type_Conge
     private $libelleType;
 
     /**
-     *  @ORM\OneToMany(targetEntity="Conge", mappedBy="typeconge",cascade={"persist"})
+     *  @ORM\OneToMany(targetEntity="DemandeConge", mappedBy="typeconge",cascade={"persist"})
      */
-    private $conges;
+    private $demandeconges;
 
       public function __toString() {
         return $this->libelleType;
     }
 
-      /**
+  
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->conges = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->demandeconges = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -78,34 +79,35 @@ class Type_Conge
     }
 
     /**
-     * Add conges
+     * Add demandeconges
      *
-     * @param \GestionBundle\Entity\Conge $conges
+     * @param \GestionBundle\Entity\DemandeConge $demandeconges
      * @return Type_Conge
      */
-    public function addConge(\GestionBundle\Entity\Conge $conges)
+    public function addDemandeconge(\GestionBundle\Entity\DemandeConge $demandeconges)
     {
-        $this->conges[] = $conges;
+        $this->demandeconges[] = $demandeconges;
 
         return $this;
     }
 
     /**
-     * Remove conges
+     * Remove demandeconges
      *
-     * @param \GestionBundle\Entity\Conge $conges
+     * @param \GestionBundle\Entity\DemandeConge $demandeconges
      */
-    public function removeConge(\GestionBundle\Entity\Conge $conges)
+    public function removeDemandeconge(\GestionBundle\Entity\DemandeConge $demandeconges)
     {
-        $this->conges->removeElement($conges);
+        $this->demandeconges->removeElement($demandeconges);
     }
+
     /**
-     * Get conges
+     * Get demandeconges
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getConges()
+    public function getDemandeconges()
     {
-        return $this->conges;
+        return $this->demandeconges;
     }
 }

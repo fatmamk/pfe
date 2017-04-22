@@ -84,7 +84,8 @@
 
 
             </div>
-            <a class="btn btn-danger btn-sm" href="{{ path('demande_formation_refusee', { 'id': demande_Formation.id }) }}">Danger</a>
+            <a href="{{ path('demande_formation_refusee', { 'id': demande_Formation.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refusé</a>
+
         </div>
     </footer>
     {{ form_end(edit_form,{'render_rest':false}) }}

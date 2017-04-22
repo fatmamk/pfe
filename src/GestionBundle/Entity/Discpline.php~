@@ -1,0 +1,61 @@
+<?php
+
+namespace GestionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Discpline
+ *
+ * @ORM\Table(name="discpline")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\DiscplineRepository")
+ */
+class Discpline
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nature", type="string", length=255, nullable=true,columnDefinition="enum('male', 'femelle')")
+     */
+    private $nature;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="date", nullable=true)
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datFin", type="date", nullable=true)
+     */
+    private $datFin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="string", length=255, nullable=true)
+     */
+    private $commentaire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="couse", type="string", length=255, nullable=true)
+     */
+    private $couse;
+
+
+
+}

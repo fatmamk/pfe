@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Form;
+use GestionBundle\Entity\Formation;
 use  GestionBundle\Entity\Nature;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -29,7 +30,8 @@ class FormationType extends AbstractType
             ->add('dateFin','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',
                  )))
-            
+        
+
             
             ->add('dateDebut','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',
@@ -97,7 +99,9 @@ class FormationType extends AbstractType
 
 
 
-
+->add('jours', CollectionType::class, array(
+    'entry_type' => JourType::class
+))
 
             ->add('employees',EntityType::class,array(
                 'class'=>'GestionBundle:Employee',
@@ -105,8 +109,9 @@ class FormationType extends AbstractType
                 'multiple'=>true,
             ))
 
-        ->add('jours', CollectionType::class, array(
-            'entry_type' => JourType::class
+        ->add('jours', CollectionType::class, array('data_class'=> null,
+            'type' =>new JourType(),
+
         ));
 
 
@@ -121,7 +126,7 @@ class FormationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GestionBundle\Entity\Formation'
+            'data_class' => Formation::class,
         ));
     }
 

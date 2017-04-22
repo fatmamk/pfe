@@ -48,11 +48,7 @@ class Conge
      */
     private $typeconge;
 
-    /**
-     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="conges" ,cascade={"persist"})
-     *@ORM\JoinColumn(name="employee_id" ,referencedColumnName="id")
-     */
-    private $employee;
+  
 
 
     public function __toString()

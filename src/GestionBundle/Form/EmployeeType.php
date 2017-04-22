@@ -21,31 +21,36 @@ class EmployeeType extends AbstractType
             ->add('prenom')
 
             ->add('cINEmployee')
+            ->add('lieunais')
             ->add('dateNaiss','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy'))
 
             ->add('sexe', 'choice', array('choices' => array('Féminin' => 'Féminin','Masculin' => 'Masculin'),'placeholder' => 'Genre',
                 'required' => false,))
             ->add('adresseEmploye')
+
             ->add('numTelEmployee')
+            ->add('gsm')
+
             ->add('emailEmployee')
             ->add('emailSecondaireEmployee')
             ->add('matriculeEmployee')
             ->add('gradeEmployee')
             ->add('rIBEmployee')
+            ->add('maison')
             ->add('numSecuriteSocialeEmployee')
 
             ->add('type', 'choice', array('choices' => array('formateur' => 'Féminin','Masculin' => 'Masculin')))
             ->add('diplome',TextareaType::class,array(
-                'attr'=>array('rows'=>'3'),
+                'attr'=>array('rows'=>'3','required' => false),
             ))
             ->add('experience',TextareaType::class,array(
-                'attr'=>array('rows'=>'3'),
+                'attr'=>array('rows'=>'3','required' => false),
             ))
             ->add('competance',TextareaType::class,array(
                 'attr'=>array('rows'=>'3'),
             ))
             ->add('aptitudePhysique',TextareaType::class,array(
-                'attr'=>array('rows'=>'3'),
+                'attr'=>array('rows'=>'3','required' => false),
             ))
             ->add('groupe')
 
@@ -64,6 +69,7 @@ class EmployeeType extends AbstractType
             ->add('activites')
 
             ->add('delivreA')
+            ->add('departement')
 
             ->add("imageFile", "text", array("mapped"=>false))
 

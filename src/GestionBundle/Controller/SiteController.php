@@ -156,7 +156,7 @@ class SiteController extends Controller
      * @Route("/{id}", name="site_delete")
      * @Method("GET")
      */
-    public function deleteAction(Request $request,$id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $site = $em->getRepository('GestionBundle:Site')->find($id);

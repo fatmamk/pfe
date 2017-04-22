@@ -5,12 +5,12 @@ namespace GestionBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Conge
+ * DemandeConge
  *
- * @ORM\Table(name="conge")
- * @ORM\Entity(repositoryClass="GestionBundle\Repository\CongeRepository")
+ * @ORM\Table(name="demande_conge")
+ * @ORM\Entity(repositoryClass="GestionBundle\Repository\DemandeCongeRepository")
  */
-class Conge
+class DemandeConge
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Conge
     /**
      * @var string
      *
-     * @ORM\Column(name="Statuts_Conge", type="string", length=30)
+     * @ORM\Column(name="StatutsConge", type="string", length=255, nullable=true)
      */
     private $statutsConge;
 
@@ -43,24 +43,29 @@ class Conge
     private $dateFinConge;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Type_Conge",inversedBy="conges" ,cascade={"persist"})
+     *@ORM\ManyToOne(targetEntity="Type_Conge",inversedBy="demandeconges" ,cascade={"persist"})
      *@ORM\JoinColumn(name="type_id" ,referencedColumnName="id")
      */
     private $typeconge;
 
+
     /**
-     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="conges" ,cascade={"persist"})
-     *@ORM\JoinColumn(name="employee_id" ,referencedColumnName="id")
+     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="demandeConge" ,cascade={"persist"})
+     *@ORM\JoinColumn(name="employe_id" ,referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $employee;
+    private $employe;
+
 
 
     public function __toString()
     {
-        return $this->typeconge;
+        return $this->statutsConge;
     }
 
 
+
+
+    
 
     /**
      * Get id
@@ -76,7 +81,7 @@ class Conge
      * Set statutsConge
      *
      * @param string $statutsConge
-     * @return Conge
+     * @return DemandeConge
      */
     public function setStatutsConge($statutsConge)
     {
@@ -99,7 +104,7 @@ class Conge
      * Set dateDebutConge
      *
      * @param \DateTime $dateDebutConge
-     * @return Conge
+     * @return DemandeConge
      */
     public function setDateDebutConge($dateDebutConge)
     {
@@ -122,7 +127,7 @@ class Conge
      * Set dateFinConge
      *
      * @param \DateTime $dateFinConge
-     * @return Conge
+     * @return DemandeConge
      */
     public function setDateFinConge($dateFinConge)
     {
@@ -145,7 +150,7 @@ class Conge
      * Set typeconge
      *
      * @param \GestionBundle\Entity\Type_Conge $typeconge
-     * @return Conge
+     * @return DemandeConge
      */
     public function setTypeconge(\GestionBundle\Entity\Type_Conge $typeconge = null)
     {
@@ -165,25 +170,25 @@ class Conge
     }
 
     /**
-     * Set employee
+     * Set employe
      *
-     * @param \GestionBundle\Entity\Employee $employee
-     * @return Conge
+     * @param \GestionBundle\Entity\Employee $employe
+     * @return DemandeConge
      */
-    public function setEmployee(\GestionBundle\Entity\Employee $employee = null)
+    public function setEmploye(\GestionBundle\Entity\Employee $employe = null)
     {
-        $this->employee = $employee;
+        $this->employe = $employe;
 
         return $this;
     }
 
     /**
-     * Get employee
+     * Get employe
      *
      * @return \GestionBundle\Entity\Employee 
      */
-    public function getEmployee()
+    public function getEmploye()
     {
-        return $this->employee;
+        return $this->employe;
     }
 }

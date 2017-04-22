@@ -3,14 +3,16 @@
         &times;
     </button>
     <div class="row" >
-        <h4 class="modal-title pull-left " id="myModalLabel"><i class="icon-append fa  fa-user"   style="margin-left: 30px"></i>  Mofifier employé </h4>
+        <h4 class="modal-title pull-left " id="myModalLabel"><i class="icon-append fa  fa-user"   style="margin-left: 30px"></i>  Ajouter employé </h4>
         <span id="bdg" class="badge bg-color-red bounceIn animated pull-left " style="padding:6px; display: none; margin-left: 15px;" ></span>
 
     </div>
 </div>
 
+
+
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(edit_form,{ 'attr': {'enctype':'multipart/form-data','class': 'smart-form ','action':  path('employee_edit',{'id':employee.id}), 'method': 'POST'|trans }} ) }}
+    {{ form_start(edit_form,{ 'attr': {'enctype':'multipart/form-data','class': 'smart-form ','action': path('employee_edit',{'id':employee.id}), 'method': 'POST'|trans }} ) }}
 
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
@@ -43,9 +45,13 @@
 
 
                             <section class="">
-                                <label class="label">Fonction</label>
-                                <label class="select"> {{ form_widget ( edit_form.fonctions,{ 'attr': {'type': 'text'|trans } } ) }}</label>
-                                <i></i>
+                                <label class="label">Département
+                                    <a href="#myNewdepartementModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                                </label>
+                                <label class="select">
+                                    {{ form_widget ( edit_form.departement ) }}
+                                    <i></i>
+                                </label>
                             </section>
 
 
@@ -58,7 +64,9 @@
                                 <div class="slim " data-label="Drop profile photo here"  data-ratio="1:1" style="border-radius: 40%; ">
                                     <input type="file" name="imageFile" />
 
+
                                 </div>
+
                             </section>
                             <section class="">
                                 <label class="label">Genre </label>
@@ -68,25 +76,6 @@
                                 </label>
                             </section>
                         </article>
-                        <section class="col col-6">
-                            <label class="label">Adresse </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( edit_form.adresseEmploye,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
-                        </section>
-
-
-                        <section class="col col-6">
-                            <label class="label">Date de naissance</label>
-                            <label  class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget ( edit_form.dateNaiss,{ 'attr': { 'class':' date'|trans } } ) }}
-
-                            </label>
-                        </section>
-
-                    </div>
-
-                    <div class="row">
-
                         <section class="col col-6">
                             <label class="label">Email principal</label>
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
@@ -100,18 +89,31 @@
                                 {{ form_widget ( edit_form.emailSecondaireEmployee,{ 'attr': {'type': 'text'|trans } } ) }}</label>
                         </section>
 
+
+
+                    </div>
+
+
+
+
+                    <div class="row">
+
                         <section class="col col-6">
                             <label class="label">Cin </label>
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
                                 {{ form_widget ( edit_form.cINEmployee,{'attr': {'type': 'text'|trans } } ) }}</label>
                         </section>
                         <section class="col col-6">
-                            <label class="label">Matricule </label>
+                            <label class="label">Grade</label>
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( edit_form.matriculeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
+                                {{ form_widget ( edit_form.gradeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
                         </section>
 
                     </div>
+
+
+
+
 
 
                 </div>
@@ -130,16 +132,26 @@
             <div id="collapseTwo" class="panel-collapse collapse ">
                 <div class="panel-body padding-7 ">
 
-                    <div class="row">
-
-
-
-
-
-                    </div>
 
                     <div class="row">
 
+
+                        <section class="col col-6">
+                            <label class="label">Adresse </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.adresseEmploye,{ 'attr': {'type': 'text','name':'numTelEmployee'|trans } } ) }}</label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Date de Naissance </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.dateNaiss,{ 'attr': {'type': 'text','name':'dateNaiss'|trans } } ) }}</label>
+                        </section>
+
+                        <section class="col col-6">
+                            <label class="label">Lieu de naissance </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.lieunais,{ 'attr': {'type': 'text','name':'lieunais'|trans } } ) }}</label>
+                        </section>
 
 
                         <section class="col col-6">
@@ -147,55 +159,45 @@
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
                                 {{ form_widget ( edit_form.numTelEmployee,{ 'attr': {'type': 'text','name':'numTelEmployee'|trans } } ) }}</label>
                         </section>
-
-
+                        <section class="col col-6">
+                            <label class="label">tel maison </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.maison,{ 'attr': {'type': 'text','name':'maison'|trans } } ) }}</label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">GSM </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.gsm,{ 'attr': {'type': 'text','name':'gsm'|trans } } ) }}</label>
+                        </section>
                         <section class="col col-6">
                             <label class="label">Rib</label>
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
                                 {{ form_widget ( edit_form.rIBEmployee,{ 'attr': {'type': 'text','name':'rIBEmployee'|trans } } ) }}</label>
                         </section>
+                        <section class="col col-6">
+                            <label class="label">Numéro sécurité sociale</label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.numSecuriteSocialeEmployee,{ 'attr': {'type': 'text','name':'numSecuriteSocialeEmployee'|trans } } ) }}</label>
+                        </section>
+
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Délivré le</label>
+                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                {{ form_widget ( edit_form.delivreLe,{ 'attr': { 'class':' date'|trans } } ) }}
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Délivré à </label>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( edit_form.delivreA,{'attr': {'type': 'text'|trans } } ) }}</label>
+                        </section>
                     </div>
 
-                    <section>
-                        <label class="label">Numéro sécurité sociale</label>
-                        <label class="input"> <i class="icon-append fa fa-tag"></i>
-                            {{ form_widget ( edit_form.numSecuriteSocialeEmployee,{ 'attr': {'type': 'text','name':'numSecuriteSocialeEmployee'|trans } } ) }}</label>
-                    </section>
-                    <section class="col col-6">
-                        <label class="label">Grade</label>
-                        <label class="input"> <i class="icon-append fa fa-tag"></i>
-                            {{ form_widget ( edit_form.gradeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
-                    </section>
-
                 </div>
 
 
-
-                <div class="row">
-                    <section class="col col-6">
-                        <label class="label">Département
-                            <a href="#myNewdepartementModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
-                        </label>
-                        <label class="select">
-                            {{ form_widget ( edit_form.departement ) }}
-                            <i></i>
-                        </label>
-                    </section>
-
-
-
-                    <section class="col col-6">
-                        <label class="label">Site
-                            <a href="#myNewsiteModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
-                        </label>
-                        <label class="select">
-                            {{ form_widget ( edit_form.site ) }}
-                            <i></i>
-                        </label>
-                    </section>
-
-
-                </div>
             </div>
         </div>
 
@@ -209,42 +211,6 @@
             </div>
             <div id="collapseThree" class="panel-collapse collapse ">
                 <div class="panel-body padding-7 ">
-
-
-                    <div class="row">
-                        <section class="col col-4">
-                            <label class="label">Délivré le</label>
-                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget ( edit_form.delivreLe,{ 'attr': { 'class':' date'|trans } } ) }}
-                            </label>
-                        </section>
-                        <section class="col col-4">
-                            <label class="label">Délivré à </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( edit_form.delivreA,{'attr': {'type': 'text'|trans } } ) }}</label>
-                        </section>
-                    </div>
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default" >
-            <div class="panel-heading" style="border-color:#ba871f; background-color: #C79121 ; ">
-                <h4 class="panel-title txt-color-white"><a data-toggle="collapse" data-parent="#accordion"
-                                                           href="#collapseFour" class="collapsed">
-                        <i class="fa fa-lg fa-angle-down pull-right txt-color-white"></i>
-                        <i class="fa fa-lg fa-angle-up pull-right txt-color-white "></i>
-                        Autre détails</a></h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse ">
-                <div class="panel-body padding-7">
-
-
 
 
                     <section>
@@ -273,9 +239,14 @@
                             {{ form_widget ( edit_form.aptitudePhysique,{ 'attr': {'type': 'text','name':'aptitudePhysique'|trans } } ) }}
                         </label>
                     </section>
+
+
+
                 </div>
             </div>
         </div>
+
+
     </div>
 
 </div>

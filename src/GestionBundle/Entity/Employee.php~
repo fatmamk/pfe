@@ -75,15 +75,23 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="email_Employee", type="string", length=30,nullable=true)
-     * @Assert\Length(min="2", minMessage="tres court")
+     * @ORM\Column(name="email_Employee", type="string", length=30)
+     * @Assert\Email(
+     *     message = "Le email '{{ value }}' N'est pas un email valide.",
+     *     checkMX = false
+     * )
      */
+    
     private $emailEmployee;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Email_Secondaire_Employee", type="string", length=30 ,nullable=true)
+     * @ORM\Column(name="Email_Secondaire_Employee", type="string", length=30)
+     * @Assert\Email(
+     *     message = "Le email '{{ value }}' N'est pas un email valide.",
+     *     checkMX = true
+     * )
      */
     private $emailSecondaireEmployee;
 
@@ -133,7 +141,24 @@ class Employee
      * @ORM\Column(name="Diplome", type="string", length=30,nullable=true)
      */
     private $diplome;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lieunais", type="string", length=30,nullable=true)
+     */
+    private $lieunais;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="maison", type="string", length=30,nullable=true)
+     */
+    private $maison;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gsm", type="string", length=30,nullable=true)
+     */
+    private $gsm;
     /**
      * @var string
      *
@@ -194,10 +219,7 @@ class Employee
     private $fonctions;
 
 
-    /**
-     *  @ORM\OneToMany(targetEntity="Conge", mappedBy="employee" , cascade={"remove"}, orphanRemoval=true)
-     */
-    private $conges;
+ 
     /**
      *@ORM\ManyToOne(targetEntity="Departement",inversedBy="employees" ,cascade={"persist"})
      *@ORM\JoinColumn(name="departement_id" ,referencedColumnName="id", nullable=true, onDelete="SET NULL")
@@ -235,6 +257,15 @@ class Employee
      * @ORM\OneToMany(targetEntity="Demande_Formation", mappedBy="employee" , cascade={"remove"}, orphanRemoval=true)
      */
     private $employeDemande;
+    /**
+     * @ORM\OneToMany(targetEntity="DemandeConge", mappedBy="employe" , cascade={"remove"}, orphanRemoval=true)
+     */
+    private $demandeConge;
+
+    /**
+     * * @ORM\OneToOne(targetEntity="Intergration" ,mappedBy="employe")
+     */
+    private $intergation;
 
 
 
@@ -242,10 +273,13 @@ class Employee
     {
         return ($this->nom . ' ' . $this->prenom);
     }
-   
+
+    public function toString()
+    {
+        return ($this->nom . ' ' . $this->prenom);
+    }
 
   
-    
   
     /**
      * Constructor
@@ -253,11 +287,11 @@ class Employee
     public function __construct()
     {
         $this->absences = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->conges = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->employeeinterne = new \Doctrine\Common\Collections\ArrayCollection();
         $this->activites = new \Doctrine\Common\Collections\ArrayCollection();
         $this->employeDemande = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->demandeConge = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -856,39 +890,6 @@ class Employee
     }
 
     /**
-     * Add conges
-     *
-     * @param \GestionBundle\Entity\Conge $conges
-     * @return Employee
-     */
-    public function addConge(\GestionBundle\Entity\Conge $conges)
-    {
-        $this->conges[] = $conges;
-
-        return $this;
-    }
-
-    /**
-     * Remove conges
-     *
-     * @param \GestionBundle\Entity\Conge $conges
-     */
-    public function removeConge(\GestionBundle\Entity\Conge $conges)
-    {
-        $this->conges->removeElement($conges);
-    }
-
-    /**
-     * Get conges
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getConges()
-    {
-        return $this->conges;
-    }
-
-    /**
      * Set departement
      *
      * @param \GestionBundle\Entity\Departement $departement
@@ -1064,5 +1065,130 @@ class Employee
     public function getEmployeDemande()
     {
         return $this->employeDemande;
+    }
+
+    /**
+     * Add demandeConge
+     *
+     * @param \GestionBundle\Entity\DemandeConge $demandeConge
+     * @return Employee
+     */
+    public function addDemandeConge(\GestionBundle\Entity\DemandeConge $demandeConge)
+    {
+        $this->demandeConge[] = $demandeConge;
+
+        return $this;
+    }
+
+    /**
+     * Remove demandeConge
+     *
+     * @param \GestionBundle\Entity\DemandeConge $demandeConge
+     */
+    public function removeDemandeConge(\GestionBundle\Entity\DemandeConge $demandeConge)
+    {
+        $this->demandeConge->removeElement($demandeConge);
+    }
+
+    /**
+     * Get demandeConge
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDemandeConge()
+    {
+        return $this->demandeConge;
+    }
+
+    /**
+     * Set intergation
+     *
+     * @param \GestionBundle\Entity\Intergration $intergation
+     * @return Employee
+     */
+    public function setIntergation(\GestionBundle\Entity\Intergration $intergation = null)
+    {
+        $this->intergation = $intergation;
+
+        return $this;
+    }
+
+    /**
+     * Get intergation
+     *
+     * @return \GestionBundle\Entity\Intergration 
+     */
+    public function getIntergation()
+    {
+        return $this->intergation;
+    }
+
+    /**
+     * Set lieunais
+     *
+     * @param string $lieunais
+     * @return Employee
+     */
+    public function setLieunais($lieunais)
+    {
+        $this->lieunais = $lieunais;
+
+        return $this;
+    }
+
+    /**
+     * Get lieunais
+     *
+     * @return string 
+     */
+    public function getLieunais()
+    {
+        return $this->lieunais;
+    }
+
+    /**
+     * Set maison
+     *
+     * @param string $maison
+     * @return Employee
+     */
+    public function setMaison($maison)
+    {
+        $this->maison = $maison;
+
+        return $this;
+    }
+
+    /**
+     * Get maison
+     *
+     * @return string 
+     */
+    public function getMaison()
+    {
+        return $this->maison;
+    }
+
+    /**
+     * Set gsm
+     *
+     * @param string $gsm
+     * @return Employee
+     */
+    public function setGsm($gsm)
+    {
+        $this->gsm = $gsm;
+
+        return $this;
+    }
+
+    /**
+     * Get gsm
+     *
+     * @return string 
+     */
+    public function getGsm()
+    {
+        return $this->gsm;
     }
 }

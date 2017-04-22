@@ -200,7 +200,7 @@ class Formation
     private $formation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Jour", mappedBy="formation")
+     * @ORM\OneToMany(targetEntity="Jour", mappedBy="formation",cascade={"persist","remove"})
      */
 
     private $jours;
@@ -227,7 +227,7 @@ class Formation
     public function __toString() {
         return $this->titre;
     }
-    
+
 
    
     /**
@@ -243,7 +243,7 @@ class Formation
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -266,7 +266,7 @@ class Formation
     /**
      * Get titre
      *
-     * @return string 
+     * @return string
      */
     public function getTitre()
     {
@@ -289,7 +289,7 @@ class Formation
     /**
      * Get objectif
      *
-     * @return string 
+     * @return string
      */
     public function getObjectif()
     {
@@ -312,7 +312,7 @@ class Formation
     /**
      * Get lieu
      *
-     * @return string 
+     * @return string
      */
     public function getLieu()
     {
@@ -335,7 +335,7 @@ class Formation
     /**
      * Get etat
      *
-     * @return string 
+     * @return string
      */
     public function getEtat()
     {
@@ -358,7 +358,7 @@ class Formation
     /**
      * Get coutImateriel
      *
-     * @return string 
+     * @return string
      */
     public function getCoutImateriel()
     {
@@ -381,7 +381,7 @@ class Formation
     /**
      * Get coutMateriel
      *
-     * @return string 
+     * @return string
      */
     public function getCoutMateriel()
     {
@@ -404,7 +404,7 @@ class Formation
     /**
      * Get theme
      *
-     * @return string 
+     * @return string
      */
     public function getTheme()
     {
@@ -427,7 +427,7 @@ class Formation
     /**
      * Get FormateurInterne
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFormateurInterne()
     {
@@ -450,7 +450,7 @@ class Formation
     /**
      * Get FormateurExterne
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFormateurExterne()
     {
@@ -473,7 +473,7 @@ class Formation
     /**
      * Get contenue
      *
-     * @return string 
+     * @return string
      */
     public function getContenue()
     {
@@ -496,7 +496,7 @@ class Formation
     /**
      * Get reccurence
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReccurence()
     {
@@ -519,7 +519,7 @@ class Formation
     /**
      * Get chaque
      *
-     * @return integer 
+     * @return integer
      */
     public function getChaque()
     {
@@ -542,7 +542,7 @@ class Formation
     /**
      * Get periode
      *
-     * @return string 
+     * @return string
      */
     public function getPeriode()
     {
@@ -565,7 +565,7 @@ class Formation
     /**
      * Get finApres
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getFinApres()
     {
@@ -588,7 +588,7 @@ class Formation
     /**
      * Get dateDebut
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateDebut()
     {
@@ -611,7 +611,7 @@ class Formation
     /**
      * Get dateFin
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateFin()
     {
@@ -634,7 +634,7 @@ class Formation
     /**
      * Get terminerA
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getTerminerA()
     {
@@ -657,7 +657,7 @@ class Formation
     /**
      * Get Ocurrancedate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getOcurrancedate()
     {
@@ -680,7 +680,7 @@ class Formation
     /**
      * Get OcurranceNbj
      *
-     * @return integer 
+     * @return integer
      */
     public function getOcurranceNbj()
     {
@@ -703,7 +703,7 @@ class Formation
     /**
      * Get typeFormation
      *
-     * @return \GestionBundle\Entity\Type_Formation 
+     * @return \GestionBundle\Entity\Type_Formation
      */
     public function getTypeFormation()
     {
@@ -736,7 +736,7 @@ class Formation
     /**
      * Get employees
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEmployees()
     {
@@ -769,7 +769,7 @@ class Formation
     /**
      * Get formation
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFormation()
     {
@@ -802,7 +802,7 @@ class Formation
     /**
      * Get jours
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getJours()
     {
@@ -825,7 +825,7 @@ class Formation
     /**
      * Get formationsemployee
      *
-     * @return \GestionBundle\Entity\Employee 
+     * @return \GestionBundle\Entity\Employee
      */
     public function getFormationsemployee()
     {
@@ -848,7 +848,7 @@ class Formation
     /**
      * Get demandeFormation
      *
-     * @return \GestionBundle\Entity\Demande_Formation 
+     * @return \GestionBundle\Entity\Demande_Formation
      */
     public function getDemandeFormation()
     {
@@ -871,7 +871,7 @@ class Formation
     /**
      * Get formateur
      *
-     * @return \GestionBundle\Entity\Formateur 
+     * @return \GestionBundle\Entity\Formateur
      */
     public function getFormateur()
     {

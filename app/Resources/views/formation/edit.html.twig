@@ -48,7 +48,7 @@
                             <label class="label">dateDebut </label>
 
                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget(edit_form.dateDebut,{'attr':{'class':'startdate'|trans}})}}
+                                {{ form_widget(edit_form.dateDebut,{'id':formation.id,'attr':{'class':'startdate'|trans}})}}
                                 {{ form_errors(edit_form.dateDebut)}}
                             </label>
                         </section>
@@ -56,7 +56,7 @@
                         <section class="col col-6">
                             <label class="label">dateFin </label>
                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget(edit_form.dateFin,{'attr':{'class':'finishdate'|trans}})}}
+                                {{ form_widget(edit_form.dateFin,{'id':formation.id,'attr':{'class':'finishdate'|trans}})}}
                                 {{ form_errors(edit_form.dateFin)}}
 
                             </label>

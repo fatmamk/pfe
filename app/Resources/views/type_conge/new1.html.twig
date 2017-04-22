@@ -1,0 +1,41 @@
+
+<div class="modal-header" style="
+    background: cornflowerblue;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title">
+        <i class="fa fa-edit"> TYpe CONGE </i>
+    </h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('type_conge_new1'),'method':'POST'|trans}})}}
+    <section>
+        <label class="label">type_Conge</label>
+        <label class="input">
+            <i class="icon-append fa fa-tag"></i>
+            {{ form_widget(form.libelleType,{'attr': {'type':'text','name':'type_Conge','placeholder':'type_Conge'|trans}}) }}
+            {{ form_errors(form.libelleType)}}
+
+
+        </label>
+
+    </section>
+
+</div>
+
+<div class="modal-footer">
+    {{ form_widget(form._token) }}
+    <footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cancel
+        </button>
+        <button type="submit" id="add" class=" btnajax btn btn-primary">
+            Save
+        </button>
+
+
+    </footer>
+    {{ form_end(form,{'render_rest':false}) }}
+</div>
+

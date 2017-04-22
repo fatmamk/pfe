@@ -368,72 +368,93 @@ Use search to find needed section.
                 <a href="#" title="grh"><i class="fa fa-group"></i> <span class="menu-item-parent">GRH</span></a>
                 <ul>
                     <li class="{% block active12 %}{% endblock%}">
-                        <a href="{{ path('employee_index') }}" title="Employe"><span class="menu-item-parent">Employe</span></a>
+                        <a href="{{ path('employee_index') }}" title="Employe"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Employe</span></a>
                     </li>
                     <li class="{% block active1 %}{% endblock%}">
-                        <a href="{{ path('site_index') }}" title="Site"><span class="menu-item-parent">Site</span></a>
+                        <a href="{{ path('site_index') }}" title="Site"><i class="fa fa-map-marker fa-lg fa-fw"></i> <span class="menu-item-parent">Site</span></a>
                     </li>
                     <li class="{% block active2 %}{% endblock %}">
-                        <a href="{{ path('departement_index') }}" title="Departement"><span class="menu-item-parent">Departement</span></a>
+                        <a href="{{ path('departement_index') }}" title="Departement"><i class="fa fa-institution fa-lg fa-fw"></i><span class="menu-item-parent">Departement</span></a>
                     </li>
                     <li class="{% block active4 %}{% endblock %}">
-                        <a href="{{ path('absence_index') }}" title="Absence"><span class="menu-item-parent">Absence</span></a>
+                        <a href="{{ path('absence_index') }}" title="Absence"><i class="fa  fa-tags fa-lg fa-fw"></i><span class="menu-item-parent">Absence</span></a>
                     </li>
                     <li class="{% block active5 %}{% endblock %}">
-                        <a href="{{ path('activite_index') }}" title="Activite"><span class="menu-item-parent">Activite</span></a>
+                        <a href="{{ path('activite_index') }}" title="Activite"><i class="fa fa-exchange fa-lg fa-fw"></i><span class="menu-item-parent">Activite</span></a>
                     </li>
                     <li class="{% block active6 %}{% endblock %}">
-                        <a href="{{ path('carriere_index') }}" title="Carriere"><span class="menu-item-parent">Carriere</span></a>
+                        <a href="{{ path('intergration_index') }}" title="Intergration"><i class="fa fa-fighter-jet fa-lg fa-fw"></i><span class="menu-item-child">Intergration</span></a>
                     </li>
-                    <li class="{% block active7 %}{% endblock %}">
-                        <a href="{{ path('conge_index') }}" title="Conge"><span class="menu-item-parent">Conge</span></a>
-                    </li>
+
                     <li class="{% block active9 %}{% endblock %}">
-                        <a href="{{ path('fonction_index') }}" title="Fonction"><span class="menu-item-parent">Fonction</span></a>
+                        <a href="{{ path('fonction_index') }}" title="Fonction"><i class="fa fa-magic fa-lg fa-fw"></i><span class="menu-item-parent">Fonction</span></a>
                     </li>
                     <li class="{% block active11 %}{% endblock %}">
-                        <a href="{{ path('groupe_index') }}" title="Groupe"><span class="menu-item-parent">Groupe</span></a>
+                        <a href="{{ path('groupe_index') }}" title="Groupe"><i class="fa fa-compress fa-lg fa-fw"></i><span class="menu-item-parent">Groupe</span></a>
                     </li>
+
                     <li class="{% block active30 %}{% endblock %}">
                         <a href="#"><i class="fa fa-lg fa-fw fa-graduation-cap"></i>Formation</a>
                      <ul>
                          <li class="{% block active10 %}{% endblock %}">
-                             <a href="{{ path('formation_index') }}" title="Formation"><span class="menu-item-parent">Formation</span></a>
+                             <a href="{{ path('formation_index') }}" title="Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Formation</span></a>
                          </li>
                          <li class="{% block active8 %}{% endblock %}">
-                             <a href="{{ path('demande_formation_index') }}" title="Demande Formation"><span class="menu-item-parent">Demande Formation</span></a>
+                             <a href="{{ path('demande_formation_index') }}" title="Demande Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Demande Formation</span></a>
                          </li>
                          <li class="{% block active40 %}{% endblock %}">
-                             <a href="{{ path('formateur_index') }}" title="Formateur"><span class="menu-item-parent">Formateur</span></a>
+                             <a href="{{ path('formateur_index') }}" title="Formateur"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Formateur</span></a>
                          </li>
                          <li class="{% block active22 %}{% endblock %}">
-                             <a href="{{ path('type_formation_index') }}" title="Type Formation"><span class="menu-item-parent">Type_Formation</span></a>
+                             <a href="{{ path('type_formation_index') }}" title="Type Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Type_Formation</span></a>
                          </li>
 
                          <li class="{% block active41 %}{% endblock %}">
-                             <a href="{{ path('fichier_index') }}" title="Fichier"><span class="menu-item-parent">Fichier</span></a>
+                             <a href="{{ path('fichier_index') }}" title="Fichier"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Fichier</span></a>
                          </li>
 
                          <li class="{% block active18 %}{% endblock %}">
-                             <a href="{{ path('evaluation_index') }}" title="evaluation"><span class="menu-item-parent">Evaluation Formation</span></a>
+                             <a href="{{ path('evaluation_index') }}" title="evaluation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Evaluation Formation</span></a>
                          </li>
 
                          <li class="{% block active19 %}{% endblock %}">
-                             <a href="{{ path('formationcomplementaire_index') }}" title="Formation Complementaire"><span class="menu-item-parent">Formation Complementaire</span></a>
+                             <a href="{{ path('formationcomplementaire_index') }}" title="Formation child"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Formation Complementaire</span></a>
                          </li>
                       </ul>
 
                     </li>
-              </ul>
+                    <li class="{% block active31 %}{% endblock %}">
+                        <a href="#"><i class="fa fa-lg fa-fw fa-calendar"></i>Conge</a>
+                        <ul>
+
+                            <li class="{% block active32 %}{% endblock %}">
+                                <a href="{{ path('demandeconge_index') }}" title="demandeconge"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">DemandeConge</span></a>
+                            </li>
+                            <li class="{% block active23 %}{% endblock %}">
+                                <a href="{{ path('type_conge_index') }}" title="Type Conge"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Type_Conge</span></a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li class="{% block active33 %}{% endblock %}">
+                        <a href="#"><i class="fa fa-lg fa-fw fa-signal "></i>Carrier</a>
+                        <ul>
+
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
             </li>
 
             <li class="{% block active20 %}{% endblock %}">
                 <a href="#" title="Parametrage"><i class="fa fa-lg fa-fw fa-wrench"></i> <span class="menu-item-parent">Paramétrage</span></a>
                 <ul>
 
-                    <li class="{% block active23 %}{% endblock %}">
-                        <a href="{{ path('type_conge_index') }}" title="Type Conge"><span class="menu-item-parent">Type_Conge</span></a>
-                    </li>
+
                     <li class="{% block active24 %}{% endblock %}">
                         <a href="{{ path('type_contrat_index') }}" title="Type Contrat"><span class="menu-item-parent">Type_Contrat</span></a>
                     </li>
@@ -1127,7 +1148,7 @@ Use search to find needed section.
             }, 500);
 
 
-
+            $('.bigBox2').delay(2000).fadeOut(1000);
         });
 
     </script>

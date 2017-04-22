@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
     <h2 class="modal-title" id="modal-fa5-label"> Ajouter Formation </h2>
 </div>
-<div class="modal-body" style="  overflow-y: auto;">
+<div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
     {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('formation_new1'),'method':'POST'|trans}})}}
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
@@ -29,15 +29,7 @@
                             </label>
                         </section>
 
-                        <section class="hidden">
-                            <label class="label">demandeFormation</label>
 
-                            <label class="input"> <i class="icon-append fa fa-user"></i>
-                                {{ form_widget(form.demandeFormation,{'attr':{'id':'gestionbundle_formation_demandeFormation'|trans}})}}
-                                {{ form_errors(form.demandeFormation)}}
-
-                            </label>
-                        </section>
 
                         <section class="col col-6">
                             <label class="label">theme </label>
@@ -70,8 +62,34 @@
                             </label>
                         </section>
                     </div>
+                    <div class="row">
+
+                        <section class="col col-6">
+                            <label class="label">coutImateriel </label>
+                            <label class="input"> <i class="icon-append fa fa-comment"></i>
+                                {{ form_widget(form.coutImateriel ) }}
+
+
+
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">coutMateriel </label>
+                            <label class="input"> <i class="icon-append fa fa-comment"></i>
+                                {{ form_widget(form.coutMateriel) }}
+
+                            </label>
+                        </section>
+                    </div>
 
                     <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Objectf </label>
+                            <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                                {{ form_widget(form.objectif,{'attr':{'type':'text','placeholder':'Tell us about your project'|trans}})}}
+
+                            </label>
+                        </section>
                         <section class="col col-6">
                             <label class="label">contenue </label>
                             <label class="textarea"> <i class="icon-append fa fa-comment"></i>
@@ -79,97 +97,129 @@
 
                             </label>
                         </section>
-                        <section class="col col-2">
+                    </div>
+                    <div class="row">
+
+
+                        <section class="col col-4">
                             <label class="label">typeFormation </label>
                             <label class="select">
-                                {{ form_widget(form.typeFormation,{ 'attr': {'required':'required'|trans } } ) }}
+                                {{ form_widget(form.typeFormation ) }}
 
                                 <i></i>
 
                             </label>
+                        </section>
+
+                        <section class="col col-6">
+                            <label class="label">Employees </label>
+                            <label class="select">
+                                {{ form_widget(form.employees ) }}
+
+                            </label>
+
+
                         </section>
                         <section class="col col-4">
                             <label class="label">lieu </label>
                             <label class="input"> <i class="icon-append fa fa-comment"></i>
-                                {{ form_widget(form.lieu,{ 'attr': {'required':'required'|trans } } ) }}
-
-                                <i></i>
-
-                            </label>
-                        </section>
-                    </div>
-
-                    <div class="row">
-
-
-                    </div>
-                    <div class="row">
-
-                        <section class="col col-4">
-                            <label class="label">coutImateriel </label>
-                            <label class="input"> <i class="icon-append fa fa-comment"></i>
-                                {{ form_widget(form.coutImateriel,{ 'attr': {'required':'required'|trans } } ) }}
+                                {{ form_widget(form.lieu ) }}
 
                                 <i></i>
 
                             </label>
                         </section>
                         <section class="col col-4">
-                            <label class="label">coutMateriel </label>
-                            <label class="input"> <i class="icon-append fa fa-comment"></i>
-                                {{ form_widget(form.coutMateriel,{ 'attr': {'required':'required'|trans } } ) }}
-
-                                <i></i>
-
+                            <label class="label">Etat
+                                <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
                             </label>
                         </section>
 
+                    </div>
+                    <div class="row">
+                        <section>
+
+                            <label class="label"> Formateur
+
+                                <a href="#myNewformateurModal"  class="for"  data-toggle="modal"    rel="tooltip" title="Ajouter type" style="display: none;"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+
+                                <label  class="toggle " style=" display: inline; ">
+                                    {{ form_widget(form.FormateurInterne,{'attr': {'class':'FormateurInterne'|trans}}) }}
+                                    <i data-swchon-text="Externe" data-swchoff-text="Interne"
+                                       style="width:60px;transform: scale(1.1); margin-right: -15px ;"></i>
+                                </label>
+
+                            </label>
+
+                            <label id="formationsemployee" class="label">liste formateur interne
+
+                                <label  class="select">
+                                    {{ form_widget(form.formationsemployee) }}
+
+                                    <i></i>
+
+                                </label>
+                            </label>
 
 
+
+
+                        </section></div>
+
+
+
+                    <div class="row">
+                        <div  class="for"  style="display: none">
+
+                            <label class="label">liste formateur Externe
+
+                                <label class="select">
+                                    {{ form_widget(form.formateur) }}
+
+                                    <i></i>
+
+                                </label>
+                            </label>
+
+
+                        </div>
                     </div>
 
 
 
+                    <div class=" row smart-form">
+                        <section class="col col-4">
+                            <label class="label">Reccurence
+                                <label class="toggle " style=" display: inline; ">
 
+                                    {{ form_widget(form.reccurence,{'attr': {'class':'reccurence'|trans}}) }}
+                                    <i data-swchon-text="Non" data-swchoff-text="Yes"
+                                       style="width:60px;transform: scale(1.1); margin-right: -15px ;"> </i>
+                                </label></label>
+                        </section >
 
-
-
-
-                    <div class="smart-form">
-                        <label class="toggle">
-
-                            {{ form_widget(form.reccurence,{'attr': {'id':'gestionbundle_formation_reccurence'|trans}}) }}
-                            <i data-swchon-text="oui" data-swchoff-text="non"></i>Switch Navs / Pills</label>
                     </div>
 
-
-
-                    <hr />
-
-                    <div  id="dv" style="display: none">
+                    <div  class="dv" style="display: none">
                         <div class="row">
-                            <div class=" col col-2 ">
+                            <section class="col col-4">
                                 <label class="label">chaque</label>
 
                                 <label class="input"> <i class="icon-append fa fa-comment"></i>
                                     {{ form_widget(form.chaque) }}
-
                                     <i></i>
-
                                 </label>
-                            </div>
+                            </section>
 
 
-                            <div class=" col col-2 ">
+                            <section class=" col col-4 ">
                                 <label class="label">periode</label>
-
                                 <label class="select">
                                     {{ form_widget(form.periode) }}
 
                                     <i></i>
-
                                 </label>
-                            </div>
+                            </section>
 
 
                         </div>
@@ -177,33 +227,42 @@
 
                         <div class="row">
 
-                            <div class=" col col-2 label">
 
-                                <label class="checkbox">
-                                    {{ form_widget(form.finApres) }}
-                                    {{ form_errors(form.finApres)}}
-                                    <i></i>Fin Apres</label>
-                            </div>
 
-                            <div class=" col col-2 ">
-                                <label class="checkbox">
-                                    {{ form_widget(form.terminerA) }}
-                                    {{ form_errors(form.terminerA)}}
-                                    <i></i>Fin Apres</label>
-                            </div>
+
+                            {% for child in form.finApres %}
+                                {% if child.vars.value == 1 %}
+                                    <section class="col col-6">
+                                        <label class="radio">
+                                            <label class="radio">
+                                                {{ form_widget(child, { 'attr': {'type':'radio','checked':'checked'}}) }}
+                                                <i></i>{{ form_label(child) }}</label>
+                                        </label>
+                                    </section>
+                                {% else %}
+                                    <section class="col col-6">
+                                        <label class="radio">
+                                            {{ form_widget(child, { 'attr': {'type':'radio'}}) }}
+                                            <i></i>{{ form_label(child) }}</label>
+                                    </section>
+                                {% endif %}
+                            {% endfor %}
+
 
                         </div>
+                        <div class="row" >
 
-                        <div class="row">
-                            <div class=" col col-2 ">
+
+                            <section class="col col-6">
                                 <label class="label">Ocurrancedate</label>
+                                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                    {{ form_widget(form.Ocurrancedate,{'attr':{'class':'date'|trans}})}}
+                                    {{ form_widget(form.Ocurrancedate) }}
+                                </label>
+                            </section>
 
-                                {{ form_widget(form.Ocurrancedate) }}
-                                {{ form_errors(form.Ocurrancedate)}}
-                            </div>
 
-
-                            <div class=" col col-2 ">
+                            <section class="col col-6">
                                 <label class="label">Ocurrance</label>
 
                                 <label class="input"> <i class="icon-append fa fa-comment"></i>
@@ -212,14 +271,14 @@
                                     <i></i>
 
                                 </label>
-                            </div>
+                            </section>
+
+
+
                         </div>
 
 
                     </div>
-
-
-
                 </fieldset>
             </fieldset>
         </div></div></div>

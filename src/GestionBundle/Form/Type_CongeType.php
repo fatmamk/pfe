@@ -31,7 +31,7 @@ class Type_CongeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_type_conge';
+        return null;
     }
 
 

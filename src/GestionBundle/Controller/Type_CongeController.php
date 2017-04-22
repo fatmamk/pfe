@@ -5,7 +5,9 @@ namespace GestionBundle\Controller;
 use GestionBundle\Entity\Type_Conge;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Type_conge controller.
@@ -52,6 +54,31 @@ class Type_CongeController extends Controller
         }
 
         return $this->render('type_conge/new.html.twig', array(
+            'type_Conge' => $type_Conge,
+            'form' => $form->createView(),
+        ));
+    }
+    /**
+     * Creates a new type_Conge entity.
+     *
+     * @Route("/new1", name="type_conge_new1")
+     * @Method({"GET", "POST"})
+     */
+    public function new1Action(Request $request)
+    {
+        $type_Conge = new Type_conge();
+        $form = $this->createForm('GestionBundle\Form\Type_CongeType', $type_Conge);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($type_Conge);
+            $em->flush($type_Conge);
+
+            return $this->redirectToRoute('type_conge_index');
+        }
+
+        return $this->render('type_conge/new1.html.twig', array(
             'type_Conge' => $type_Conge,
             'form' => $form->createView(),
         ));
@@ -134,4 +161,29 @@ class Type_CongeController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Lists all site entities.
+     *
+     * @Route("/fc/{lib}", name="TypeConge_fc")
+     * @Method("GET")
+     */
+    public function fcAction($lib)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $typeconge = $em->getRepository('GestionBundle:Type_Conge')->findOneBy(array('libelleType' => $lib));//tout les site bil id
+
+        if($typeconge)
+        {
+            $typec_id=$typeconge->getId();
+        }
+        else {
+            $typec_id=null;
+        }
+        //die($site);
+        $response = new JsonResponse(); // return une valeur json pour notre ajax
+        return $response->setData(array('site_id'=>$typec_id));//tarja3li
+
+    }
+
 }

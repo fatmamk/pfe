@@ -1,3 +1,26 @@
+gestion_discpline:
+    resource: "@GestionBundle/Controller/DiscplineController.php"
+    type:     annotation
+
+gestion_intergration:
+    resource: "@GestionBundle/Controller/IntergrationController.php"
+    type:     annotation
+
+gestion_demande_conge:
+    resource: "@GestionBundle/Controller/DemandeCongeController.php"
+    type:     annotation
+
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+
+gestion_fos:
+    resource: "@GestionBundle/Controller/FosController/ConnexionController.php"
+    type:     annotation
+
 gestion_formation_complementaire:
     resource: "@GestionBundle/Controller/FormationComplementaireController.php"
     type:     annotation
@@ -74,9 +97,7 @@ gestion_demande.formation:
     resource: "@GestionBundle/Controller/Demande_FormationController.php"
     type:     annotation
 
-gestion_conge:
-    resource: "@GestionBundle/Controller/CongeController.php"
-    type:     annotation
+
 
 gestion_carriere:
     resource: "@GestionBundle/Controller/CarriereController.php"

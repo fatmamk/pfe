@@ -3,6 +3,7 @@
 namespace GestionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Absence
@@ -24,7 +25,7 @@ class Absence
     /**
      * @var string
      *
-     * @ORM\Column(name="Justifier", type="string", length=50)
+     * @ORM\Column(name="Justifier", type="boolean",nullable=true)
      */
     private $justifier;
 
@@ -45,37 +46,18 @@ class Absence
     /**
      * @var string
      *
-     * @ORM\Column(name="Etat", type="string", length=30)
+     * @ORM\Column(name="name", type="string", length=30)
      */
-    private $etat;
+    private $name;
+
+
+    private $file;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Integere", type="string", length=30)
-     */
-    private $integere;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Commentaire", type="string", length=50)
-     */
-    private $commentaire;
-
-
-    /**
-     *@ORM\ManyToOne(targetEntity="NatureAbsence",inversedBy="nature_absences")
-     *@ORM\JoinColumn(name="nature_id" ,referencedColumnName="id")
-     */
-    private $nature;
-
-    /**
-     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="absences")
-     *@ORM\JoinColumn(name="employee_id" ,referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Employee",inversedBy="absences")
+     * @ORM\JoinColumn(name="employee_id" ,referencedColumnName="id")
      */
     private $employee;
-   
 
 
 
@@ -92,7 +74,7 @@ class Absence
     /**
      * Set justifier
      *
-     * @param string $justifier
+     * @param boolean $justifier
      * @return Absence
      */
     public function setJustifier($justifier)
@@ -103,9 +85,25 @@ class Absence
     }
 
     /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
+    }
+
+    /**
      * Get justifier
      *
-     * @return string 
+     * @return boolean 
      */
     public function getJustifier()
     {
@@ -159,95 +157,26 @@ class Absence
     }
 
     /**
-     * Set etat
+     * Set name
      *
-     * @param string $etat
+     * @param string $name
      * @return Absence
      */
-    public function setEtat($etat)
+    public function setName($name)
     {
-        $this->etat = $etat;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get etat
+     * Get name
      *
      * @return string 
      */
-    public function getEtat()
+    public function getName()
     {
-        return $this->etat;
-    }
-
-    /**
-     * Set integere
-     *
-     * @param string $integere
-     * @return Absence
-     */
-    public function setIntegere($integere)
-    {
-        $this->integere = $integere;
-
-        return $this;
-    }
-
-    /**
-     * Get integere
-     *
-     * @return string 
-     */
-    public function getIntegere()
-    {
-        return $this->integere;
-    }
-
-    /**
-     * Set commentaire
-     *
-     * @param string $commentaire
-     * @return Absence
-     */
-    public function setCommentaire($commentaire)
-    {
-        $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    /**
-     * Get commentaire
-     *
-     * @return string 
-     */
-    public function getCommentaire()
-    {
-        return $this->commentaire;
-    }
-
-    /**
-     * Set nature
-     *
-     * @param \GestionBundle\Entity\NatureAbsence $nature
-     * @return Absence
-     */
-    public function setNature(\GestionBundle\Entity\NatureAbsence $nature = null)
-    {
-        $this->nature = $nature;
-
-        return $this;
-    }
-
-    /**
-     * Get nature
-     *
-     * @return \GestionBundle\Entity\NatureAbsence 
-     */
-    public function getNature()
-    {
-        return $this->nature;
+        return $this->name;
     }
 
     /**
@@ -271,5 +200,41 @@ class Absence
     public function getEmployee()
     {
         return $this->employee;
+    }
+
+    public function getUploadDir()
+    {
+        return 'upload/files';
+    }
+    public function getAbsolutRoot()
+    {
+        return   $this->getUploadRoot().$this->name;
+    }
+
+    public function getWebPath()
+    {
+        return   $this->getUploadDir().'/'.$this->name;
+    }
+
+    public function getUploadRoot()
+    {
+        return   __DIR__.'/../../../web/'.$this->getUploadDir().'/'.$this->name;
+    }
+
+
+    public function upload()
+    {
+        if($this->file==null)
+        {
+            return;
+        }
+        $this->name=$this->file->getClientOriginalName();
+
+        if(!is_dir($this->getUploadRoot()))
+        {
+            mkdir($this->getUploadRoot(),'0777',true);
+        }
+        $this->file->move($this->getUploadRoot(),$this->name);
+        unset($this->file);
     }
 }

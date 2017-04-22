@@ -24,14 +24,14 @@ class Jour
     /**
      * @var string
      *
-     * @ORM\Column(name="progMedi", type="string", length=255)
+     * @ORM\Column(name="progMedi", type="string", length=255, nullable=true)
      */
     private $progMedi;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="progmatin", type="string", length=255)
+     * @ORM\Column(name="progmatin", type="string", length=255, nullable=true)
      */
     private $progmatin;
     /**
@@ -40,10 +40,15 @@ class Jour
      */
     private $formation;
 
+
+
+    public function __toString() {
+        return $this->progMedi.' '.progmatin;
+    }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +71,7 @@ class Jour
     /**
      * Get progMedi
      *
-     * @return string 
+     * @return string
      */
     public function getProgMedi()
     {
@@ -89,7 +94,7 @@ class Jour
     /**
      * Get progmatin
      *
-     * @return string 
+     * @return string
      */
     public function getProgmatin()
     {
@@ -112,7 +117,7 @@ class Jour
     /**
      * Get formations
      *
-     * @return \GestionBundle\Entity\Formation 
+     * @return \GestionBundle\Entity\Formation
      */
     public function getFormations()
     {
@@ -135,7 +140,7 @@ class Jour
     /**
      * Get formation
      *
-     * @return \GestionBundle\Entity\Formation 
+     * @return \GestionBundle\Entity\Formation
      */
     public function getFormation()
     {
