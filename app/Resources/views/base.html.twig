@@ -4,12 +4,53 @@
 <head>
 
 
+
+
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }} fmsg" style="z-index:10000;position:relative;">
+                <div id="divSmallBoxes " >
+                    <div id="smallbox34" class="SmallBox animated fadeInRight  fast"
+                         style="background-color: #539c53; border-left: 5px solid rgba(0,0,0,.15)">
+
+                        <div class="textoFull">
+                            <span><i class="fa-fw fa fa-check"></i><strong>Succès </strong>{{ flash_message }}</span>
+                            <p><i class="fa fa-clock-o"></i> <i>2 seconds ago...</i></p>
+                        </div>
+                        <div class="miniIcono"><i class="miniPic fa fa-thumbs-up bounce animated"></i></div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="MessageBoxContainer animated fadeIn fast" id="Msg1">
+            <div class="MessageBoxMiddle"><span class="MsgTitle"
+                ><i class="fa fa-sign-out text-danger"></i>
+                                                                    <span class="txt-color-orangeDark"><strong>
+                                                                            Déconnexion
+                                                                        </strong></span> ?</span>
+                <p class="pText"><p><span>Voulez-vous vraiment Déconnecter <a href="#"></a> ? </span></p>
+                <div class="MessageBoxButtonSection">
+                    <div >
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">
+                            Annuler
+                        </button>
+
+                        <button onclick="window.location.href='{{ path('fos_user_security_logout')}}'" class="btn btn-primary"  id="lien">Déconnexion</button>
+                    </div>
+
+                </div></div></div></div>
+
+
+    <!-- END FLASH MESSAGE-->
     <!-- END FLASH MESSAGE-->
 
     <meta charset="utf-8">
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-    <title> {% block title %}SmartAdmin{% endblock %} </title>
+    <title> {% block title %}QualiMaker{% endblock %} </title>
 
 
 
@@ -27,6 +68,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/font-awesome.min.css')}}">
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/slim.css')}}">
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/slim.min.css')}}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/jquery.rateyo.min.css')}}">
 
 
         <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
@@ -63,50 +105,7 @@
     {% endblock %}
 </head>
 
-<!--
 
-TABLE OF CONTENTS.
-
-Use search to find needed section.
-
-===================================================================
-
-|  01. #CSS Links                |  all CSS links and file paths  |
-|  02. #FAVICONS                 |  Favicon links and file paths  |
-|  03. #GOOGLE FONT              |  Google font link              |
-|  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
-|  05. #BODY                     |  body tag                      |
-|  06. #HEADER                   |  header tag                    |
-|  07. #PROJECTS                 |  project lists                 |
-|  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
-|  09. #MOBILE                   |  mobile view dropdown          |
-|  10. #SEARCH                   |  search field                  |
-|  11. #NAVIGATION               |  left panel & navigation       |
-|  12. #RIGHT PANEL              |  right panel userlist          |
-|  13. #MAIN PANEL               |  main panel                    |
-|  14. #MAIN CONTENT             |  content holder                |
-|  15. #PAGE FOOTER              |  page footer                   |
-|  16. #SHORTCUT AREA            |  dropdown shortcuts area       |
-|  17. #PLUGINS                  |  all scripts and plugins       |
-
-===================================================================
-
--->
-
-<!-- #BODY -->
-<!-- Possible Classes
-
-    * 'smart-style-{SKIN#}'
-    * 'smart-rtl'         - Switch theme mode to RTL
-    * 'menu-on-top'       - Switch to top navigation (no DOM change required)
-    * 'no-menu'			  - Hides the menu completely
-    * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
-    * 'fixed-header'      - Fixes the header
-    * 'fixed-navigation'  - Fixes the main menu
-    * 'fixed-ribbon'      - Fixes breadcrumb
-    * 'fixed-page-footer' - Fixes footer
-    * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
--->
 <body class="">
 
 
@@ -114,30 +113,9 @@ Use search to find needed section.
 <header id="header">
 
     <div id="logo-group">
-        {% for type, flash_messages in app.session.flashBag.all %}
-            {% for flash_message in flash_messages %}
-            <div class="flash-{{ type }}">
-                {% if flash_messages is not empty %}
-                    <div id="divMiniIcons" class="fmsg">
-                        <div id="miniIcon2" class="cajita animated fadeIn" style="background-color: #b10804;">
-                            <i class="fa fa-bell swing animated"></i></div>
-                    </div>
-                    <div class="fmsg">
-                        <div  id="bigBox2" class="bigBox animated fadeIn fast" style="background-color: rgb(177, 15, 0);">
-                            <div id="bigBoxColor2"><span>Indication</span>
-                                <p><strong>Succès {{ flash_message }}</strong> </p><div class="bigboxicon">
-                                    <i class="fa fa-bell swing animated"></i></div><div class="bigboxnumber">2 seconde and go</div></div></div>
-                    </div>
-                    </div>
 
-
-
-                {% endif %}
-
-            {% endfor %}
-        {% endfor %}
         <!-- PLACE YOUR LOGO HERE -->
-        <span id="logo"> <img src="{{ asset('img/logo.png') }}" alt="SmartAdmin"> </span>
+        <span id="logo"> <img src="{{ asset('img/quli.png') }}" alt="QualiMaker"> </span>
         <!-- END LOGO PLACEHOLDER -->
 
         <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
@@ -196,9 +174,7 @@ Use search to find needed section.
         <!-- Top menu profile link : this shows only when top menu is active -->
         <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
             <li class="">
-                <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                    <img src="{{ asset('img/avatars/sunny.png')}}" alt="John Doe" class="online" />
-                </a>
+
                 <ul class="dropdown-menu pull-right">
                     <li>
                         <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Setting</a>
@@ -217,15 +193,17 @@ Use search to find needed section.
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                        <a href="{{ path('fos_user_security_login') }}" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>D</u>éconnexion</strong></a>
                     </li>
                 </ul>
             </li>
         </ul>
 
         <!-- logout button -->
-        <div id="logout" class="btn-header transparent pull-right">
-            <span> <a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+        <div  class="btn-header transparent pull-right">
+            <span>
+               <a href="#logout"  data-toggle="modal" id="modal_link" title="Déconnexion" ><i class="fa fa-sign-out"></i></a> </span>
+                    </i></a>
         </div>
         <!-- end logout button -->
 
@@ -346,10 +324,11 @@ Use search to find needed section.
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                        <img src="{{ asset('img/avatars/sunny.png')}}" alt="me" class="online" />
-						<span>
-							john.doe
+                        <img src="{{ asset('upload/images/')}}{{ app.user.username }}" alt="me" class="online" />
+						<span style="color:#69fff7;">
+							 <h1>{{ app.user.username }}&nbsp;{{ app.user.prenom }}</h1>
 						</span>
+                        <i class="fa fa-angle-down"></i>
                     </a>
 
 				</span>
@@ -367,108 +346,123 @@ Use search to find needed section.
             <li class="{% block active0 %}{% endblock %}">
                 <a href="#" title="grh"><i class="fa fa-group"></i> <span class="menu-item-parent">GRH</span></a>
                 <ul>
-                    <li class="{% block active12 %}{% endblock%}">
-                        <a href="{{ path('employee_index') }}" title="Employe"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Employe</span></a>
-                    </li>
-                    <li class="{% block active1 %}{% endblock%}">
-                        <a href="{{ path('site_index') }}" title="Site"><i class="fa fa-map-marker fa-lg fa-fw"></i> <span class="menu-item-parent">Site</span></a>
-                    </li>
-                    <li class="{% block active2 %}{% endblock %}">
-                        <a href="{{ path('departement_index') }}" title="Departement"><i class="fa fa-institution fa-lg fa-fw"></i><span class="menu-item-parent">Departement</span></a>
-                    </li>
-                    <li class="{% block active4 %}{% endblock %}">
-                        <a href="{{ path('absence_index') }}" title="Absence"><i class="fa  fa-tags fa-lg fa-fw"></i><span class="menu-item-parent">Absence</span></a>
-                    </li>
-                    <li class="{% block active5 %}{% endblock %}">
-                        <a href="{{ path('activite_index') }}" title="Activite"><i class="fa fa-exchange fa-lg fa-fw"></i><span class="menu-item-parent">Activite</span></a>
-                    </li>
-                    <li class="{% block active6 %}{% endblock %}">
-                        <a href="{{ path('intergration_index') }}" title="Intergration"><i class="fa fa-fighter-jet fa-lg fa-fw"></i><span class="menu-item-child">Intergration</span></a>
-                    </li>
+                        <li class="{% block active12 %}{% endblock%}">
+                            <a href="{{ path('employee_index') }}" title="Employe">
+                                <i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Employe</span></a>
+                        </li>
 
-                    <li class="{% block active9 %}{% endblock %}">
-                        <a href="{{ path('fonction_index') }}" title="Fonction"><i class="fa fa-magic fa-lg fa-fw"></i><span class="menu-item-parent">Fonction</span></a>
-                    </li>
-                    <li class="{% block active11 %}{% endblock %}">
-                        <a href="{{ path('groupe_index') }}" title="Groupe"><i class="fa fa-compress fa-lg fa-fw"></i><span class="menu-item-parent">Groupe</span></a>
-                    </li>
-
-                    <li class="{% block active30 %}{% endblock %}">
-                        <a href="#"><i class="fa fa-lg fa-fw fa-graduation-cap"></i>Formation</a>
-                     <ul>
-                         <li class="{% block active10 %}{% endblock %}">
-                             <a href="{{ path('formation_index') }}" title="Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Formation</span></a>
-                         </li>
-                         <li class="{% block active8 %}{% endblock %}">
-                             <a href="{{ path('demande_formation_index') }}" title="Demande Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Demande Formation</span></a>
-                         </li>
-                         <li class="{% block active40 %}{% endblock %}">
-                             <a href="{{ path('formateur_index') }}" title="Formateur"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Formateur</span></a>
-                         </li>
-                         <li class="{% block active22 %}{% endblock %}">
-                             <a href="{{ path('type_formation_index') }}" title="Type Formation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Type_Formation</span></a>
-                         </li>
-
-                         <li class="{% block active41 %}{% endblock %}">
-                             <a href="{{ path('fichier_index') }}" title="Fichier"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Fichier</span></a>
-                         </li>
-
-                         <li class="{% block active18 %}{% endblock %}">
-                             <a href="{{ path('evaluation_index') }}" title="evaluation"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-child">Evaluation Formation</span></a>
-                         </li>
-
-                         <li class="{% block active19 %}{% endblock %}">
-                             <a href="{{ path('formationcomplementaire_index') }}" title="Formation child"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Formation Complementaire</span></a>
-                         </li>
-                      </ul>
-
-                    </li>
                     <li class="{% block active31 %}{% endblock %}">
                         <a href="#"><i class="fa fa-lg fa-fw fa-calendar"></i>Conge</a>
                         <ul>
 
-                            <li class="{% block active32 %}{% endblock %}">
-                                <a href="{{ path('demandeconge_index') }}" title="demandeconge"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">DemandeConge</span></a>
-                            </li>
-                            <li class="{% block active23 %}{% endblock %}">
-                                <a href="{{ path('type_conge_index') }}" title="Type Conge"><i class="fa fa-user fa-lg fa-fw"></i><span class="menu-item-parent">Type_Conge</span></a>
-                            </li>
+                                <li class="{% block active32 %}{% endblock %}">
+                                    <a href="{{ path('demandeconge_index') }}" title="demandeconge"><i class="fa  fa-lg fa-fw"></i><span class="menu-item-parent">DemandeConge</span></a>
+                                </li>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="{% block active23 %}{% endblock %}">
+                                    <a href="{{ path('type_conge_index') }}" title="Type Conge"><i class="fa  fa-lg fa-fw"></i><span class="menu-item-parent">Type_Conge</span></a>
+                                </li>
+                            {%  endif %}
+
 
                         </ul>
 
+
                     </li>
-                    <li class="{% block active33 %}{% endblock %}">
-                        <a href="#"><i class="fa fa-lg fa-fw fa-signal "></i>Carrier</a>
+                    <li class="{% block active30 %}{% endblock %}">
+                        <a href="#"><i class="fa fa-lg fa-fw fa-graduation-cap"></i>Formation</a>
                         <ul>
 
+                                <li class="{% block active10 %}{% endblock %}">
+                                    <a href="{{ path('formation_index') }}" title="Formation"><i class="fa fa-lg fa-fw"></i><span class="menu-item-parent">Formation</span></a>
+                                </li>
+
+
+                                <li class="{% block active8 %}{% endblock %}">
+                                    <a href="{{ path('demande_formation_index') }}" title="Demande Formation"><i class="fa  fa-lg fa-fw"></i><span class="menu-item-parent">Demande Formation</span></a>
+                                </li>
+
+
+
+                                <li class="{% block active40 %}{% endblock %}">
+                                    <a href="{{ path('formateur_index') }}" title="Formateur"><i class="fa  fa-lg fa-fw"></i><span class="menu-item-parent">Formateur</span></a>
+                                </li>
+
+
+
+                                <li class="{% block active22 %}{% endblock %}">
+                                    <a href="{{ path('type_formation_index') }}" title="Type Formation"><i class="fa  fa-lg fa-fw"></i><span class="menu-item-parent">Type_Formation</span></a>
+                                </li>
+
+
+
+                                <li class="{% block active18 %}{% endblock %}">
+                                    <a href="{{ path('evaluation_index') }}" title="evaluation"><i class="fa fa-lg fa-fw"></i><span class="menu-item-parent">EvaluationFormation</span></a>
+                                </li>
+
+
+                                <li class="{% block active19 %}{% endblock %}">
+                                    <a href="{{ path('formationcomplementaire_index') }}" title="Formation complimentaire"><i class="fa fa-lg fa-fw"></i><span class="menu-item-parent">Complementaire</span></a>
+                                </li>
+
+
+
 
 
                         </ul>
 
                     </li>
+                        <li class="{% block active1 %}{% endblock%}">
+                            <a href="{{ path('site_index') }}" title="Site"><i class="fa fa-map-marker fa-lg fa-fw"></i> <span class="menu-item-parent">Site</span></a>
+                        </li>
+                        <li class="{% block active2 %}{% endblock %}">
+                            <a href="{{ path('departement_index') }}" title="Departement"><i class="fa fa-institution fa-lg fa-fw"></i><span class="menu-item-parent">Departement</span></a>
+                        </li>
+
+                        <li class="{% block active4 %}{% endblock %}">
+                            <a href="{{ path('absence_index') }}" title="Absence"><i class="fa  fa-tags fa-lg fa-fw"></i><span class="menu-item-parent">Absence</span></a>
+                        </li>
+
+                        <li class="{% block active6 %}{% endblock %}">
+                            <a href="{{ path('intergration_index') }}" title="Intergration"><i class="fa fa-fighter-jet fa-lg fa-fw"></i><span class="menu-item-child">Intergration</span></a>
+                        </li>
+
+
+                        <li class="{% block active9 %}{% endblock %}">
+                            <a href="{{ path('fonction_index') }}" title="Fonction"><i class="fa fa-magic fa-lg fa-fw"></i><span class="menu-item-parent">Fonction</span></a>
+                        </li>
+
+
+
+                        <li class="{% block active33 %}{% endblock %}">
+                            <a href="{{ path('carriere_index') }}" title="Groupe"><i class="fa fa-lg fa-fw fa-signal "></i><span class="menu-item-parent">carrière</span></a>
+
+
+                        </li>
+
 
                 </ul>
             </li>
-
             <li class="{% block active20 %}{% endblock %}">
                 <a href="#" title="Parametrage"><i class="fa fa-lg fa-fw fa-wrench"></i> <span class="menu-item-parent">Paramétrage</span></a>
                 <ul>
 
+                        <li class="{% block active24 %}{% endblock %}">
+                            <a href="{{ path('type_contrat_index') }}" title="Type Contrat"><span class="menu-item-parent">Type_Contrat</span></a>
+                        </li>
 
-                    <li class="{% block active24 %}{% endblock %}">
-                        <a href="{{ path('type_contrat_index') }}" title="Type Contrat"><span class="menu-item-parent">Type_Contrat</span></a>
-                    </li>
-                    <li class="{% block active25 %}{% endblock %}">
-                        <a href="{{ path('natureabsence_index') }}" title="Nature Absence"><span class="menu-item-parent">Type_Contrat</span></a>
-                    </li>
+
+
+
+
+
                 </ul>
             </li>
 
         </ul>
 
     </nav>
-
-
 			<span class="minifyme" data-action="minifyMenu">
 				<i class="fa fa-arrow-circle-left hit"></i>
 			</span>
@@ -594,13 +588,6 @@ Use search to find needed section.
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
             pageSetUp();
 
-            /*
-             * PAGE RELATED SCRIPTS
-             */
-
-
-
-
             $(".js-status-update a").click(function() {
                 var selText = $(this).text();
                 var $this = $(this);
@@ -608,10 +595,6 @@ Use search to find needed section.
                 $this.parents('.dropdown-menu').find('li').removeClass('active');
                 $this.parent().addClass('active');
             });
-
-            /*
-             * TODO: add a way to add more todo's to list
-             */
 
             // initialize sortable
             $(function() {
@@ -651,9 +634,7 @@ Use search to find needed section.
                     var $this = $(this);
                     $this.find(".num-of-tasks").text($this.next().find("li").size());
                 });
-
             }
-
             /*
              * RUN PAGE GRAPHS
              */
@@ -951,110 +932,8 @@ Use search to find needed section.
                 }
             });
 
-            /*
-             * FULL CALENDAR JS
-             */
-
-            if ($("#calendar").length) {
-                var date = new Date();
-                var d = date.getDate();
-                var m = date.getMonth();
-                var y = date.getFullYear();
-
-                var calendar = $('#calendar').fullCalendar({
-
-                    editable : true,
-                    draggable : true,
-                    selectable : false,
-                    selectHelper : true,
-                    unselectAuto : false,
-                    disableResizing : false,
-                    height: "auto",
-
-                    header : {
-                        left : 'title', //,today
-                        center : 'prev, next, today',
-                        right : 'month, agendaWeek, agenDay' //month, agendaDay,
-                    },
-
-                    select : function(start, end, allDay) {
-                        var title = prompt('Event Title:');
-                        if (title) {
-                            calendar.fullCalendar('renderEvent', {
-                                        title : title,
-                                        start : start,
-                                        end : end,
-                                        allDay : allDay
-                                    }, true // make the event "stick"
-                            );
-                        }
-                        calendar.fullCalendar('unselect');
-                    },
-
-                    events : [{
-                        title : 'All Day Event',
-                        start : new Date(y, m, 1),
-                        description : 'long description',
-                        className : ["event", "bg-color-greenLight"],
-                        icon : 'fa-check'
-                    }, {
-                        title : 'Long Event',
-                        start : new Date(y, m, d - 5),
-                        end : new Date(y, m, d - 2),
-                        className : ["event", "bg-color-red"],
-                        icon : 'fa-lock'
-                    }, {
-                        id : 999,
-                        title : 'Repeating Event',
-                        start : new Date(y, m, d - 3, 16, 0),
-                        allDay : false,
-                        className : ["event", "bg-color-blue"],
-                        icon : 'fa-clock-o'
-                    }, {
-                        id : 999,
-                        title : 'Repeating Event',
-                        start : new Date(y, m, d + 4, 16, 0),
-                        allDay : false,
-                        className : ["event", "bg-color-blue"],
-                        icon : 'fa-clock-o'
-                    }, {
-                        title : 'Meeting',
-                        start : new Date(y, m, d, 10, 30),
-                        allDay : false,
-                        className : ["event", "bg-color-darken"]
-                    }, {
-                        title : 'Lunch',
-                        start : new Date(y, m, d, 12, 0),
-                        end : new Date(y, m, d, 14, 0),
-                        allDay : false,
-                        className : ["event", "bg-color-darken"]
-                    }, {
-                        title : 'Birthday Party',
-                        start : new Date(y, m, d + 1, 19, 0),
-                        end : new Date(y, m, d + 1, 22, 30),
-                        allDay : false,
-                        className : ["event", "bg-color-darken"]
-                    }, {
-                        title : 'Smartadmin Open Day',
-                        start : new Date(y, m, 28),
-                        end : new Date(y, m, 29),
-                        className : ["event", "bg-color-darken"]
-                    }],
 
 
-                    eventRender : function(event, element, icon) {
-                        if (!event.description == "") {
-                            element.find('.fc-title').append("<br/><span class='ultra-light'>" + event.description + "</span>");
-                        }
-                        if (!event.icon == "") {
-                            element.find('.fc-title').append("<i class='air air-top-right fa " + event.icon + " '></i>");
-                        }
-                    }
-
-                });
-
-
-            };
 
             /* hide default buttons */
             $('.fc-toolbar .fc-right, .fc-toolbar .fc-center').hide();

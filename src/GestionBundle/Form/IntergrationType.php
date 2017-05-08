@@ -19,19 +19,15 @@ class IntergrationType extends AbstractType
         'placeholder' => 'DD-MM-YYYY',
     )))
 
-            ->add('employe', EntityType::class,
-                array(
-                    'class' => 'GestionBundle:Employee',
-
-                    'required' => false,
-                    'property' => 'toString'))
+            ->add('employe')
             ->add('responsable', EntityType::class,
                 array(
                     'class' => 'GestionBundle:Employee',
 
                     'required' => false,
                     'property' => 'toString'))
-
+            ->add('etat', 'choice', array('choices' => array('Realisée' => 'Realisée','Programmée' => 'Programmée','Terminer'=>'Términer'),'placeholder' => 'Genre',
+                'required' => false,))
             ->add('dateFin','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',
             )))

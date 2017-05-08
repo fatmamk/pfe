@@ -43,7 +43,7 @@ class Type_FormationController extends Controller
         $form = $this->createForm('GestionBundle\Form\Type_FormationType', $type_Formation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($type_Formation);
             $em->flush($type_Formation);
@@ -85,7 +85,7 @@ class Type_FormationController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\Type_FormationType', $type_Formation);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('type_formation_index');

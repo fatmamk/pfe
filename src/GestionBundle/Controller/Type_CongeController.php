@@ -45,7 +45,7 @@ class Type_CongeController extends Controller
         $form = $this->createForm('GestionBundle\Form\Type_CongeType', $type_Conge);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($type_Conge);
             $em->flush($type_Conge);
@@ -70,7 +70,7 @@ class Type_CongeController extends Controller
         $form = $this->createForm('GestionBundle\Form\Type_CongeType', $type_Conge);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($type_Conge);
             $em->flush($type_Conge);

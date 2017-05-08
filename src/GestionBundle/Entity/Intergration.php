@@ -70,12 +70,12 @@ class Intergration
     private $pointforte;
 
     /**
-     * @ORM\OneToOne(targetEntity="Employee",inversedBy="intergation" ,cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="employe_id" ,referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Employee",inversedBy="intergation" )
+     * @ORM\JoinColumn(name="employe_id" ,referencedColumnName="id",nullable=true, onDelete="SET NULL")
      */
     private $employe;
 
-  
+
 
 
 

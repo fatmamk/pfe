@@ -22,17 +22,25 @@ class EmployeeType extends AbstractType
 
             ->add('cINEmployee')
             ->add('lieunais')
-            ->add('dateNaiss','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy'))
+            ->add('dateNaiss','date',array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy'))
 
-            ->add('sexe', 'choice', array('choices' => array('Féminin' => 'Féminin','Masculin' => 'Masculin'),'placeholder' => 'Genre',
-                'required' => false,))
+            ->add('sexe', 'choice', array('choices' => array('Féminin' => 'Féminin','Masculin' => 'Masculin'),
+                'required' => false))
             ->add('adresseEmploye')
 
             ->add('numTelEmployee')
             ->add('gsm')
 
-            ->add('emailEmployee')
-            ->add('emailSecondaireEmployee')
+            ->add('email')
+            ->add('username')
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'options' => array('translation_domain' => 'FOSUserBundle'),
+                'first_options' => array('label' => 'form.password'),
+                'second_options' => array('label' => 'form.password_confirmation'),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
+          ->add('emailSecondaireEmployee')
             ->add('matriculeEmployee')
             ->add('gradeEmployee')
             ->add('rIBEmployee')
@@ -40,33 +48,23 @@ class EmployeeType extends AbstractType
             ->add('numSecuriteSocialeEmployee')
 
             ->add('type', 'choice', array('choices' => array('formateur' => 'Féminin','Masculin' => 'Masculin')))
-            ->add('diplome',TextareaType::class,array(
-                'attr'=>array('rows'=>'3','required' => false),
+            ->add('diplome',TextareaType::class,array('required' => false,
+                'attr'=>array('rows'=>'3',),
             ))
             ->add('experience',TextareaType::class,array(
-                'attr'=>array('rows'=>'3','required' => false),
+                'attr'=>array('rows'=>'3'),
             ))
             ->add('competance',TextareaType::class,array(
                 'attr'=>array('rows'=>'3'),
             ))
-            ->add('aptitudePhysique',TextareaType::class,array(
-                'attr'=>array('rows'=>'3','required' => false),
+            ->add('aptitudePhysique',TextareaType::class,array('required' => false,
+                'attr'=>array('rows'=>'3')
             ))
-            ->add('groupe')
 
 
-
-            
-
+            ->add('fonctions')
 
             ->add('site')
-
-
-
-
-
-            ->add('carriere')
-            ->add('activites')
 
             ->add('delivreA')
             ->add('departement')
@@ -85,12 +83,11 @@ class EmployeeType extends AbstractType
 
             ->add('departement',EntityType::class,
         array(
-            'placeholder' => 'Choose departement',
+
             'required' => false,
             'class' => 'GestionBundle:Departement',
             'property' => 'libelleDepartement',
         'multiple'=>false));
-
     }
     
     /**

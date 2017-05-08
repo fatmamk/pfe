@@ -5,7 +5,9 @@ namespace GestionBundle\Controller;
 use GestionBundle\Entity\Fonction;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Fonction controller.
@@ -43,7 +45,7 @@ class FonctionController extends Controller
         $form = $this->createForm('GestionBundle\Form\FonctionType', $fonction);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($fonction);
             $em->flush($fonction);
@@ -57,6 +59,31 @@ class FonctionController extends Controller
         ));
     }
 
+    /**
+     * Creates a new fonction entity.
+     *
+     * @Route("/new1", name="fonction_new1")
+     * @Method({"GET", "POST"})
+     */
+    public function new1Action(Request $request)
+    {
+        $fonction = new Fonction();
+        $form = $this->createForm('GestionBundle\Form\FonctionType', $fonction);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() ) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($fonction);
+            $em->flush($fonction);
+
+            return $this->redirectToRoute('fonction_index');
+        }
+
+        return $this->render('fonction/new1.html.twig', array(
+            'fonction' => $fonction,
+            'form' => $form->createView(),
+        ));
+    }
     /**
      * Finds and displays a fonction entity.
      *
@@ -85,7 +112,7 @@ class FonctionController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\FonctionType', $fonction);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('fonction_index');
@@ -133,5 +160,30 @@ class FonctionController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+
+    /**
+     * Lists all site entities.
+     *
+     * @Route("/fc/{lib}", name="fonction_fc")
+     * @Method("GET")
+     */
+    public function fcAction($lib)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fonction = $em->getRepository('GestionBundle:Fonction')->findOneBy(array('libelleFonction' => $lib));//tout les fonctions bil id
+
+        if($fonction)
+        {
+            $fonction_id=$fonction->getId();
+        }
+        else {
+            $fonction_id=null;
+        }
+        //die($site);
+        $response = new JsonResponse(); // return une valeur json pour notre ajax
+        return $response->setData(array('site_id'=>$fonction_id));//tarja3li
+
     }
 }

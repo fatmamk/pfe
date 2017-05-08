@@ -25,6 +25,24 @@ class IntergrationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $intergrations = $em->getRepository('GestionBundle:Intergration')->findAll();
+        if($intergrations){
+
+            foreach($intergrations as $integration) {
+
+
+                if ($integration->getDateDebut()->format('Y-m-d') < date('Y-m-d') && $integration->getDateFin()->format('Y-m-d') > date('Y-m-d'))
+                    $integration->setEtat("En cours");
+
+                else if ($integration->getDateDebut()->format('Y-m-d') > date('Y-m-d'))
+                    $integration->setEtat("Programmée");
+                else
+                    $integration->setEtat("Terminée");
+
+            }
+            $em->persist($integration);
+            $em->flush();
+        }
+
 
         return $this->render('intergration/index.html.twig', array(
             'intergrations' => $intergrations,
@@ -43,7 +61,7 @@ class IntergrationController extends Controller
         $form = $this->createForm('GestionBundle\Form\IntergrationType', $intergration);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($intergration);
             $em->flush($intergration);
@@ -85,7 +103,7 @@ class IntergrationController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\IntergrationType', $intergration);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('intergration_index');

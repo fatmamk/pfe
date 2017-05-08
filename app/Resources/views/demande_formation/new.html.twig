@@ -7,6 +7,7 @@
 
     <fieldset>
         <div class="row">
+            <div class="row">
             <section class="col col-6">
                 <label class="label">Théme </label>
                 <label class="input"> <i class="icon-append fa fa-pencil"></i>
@@ -14,6 +15,15 @@
                     {{ form_errors(form.theme)}}
                     </label>
             </section>
+                <section class="col col-4">
+                    <label class="label">Etat
+                        <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
+
+
+                    </label>
+                </section>
+            </div>
+            <div class="row">
             <section class="col col-6">
                 <label class="label">Date de demande </label>
 
@@ -30,7 +40,7 @@
                     {{ form_errors(form.dateSouhaite)}}
                 </label>
             </section>
-
+            </div>
         </div>
     </fieldset>
 
@@ -51,13 +61,7 @@
                     {{ form_errors(form.description)}}
                     <b class="tooltip tooltip-bottom-right">Needed to enter the description </b> </label>
             </section>
-            <section class="col col-4">
-                <label class="label">Etat
-                    <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
 
-
-                </label>
-            </section>
         </div>
     </fieldset>
 
@@ -66,19 +70,14 @@
     </fieldset>
 </div>
 <div class="modal-footer">
-    {{ form_widget(form._token) }}
 
-    <footer>
-
-        <div class="btn-group dropup">
-            <button type="submit" class="btn btn-primary">
-                Validate Form
-            </button>
-
-        </div>
-    </footer>
-
-
+    <button type="button" class="btn btn-default"   data-dismiss="modal">
+        Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">
+        Ajouter
+    </button>
+</div>
 
     {{ form_end(form,{'render_rest':false}) }}
 

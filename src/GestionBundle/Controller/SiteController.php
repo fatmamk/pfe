@@ -45,7 +45,7 @@ class SiteController extends Controller
         $form = $this->createForm('GestionBundle\Form\SiteType', $site);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($site);
             $em->flush($site);
@@ -95,7 +95,7 @@ class SiteController extends Controller
         $form = $this->createForm('GestionBundle\Form\SiteType', $site);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($site);
             $em->flush($site);
@@ -137,7 +137,7 @@ class SiteController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\SiteType', $site);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('site_index');// tab3thek lil index win tab3the q

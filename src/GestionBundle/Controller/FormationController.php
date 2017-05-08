@@ -2,6 +2,8 @@
 
 namespace GestionBundle\Controller;
 
+use GestionBundle\Entity\Demande_Formation;
+use GestionBundle\Entity\Document;
 use GestionBundle\Entity\Employee;
 use GestionBundle\Entity\Formation;
 use GestionBundle\Entity\Jour;
@@ -9,7 +11,9 @@ use GestionBundle\Form\FormationType;
 use GestionBundle\Form\JourType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Formation controller.
@@ -18,6 +22,45 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class FormationController extends Controller
 {
+    /**
+     * Displays a form to edit an existing formation entity.
+     *
+     * @Route("/doc", name="formation_doc")
+     * @Method({"GET", "POST"})
+     */
+    public function DocAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $this->debug_to_console($id);
+        $formation = $em->getRepository('GestionBundle:Formation')->findOneBy(array('id' => $id));
+        return $this->render('formation/doc.html.twig' ,array(
+            'formation' => $formation,
+        ));
+    }
+    /**
+     *
+     * @Method({"GET", "POST"})
+     * @Route("/ajax/snippet/image/send/{id}", name="ajax_snippet_image_send")
+     */
+    public function ajaxSnippetImageSendAction(Request $request,$id)
+    {
+        $this->debug_to_console($id);
+        $em = $this->container->get("doctrine.orm.default_entity_manager");
+
+        $formation=$em->getRepository('GestionBundle:Formation')->findOneBy(array('id' => $id));
+        $document = new Document();
+        $media = $request->files->get('file');
+        $document->setFormation($formation);
+        $document->setFile($media);
+        $document->upload();
+        $em->persist($document);
+        $em->flush();
+
+        //infos sur le document envoyé
+        //var_dump($request->files->get('file'));die;
+        return new JsonResponse(array('success' => true));
+    }
+
     /**
      * Lists all formation entities.
      *
@@ -43,6 +86,15 @@ class FormationController extends Controller
                 else
                     $formation->setEtat("Terminée");
                 //$this->debug_to_console($formation->getDateDebut()->format('Y-m-d'));
+                // evaluation
+
+                $somme = 0;
+                foreach ($formation->getEvaluations() as $evaluation) {
+                    $somme = $somme + ($evaluation->getMoyenne())/$formation->getEvaluations()->count();
+                }
+
+                $formation->setEvalutionformation($somme);
+
             }
             $em->persist($formation);
             $em->flush();
@@ -68,19 +120,16 @@ class FormationController extends Controller
         $form->handleRequest($request);
 
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
 
             //nb jours between 2 date and generate jours fields
             $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
             $dif=$int->format('%a');
-
             for ($i = 1; $i <= $dif+1; $i++) {
-
                 ${'jour'.'$i'} = new Jour();
                 ${'jour'.'$i'}->setFormation($formation);
                 $formation->getJours()->add(${'jour'.'$i'});
-
             }
             if($formation->getReccurence()=='0')
                 $formation->setFinApres(null);
@@ -113,10 +162,9 @@ class FormationController extends Controller
         $form = $this->createForm('GestionBundle\Form\FormationType', $formation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $id =$formation->getDemandeFormation();
             $em = $this->getDoctrine()->getManager();
-
             //nb jours between 2 date and generate jours fields
             $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
             $dif=$int->format('%a');
@@ -172,11 +220,10 @@ class FormationController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\FormationType', $formation);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
             $dif=$int->format('%a');
             $length=$formation->getJours()->count();/*length nombre de jour le9dima*/
-
             if($dif>$length)
                 for ($i = 1; $i <= $dif+1-$length; $i++) {
 
@@ -187,9 +234,7 @@ class FormationController extends Controller
                 }
             else if($dif<$length)
                 for ($i = $dif+1; $i <= $length-1; $i++) {
-
                     $formation->getJours()->remove($i);
-
                 }
             $this->getDoctrine()->getManager()->flush();
 
@@ -216,7 +261,7 @@ class FormationController extends Controller
 
 
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
 
@@ -265,5 +310,9 @@ class FormationController extends Controller
             ->setMethod('DELETE')
             ->getForm()
             ;
+    }
+
+    private function debug_to_console($id)
+    {
     }
 }

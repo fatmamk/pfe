@@ -27,7 +27,12 @@ class Fonction
      * @ORM\Column(name="Libelle_Fonction", type="string", length=20)
      */
     private $libelleFonction;
-
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Poste",inversedBy="fonctions" ,cascade={"persist"})
+     * @ORM\JoinTable(name="Fonctionposte_id" )
+     */
+    private $postes;
 
     /**
      *  @ORM\OneToMany(targetEntity="Employee", mappedBy="fonctions",cascade={"persist"})
@@ -113,5 +118,71 @@ class Fonction
     public function getEmployees()
     {
         return $this->employees;
+    }
+
+    /**
+     * Add postes
+     *
+     * @param \GestionBundle\Entity\Poste $postes
+     * @return Fonction
+     */
+    public function addPoste(\GestionBundle\Entity\Poste $postes)
+    {
+        $this->postes[] = $postes;
+
+        return $this;
+    }
+
+    /**
+     * Remove postes
+     *
+     * @param \GestionBundle\Entity\Poste $postes
+     */
+    public function removePoste(\GestionBundle\Entity\Poste $postes)
+    {
+        $this->postes->removeElement($postes);
+    }
+
+    /**
+     * Get postes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPostes()
+    {
+        return $this->postes;
+    }
+
+    /**
+     * Add fonctions
+     *
+     * @param \GestionBundle\Entity\Fonction $fonctions
+     * @return Fonction
+     */
+    public function addFonction(\GestionBundle\Entity\Fonction $fonctions)
+    {
+        $this->fonctions[] = $fonctions;
+
+        return $this;
+    }
+
+    /**
+     * Remove fonctions
+     *
+     * @param \GestionBundle\Entity\Fonction $fonctions
+     */
+    public function removeFonction(\GestionBundle\Entity\Fonction $fonctions)
+    {
+        $this->fonctions->removeElement($fonctions);
+    }
+
+    /**
+     * Get fonctions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFonctions()
+    {
+        return $this->fonctions;
     }
 }

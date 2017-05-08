@@ -2,17 +2,18 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
         &times;
     </button>
-    <div class="row" >
-        <h4 class="modal-title pull-left " id="myModalLabel"><i class="icon-append fa  fa-user"   style="margin-left: 30px"></i>  Ajouter employé </h4>
-        <span id="bdg" class="badge bg-color-red bounceIn animated pull-left " style="padding:6px; display: none; margin-left: 15px;" ></span>
+    <div class="row">
+        <h4 class="modal-title pull-left " id="myModalLabel"><i class="icon-append fa  fa-user"
+                                                                style="margin-left: 30px"></i> Ajouter employé </h4>
+        <span id="bdg" class="badge bg-color-red bounceIn animated pull-left "
+              style="padding:6px; display: none; margin-left: 15px;"></span>
 
     </div>
 </div>
 
 
-
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(form,{ 'attr': {'enctype':'multipart/form-data','class': 'smart-form ','action': path('employee_new'), 'method': 'POST'|trans }} ) }}
+    {{ form_start(form,{ 'attr': {'enctype':'multipart/form-data','id':'checkout-form','class': 'smart-form','action': path('employee_new'), 'method': 'POST'|trans }} ) }}
 
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
@@ -27,47 +28,70 @@
                 <div class="panel-body padding-7 ">
 
 
-                    <div class="row" >
+                    <div class="row">
                         <article class="col col-6">
 
 
                             <section class="">
                                 <label class="label">Nom</label>
-                                <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                    {{ form_widget ( form.nom,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    {{ form_widget ( form.nom,{ 'attr': {'type': 'text'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">Entrez le nom </b> </label>
                             </section>
 
                             <section class="">
                                 <label class="label">Prénom</label>
-                                <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                    {{ form_widget ( form.prenom,{ 'attr': {'type': 'text'|trans } } ) }}</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    {{ form_widget ( form.prenom,{ 'attr': {'type': 'text'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">Entrez le prenom </b> </label>
                             </section>
 
 
-                            <section class="">
-                                <label class="label">Département
-                                    <a href="#myNewdepartementModal" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
-                                </label>
-                                <label class="select">
-                                    {{ form_widget ( form.departement ) }}
-                                    <i></i>
+                            <section>
+                                <label class="label">username</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    {{ form_widget ( form.username,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">Vous avez besoin d'entrer le nom
+                                        d'utilisateur</b> </label>
+                            </section>
+                            <section>
+                                <label class="label">email</label>
+                                <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+                                    {{ form_widget ( form.email,{ 'attr': {'type': 'email','name':'email'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">Vous avez besoin d'entrer l'email</b>
                                 </label>
                             </section>
-
-
+                            <section>
+                                <label class="label">mot de pass</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    {{ form_widget ( form.plainPassword.first,{ 'attr': {'type': 'password','name':'password'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">N'oubliez pas le mot de passe</b> </label>
+                            </section>
+                            <section>
+                                <label class="label">mot de passe confirmer</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    {{ form_widget ( form.plainPassword.second,{ 'attr': {'type': 'password','name':'passwordConfirm'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">N'oubliez pas le mot de passe</b> </label>
+                            </section>
+                            <section>
+                                <label class="label">emailSecondaireEmployee</label>
+                                <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+                                    {{ form_widget ( form.emailSecondaireEmployee,{ 'attr': {'type': 'email','name':'emailSecondaireEmployee'|trans } } ) }}
+                                    <b class="tooltip tooltip-bottom-right">Entrez l'email secondaire</b>
+                                </label>
+                            </section>
 
                         </article>
-                        <article class="col col-6 " >
-
-
-                            <section class="" style="width: 150px; height: 150px; margin: 0 auto; "  >
-                                <div class="slim " data-label="Drop profile photo here"  data-ratio="1:1" style="border-radius: 40%; ">
-                                    <input type="file" name="imageFile" />
-
-
+                        <article class="col col-6 ">
+                            <section class="" style="width: 200px; height: 200px; margin: 0 auto; ">
+                                <div class="slim " data-label="Drop profile photo here" data-ratio="1:1"
+                                     style="border-radius: 50%; ">
+                                    <input type="file" name="imageFile"/>
                                 </div>
-
                             </section>
+                        </article>
+                        <article class="col col-6 ">
+
                             <section class="">
                                 <label class="label">Genre </label>
                                 <label class="select">
@@ -75,52 +99,47 @@
                                     <i></i>
                                 </label>
                             </section>
+
+
                         </article>
-                        <section class="col col-6">
-                            <label class="label">Email principal</label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_errors ( form.emailEmployee)}}
-                                {{ form_widget ( form.emailEmployee,{ 'attr': {'type': 'text'|trans } } ) }}</label>
-                        </section>
+                        <article class="col col-6 ">
+                            <section>
+                                <label class="label">Fonction
+                                    <a href="#myNewfonctionsModal" class="open ajouter" data-toggle="modal"> <i
+                                                class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                                </label>
+                                <label class="select">
+                                    {{ form_widget ( form.fonctions ) }}
+                                    <i></i>
+                                </label>
+                            </section>
 
-                        <section class="col col-6">
-                            <label class="label">Email secondaire</label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.emailSecondaireEmployee,{ 'attr': {'type': 'text'|trans } } ) }}</label>
-                        </section>
+                            <section>
+                                <label class="label">Site
+                                </label>
+                                <label class="select">
+                                    {{ form_widget ( form.site ) }}
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section class="">
+                                <label class="label">Département
+                                    <a href="#myNewdepartementModal" class="open ajouter" data-toggle="modal"> <i
+                                                class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                                </label>
+                                <label class="select">
+                                    {{ form_widget ( form.departement ) }}
+                                    <i></i>
+                                </label>
+                            </section>
 
-
+                        </article>
 
                     </div>
-
-
-
-
-                    <div class="row">
-
-                        <section class="col col-6">
-                            <label class="label">Cin </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.cINEmployee,{'attr': {'type': 'text'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">Grade</label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.gradeEmployee,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}</label>
-                        </section>
-
-                    </div>
-
-
-
-
-
-
                 </div>
             </div>
         </div>
-
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="accordion">
             <div class="panel-heading" style="background-color: #AC5287">
                 <h4 class="panel-title txt-color-white ">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
@@ -133,69 +152,95 @@
                 <div class="panel-body padding-7 ">
 
 
-                    <div class="row">
+                    <article class="col col-6">
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-list-alt"></i>
+                                {{ form_widget ( form.cINEmployee,{'attr': {'type': 'text','data-mask':'9999-9999-9999-9999','placeholder':'cin'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez le Cin</b>
 
-
-                        <section class="col col-6">
-                            <label class="label">Adresse </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.adresseEmploye,{ 'attr': {'type': 'text','name':'numTelEmployee'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">Date de Naissance </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.dateNaiss,{ 'attr': {'type': 'text','name':'dateNaiss'|trans } } ) }}</label>
-                        </section>
-
-                        <section class="col col-6">
-                            <label class="label">Lieu de naissance </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.lieunais,{ 'attr': {'type': 'text','name':'lieunais'|trans } } ) }}</label>
-                        </section>
-
-
-                        <section class="col col-6">
-                            <label class="label">numéro teléphone </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.numTelEmployee,{ 'attr': {'type': 'text','name':'numTelEmployee'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">tel maison </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.maison,{ 'attr': {'type': 'text','name':'maison'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">GSM </label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.gsm,{ 'attr': {'type': 'text','name':'gsm'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">Rib</label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.rIBEmployee,{ 'attr': {'type': 'text','name':'rIBEmployee'|trans } } ) }}</label>
-                        </section>
-                        <section class="col col-6">
-                            <label class="label">Numéro sécurité sociale</label>
-                            <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.numSecuriteSocialeEmployee,{ 'attr': {'type': 'text','name':'numSecuriteSocialeEmployee'|trans } } ) }}</label>
-                        </section>
-
-                    </div>
-                    <div class="row">
-                        <section class="col col-6">
-                            <label class="label">Délivré le</label>
-                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget ( form.delivreLe,{ 'attr': { 'class':' date'|trans } } ) }}
                             </label>
                         </section>
-                        <section class="col col-6">
-                            <label class="label">Délivré à </label>
+                        <section>
                             <label class="input"> <i class="icon-append fa fa-tag"></i>
-                                {{ form_widget ( form.delivreA,{'attr': {'type': 'text'|trans } } ) }}</label>
+                                {{ form_widget ( form.adresseEmploye,{ 'attr': {'type':'text','placeholder':'Adresse','name':'adresseEmploye'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez l'adresse</b>
+                            </label>
                         </section>
-                    </div>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                {{ form_widget ( form.dateNaiss,{ 'attr': { 'class':'datenais','placeholder':'Date de naissance','name':'lieunais'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez l'date naissance</b>
+                            </label>
+                        </section>
 
-                    </div>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-mobile"></i>
+                                {{ form_widget ( form.numTelEmployee,{ 'attr': {'type': 'text','placeholder':'numéro de téléphone','data-mask':'+(99) 99 999-999','name':'numTelEmployee'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez numero telephone</b>
+                            </label>
+                        </section>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-map-marker"></i>
+                                {{ form_widget ( form.delivreA,{'attr': {'type': 'text','placeholder':'Délivré à'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez Délivré à</b>
+                            </label>
+                        </section>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-signal"></i>
+                                {{ form_widget ( form.matriculeEmployee,{ 'attr': {'type': 'text','name':'maison','placeholder':'matricule'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez matricule</b>
+                            </label>
+                        </section>
+
+
+                    </article>
+                    <article class="col col-6">
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.rIBEmployee,{ 'attr': {'type': 'text','name':'rIBEmployee','placeholder':'Rib'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez Rib </b>
+                            </label>
+                        </section>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-tag"></i>
+                                {{ form_widget ( form.numSecuriteSocialeEmployee,{ 'attr': {'type': 'text','name':'numSecuriteSocialeEmployee','placeholder':'Numéro sécurité sociale'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez numero de securite sociale </b>
+
+                            </label>
+
+                        </section>
+
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-map-marker"></i>
+                                {{ form_widget ( form.lieunais,{ 'attr': {'type': 'text','placeholder':'Lieu de naissance','name':'lieunais'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez lieu naissance</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-phone"></i>
+                                {{ form_widget ( form.maison,{ 'attr': {'type': 'text','name':'maison','placeholder':'tel maison'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez telephone maison</b>
+                            </label>
+                        </section>
+
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                {{ form_widget ( form.delivreLe,{ 'attr': { 'class':'datelivre','placeholder':'Délivré le'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez delivre Le</b>
+
+                            </label>
+                        </section>
+                        <section>
+                            <label class="input"> <i class="icon-append fa fa-signal"></i>
+                                {{ form_widget ( form.gradeEmployee,{ 'attr': {'type': 'text','name':'maison','placeholder':'tel maison'|trans } } ) }}
+                                <b class="tooltip tooltip-bottom-right">Entrez grade</b>
+                            </label>
+                        </section>
+
+                    </article>
+
+                </div>
 
 
             </div>
@@ -217,12 +262,14 @@
                         <label class="label">Compétence</label>
                         <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                             {{ form_widget ( form.competance,{ 'attr': {'type': 'text','name':'competance'|trans } } ) }}
+                            <b class="tooltip tooltip-bottom-right">Entrez competance</b>
                         </label>
                     </section>
                     <section>
                         <label class="label">Diplome</label>
                         <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                             {{ form_widget ( form.diplome,{ 'attr': {'type': 'text','name':'diplome'|trans } } ) }}
+                            <b class="tooltip tooltip-bottom-right">Entrez diplome</b>
                         </label>
                     </section>
 
@@ -230,6 +277,8 @@
                         <label class="label">Expérience</label>
                         <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                             {{ form_widget ( form.experience,{ 'attr': {'type': 'text','name':'experience'|trans } } ) }}
+                            <b class="tooltip tooltip-bottom-right">Entrez experience</b>
+
                         </label>
                     </section>
 
@@ -237,9 +286,10 @@
                         <label class="label">Aptitude physique</label>
                         <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                             {{ form_widget ( form.aptitudePhysique,{ 'attr': {'type': 'text','name':'aptitudePhysique'|trans } } ) }}
+                            <b class="tooltip tooltip-bottom-right">Entrez aptitudePhysique</b>
+
                         </label>
                     </section>
-
 
 
                 </div>
@@ -255,7 +305,7 @@
 <div class="modal-footer">
     {{ form_widget(form._token) }}
 
-    <button type="button" class="btn btn-default"   data-dismiss="modal">
+    <button type="button" class="btn btn-default" data-dismiss="modal">
         Annuler
     </button>
     <button type="submit" class="btn btn-primary">

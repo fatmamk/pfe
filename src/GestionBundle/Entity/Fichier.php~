@@ -87,13 +87,6 @@ class Fichier
         return $this->id;
     }
 
-
-
-
-
-
-
-
     public function getUploadDir()
     {
             return 'upload/files';

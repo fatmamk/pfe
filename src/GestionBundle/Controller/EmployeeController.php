@@ -44,7 +44,7 @@ class EmployeeController extends Controller
         $form = $this->createForm('GestionBundle\Form\EmployeeType', $employee);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
 
 
             if ( $request->request->get('imageFile') )//b3athha symfony
@@ -84,6 +84,10 @@ class EmployeeController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($employee);
             $em->flush($employee);
+            $this->addFlash(
+                'success',
+                ', la formation a été ajouté!'
+            );
 
             return $this->redirectToRoute('employee_index');
         }
@@ -122,7 +126,7 @@ class EmployeeController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\EmployeeType', $employee);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
 
             if ( $request->request->get('imageFile') )//b3athha symfony
             {
@@ -203,5 +207,60 @@ class EmployeeController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+   
+    public function activeAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('GestionBundle:Employee')->find($id);
+        if($user->isEnabled()==true){
+            $user->setEnabled(false);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('info'," Compte est desactive.");
+        }else{
+            $user->setEnabled(true);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('info', " Compte est desactive.");
+        }
+
+        return $this->redirectToRoute('employee_index');
+
+    }
+
+    /**
+     * Creates a new demandeConge entity.
+     *
+     * @Route("/user/{id}", name="User")
+     * @Method({"GET"})
+     */
+    public function promoteUserAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository("GestionBundle:Employee")->find($id);
+        $user->removeRole('ROLE_ADMIN');
+        $user->addRole("ROLE_User");
+        $em->persist($user);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('info', " modification enregistres .");
+
+        return $this->redirectToRoute('employee_index');
+    }
+    /**
+     * Creates a new demandeConge entity.
+     *
+     * @Route("/admin/{id}", name="Admin")
+     * @Method({"GET"})
+     */
+
+    public function promoteAdminAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository("GestionBundle:Employee")->find($id);
+        $user->addRole("ROLE_ADMIN");
+        $em->persist($user);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('info', " modification enregistres .");
+
+        return $this->redirectToRoute('employee_index');
     }
 }

@@ -22,26 +22,8 @@ class Evaluation
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Matricule", type="string",  nullable=true)
-     */
-    private $matricule;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="effectue", type="integer")
-     *  @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "le numbre  {{ value }}doit etre >0",
-     *      maxMessage = "le numbre  {{ value }}doit etre <5",
-     *
-     * )
-     */
-    private $effectue;
 
     /**
      * @var string
@@ -57,12 +39,7 @@ class Evaluation
      */
     private $achaud;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="reference", type="boolean", nullable=true)
-     */
-    private $reference;
+
 
     /**
      * @var bool
@@ -130,11 +107,23 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(name="efficace", type="integer", nullable=true)
+     */
+    private $efficace;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="moyenne", type="float", nullable=true)
+     */
+    private $moyenne;
+    /**
+     * @var string
+     *
      * @ORM\Column(name="TravauxPratique", type="integer", nullable=true)
      */
     private $travauxPratique;
 
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="objectif", type="integer", nullable=true)
@@ -154,6 +143,14 @@ class Evaluation
      */
     private $ambianceGenerale;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Formation",inversedBy="evaluations" ,cascade={"persist"})
+     * @ORM\JoinColumn(name="evaluationsFormation_id" ,referencedColumnName="id" , nullable=true, onDelete="SET NULL")
+     */
+    private $formation;
+
+
+
 
     /**
      * Get id
@@ -166,55 +163,9 @@ class Evaluation
     }
 
     /**
-     * Set matricule
-     *
-     * @param string $matricule
-     * @return Evaluation
-     */
-    public function setMatricule($matricule)
-    {
-        $this->matricule = $matricule;
-
-        return $this;
-    }
-
-    /**
-     * Get matricule
-     *
-     * @return string 
-     */
-    public function getMatricule()
-    {
-        return $this->matricule;
-    }
-
-    /**
-     * Set effectue
-     *
-     * @param string $effectue
-     * @return Evaluation
-     */
-    public function setEffectue($effectue)
-    {
-        $this->effectue = $effectue;
-
-        return $this;
-    }
-
-    /**
-     * Get effectue
-     *
-     * @return string 
-     */
-    public function getEffectue()
-    {
-        return $this->effectue;
-    }
-
-    /**
      * Set afroid
      *
-     * @param string $afroid
+     * @param integer $afroid
      * @return Evaluation
      */
     public function setAfroid($afroid)
@@ -227,7 +178,7 @@ class Evaluation
     /**
      * Get afroid
      *
-     * @return string 
+     * @return integer 
      */
     public function getAfroid()
     {
@@ -237,7 +188,7 @@ class Evaluation
     /**
      * Set achaud
      *
-     * @param string $achaud
+     * @param integer $achaud
      * @return Evaluation
      */
     public function setAchaud($achaud)
@@ -250,7 +201,7 @@ class Evaluation
     /**
      * Get achaud
      *
-     * @return string 
+     * @return integer 
      */
     public function getAchaud()
     {
@@ -258,32 +209,9 @@ class Evaluation
     }
 
     /**
-     * Set reference
-     *
-     * @param boolean $reference
-     * @return Evaluation
-     */
-    public function setReference($reference)
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
-
-    /**
-     * Get reference
-     *
-     * @return boolean 
-     */
-    public function getReference()
-    {
-        return $this->reference;
-    }
-
-    /**
      * Set datePrevue
      *
-     * @param boolean $datePrevue
+     * @param integer $datePrevue
      * @return Evaluation
      */
     public function setDatePrevue($datePrevue)
@@ -296,7 +224,7 @@ class Evaluation
     /**
      * Get datePrevue
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getDatePrevue()
     {
@@ -306,7 +234,7 @@ class Evaluation
     /**
      * Set commantaire
      *
-     * @param string $commantaire
+     * @param integer $commantaire
      * @return Evaluation
      */
     public function setCommantaire($commantaire)
@@ -319,7 +247,7 @@ class Evaluation
     /**
      * Get commantaire
      *
-     * @return string 
+     * @return integer 
      */
     public function getCommantaire()
     {
@@ -329,7 +257,7 @@ class Evaluation
     /**
      * Set methodePedalogique
      *
-     * @param string $methodePedalogique
+     * @param integer $methodePedalogique
      * @return Evaluation
      */
     public function setMethodePedalogique($methodePedalogique)
@@ -342,7 +270,7 @@ class Evaluation
     /**
      * Get methodePedalogique
      *
-     * @return string 
+     * @return integer 
      */
     public function getMethodePedalogique()
     {
@@ -352,7 +280,7 @@ class Evaluation
     /**
      * Set conference
      *
-     * @param string $conference
+     * @param integer $conference
      * @return Evaluation
      */
     public function setConference($conference)
@@ -365,7 +293,7 @@ class Evaluation
     /**
      * Get conference
      *
-     * @return string 
+     * @return integer 
      */
     public function getConference()
     {
@@ -375,7 +303,7 @@ class Evaluation
     /**
      * Set supportDeCours
      *
-     * @param string $supportDeCours
+     * @param integer $supportDeCours
      * @return Evaluation
      */
     public function setSupportDeCours($supportDeCours)
@@ -388,7 +316,7 @@ class Evaluation
     /**
      * Get supportDeCours
      *
-     * @return string 
+     * @return integer 
      */
     public function getSupportDeCours()
     {
@@ -398,7 +326,7 @@ class Evaluation
     /**
      * Set lieu
      *
-     * @param string $lieu
+     * @param integer $lieu
      * @return Evaluation
      */
     public function setLieu($lieu)
@@ -411,7 +339,7 @@ class Evaluation
     /**
      * Get lieu
      *
-     * @return string 
+     * @return integer 
      */
     public function getLieu()
     {
@@ -421,7 +349,7 @@ class Evaluation
     /**
      * Set duree
      *
-     * @param string $duree
+     * @param integer $duree
      * @return Evaluation
      */
     public function setDuree($duree)
@@ -434,7 +362,7 @@ class Evaluation
     /**
      * Get duree
      *
-     * @return string 
+     * @return integer 
      */
     public function getDuree()
     {
@@ -444,7 +372,7 @@ class Evaluation
     /**
      * Set recpectHumain
      *
-     * @param string $recpectHumain
+     * @param integer $recpectHumain
      * @return Evaluation
      */
     public function setRecpectHumain($recpectHumain)
@@ -457,103 +385,11 @@ class Evaluation
     /**
      * Get recpectHumain
      *
-     * @return string 
+     * @return integer 
      */
     public function getRecpectHumain()
     {
         return $this->recpectHumain;
-    }
-
-    /**
-     * Set ontenueCours
-     *
-     * @param string $ontenueCours
-     * @return Evaluation
-     */
-    public function setOntenueCours($ontenueCours)
-    {
-        $this->ontenueCours = $ontenueCours;
-
-        return $this;
-    }
-
-    /**
-     * Get ontenueCours
-     *
-     * @return string 
-     */
-    public function getOntenueCours()
-    {
-        return $this->ontenueCours;
-    }
-
-    /**
-     * Set travauxPratique
-     *
-     * @param string $travauxPratique
-     * @return Evaluation
-     */
-    public function setTravauxPratique($travauxPratique)
-    {
-        $this->travauxPratique = $travauxPratique;
-
-        return $this;
-    }
-
-    /**
-     * Get travauxPratique
-     *
-     * @return string 
-     */
-    public function getTravauxPratique()
-    {
-        return $this->travauxPratique;
-    }
-
-    /**
-     * Set objectif
-     *
-     * @param string $objectif
-     * @return Evaluation
-     */
-    public function setObjectif($objectif)
-    {
-        $this->objectif = $objectif;
-
-        return $this;
-    }
-
-    /**
-     * Get objectif
-     *
-     * @return string 
-     */
-    public function getObjectif()
-    {
-        return $this->objectif;
-    }
-
-    /**
-     * Set ambianceGenerale
-     *
-     * @param string $ambianceGenerale
-     * @return Evaluation
-     */
-    public function setAmbianceGenerale($ambianceGenerale)
-    {
-        $this->ambianceGenerale = $ambianceGenerale;
-
-        return $this;
-    }
-
-    /**
-     * Get ambianceGenerale
-     *
-     * @return string 
-     */
-    public function getAmbianceGenerale()
-    {
-        return $this->ambianceGenerale;
     }
 
     /**
@@ -580,6 +416,98 @@ class Evaluation
     }
 
     /**
+     * Set efficace
+     *
+     * @param integer $efficace
+     * @return Evaluation
+     */
+    public function setEfficace($efficace)
+    {
+        $this->efficace = $efficace;
+
+        return $this;
+    }
+
+    /**
+     * Get efficace
+     *
+     * @return integer 
+     */
+    public function getEfficace()
+    {
+        return $this->efficace;
+    }
+
+    /**
+     * Set moyenne
+     *
+     * @param float $moyenne
+     * @return Evaluation
+     */
+    public function setMoyenne($moyenne)
+    {
+        $this->moyenne = $moyenne;
+
+        return $this;
+    }
+
+    /**
+     * Get moyenne
+     *
+     * @return float 
+     */
+    public function getMoyenne()
+    {
+        return $this->moyenne;
+    }
+
+    /**
+     * Set travauxPratique
+     *
+     * @param integer $travauxPratique
+     * @return Evaluation
+     */
+    public function setTravauxPratique($travauxPratique)
+    {
+        $this->travauxPratique = $travauxPratique;
+
+        return $this;
+    }
+
+    /**
+     * Get travauxPratique
+     *
+     * @return integer 
+     */
+    public function getTravauxPratique()
+    {
+        return $this->travauxPratique;
+    }
+
+    /**
+     * Set objectif
+     *
+     * @param integer $objectif
+     * @return Evaluation
+     */
+    public function setObjectif($objectif)
+    {
+        $this->objectif = $objectif;
+
+        return $this;
+    }
+
+    /**
+     * Get objectif
+     *
+     * @return integer 
+     */
+    public function getObjectif()
+    {
+        return $this->objectif;
+    }
+
+    /**
      * Set annimateur
      *
      * @param integer $annimateur
@@ -600,5 +528,51 @@ class Evaluation
     public function getAnnimateur()
     {
         return $this->annimateur;
+    }
+
+    /**
+     * Set ambianceGenerale
+     *
+     * @param integer $ambianceGenerale
+     * @return Evaluation
+     */
+    public function setAmbianceGenerale($ambianceGenerale)
+    {
+        $this->ambianceGenerale = $ambianceGenerale;
+
+        return $this;
+    }
+
+    /**
+     * Get ambianceGenerale
+     *
+     * @return integer 
+     */
+    public function getAmbianceGenerale()
+    {
+        return $this->ambianceGenerale;
+    }
+
+    /**
+     * Set formation
+     *
+     * @param \GestionBundle\Entity\Formation $formation
+     * @return Evaluation
+     */
+    public function setFormation(\GestionBundle\Entity\Formation $formation = null)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \GestionBundle\Entity\Formation 
+     */
+    public function getFormation()
+    {
+        return $this->formation;
     }
 }

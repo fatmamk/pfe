@@ -17,6 +17,10 @@ class FonctionType extends AbstractType
         $builder
             ->add('libelleFonction')
             ->add('employees')
+
+
+            ->add('postes')
+
         ;
     }
     
@@ -35,7 +39,7 @@ class FonctionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_fonction';
+        return null;
     }
     
     

@@ -43,7 +43,7 @@ class DemandeCongeController extends Controller
         $form = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $demandeConge->setStatutsConge("En attente");
             $em->persist($demandeConge);
@@ -70,7 +70,7 @@ class DemandeCongeController extends Controller
         $form = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($demandeConge);
             $em->flush($demandeConge);
@@ -108,12 +108,36 @@ class DemandeCongeController extends Controller
      */
     public function editAction(Request $request, DemandeConge $demandeConge)
     {
+
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($demandeConge);
         $editForm = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+        if ($editForm->isSubmitted() ) {
+
+            $p=$demandeConge->getStatutsConge();
+          
+            if($p=='En attente')
+            {
+                $demandeConge->setStatutsConge('En attente');
+                $em->persist($demandeConge);
+                $em->flush($demandeConge);
+            }
+
+            if($p=='accepter')
+            {
+                $demandeConge->setStatutsConge('accepter');
+                $em->persist($demandeConge);
+                $em->flush($demandeConge);
+            }
+            if($p=='Refusee')
+            {
+                $demandeConge->setStatutsConge('Refusee');
+                $em->persist($demandeConge);
+                $em->flush($demandeConge);
+            }
 
             return $this->redirectToRoute('demandeconge_index');
         }
@@ -129,19 +153,20 @@ class DemandeCongeController extends Controller
      * Deletes a demandeConge entity.
      *
      * @Route("/{id}", name="demandeconge_delete")
-     * @Method("DELETE")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, DemandeConge $demandeConge)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($demandeConge);
-        $form->handleRequest($request);
+     $em = $this->getDoctrine()->getManager();
+        $demndeCnge = $em->getRepository('GestionBundle:DemandeConge')->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($demandeConge);
-            $em->flush($demandeConge);
-        }
-
+        $em->remove($demndeCnge);
+        $em->flush($demndeCnge);
+        $this->addFlash(
+            'deletesuccess',
+            ', la formation a été supprimé!'
+        );
+        
         return $this->redirectToRoute('demandeconge_index');
     }
 

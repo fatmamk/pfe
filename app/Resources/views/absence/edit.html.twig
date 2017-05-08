@@ -10,17 +10,21 @@
         Absence
     </header>
 
-
     <fieldset>
         <div class="row">
-            <section class="col-sm-12 col-md-12 col-lg-12 ">
-                <label class="label">justifier</label>
-                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                    {{ form_widget ( edit_form.justifier) }}
-                    {{ form_errors(edit_form.justifier)}}</label>
-            </section></div>
-    </fieldset>
+            <section class="col col-6">
+                <label class="label">liste des employees </label>
 
+                <label class="select">
+                    {{ form_widget(edit_form.employee) }}
+
+                    <i></i>
+
+                </label>
+
+            </section>
+        </div>
+    </fieldset>
 
 
     <fieldset>
@@ -29,14 +33,15 @@
                 <label class="label">date Debut</label>
 
                 <label id="dob" class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget ( edit_form.dateDebut,{ 'attr': { 'class':'startdate'|trans}}) }}
+                    {{ form_widget(edit_form.dateDebut,{'id':'startdate'~absence.id,'attr':{'class':'startdate'|trans}})}}
+
                     {{ form_errors(edit_form.dateDebut)}}
                 </label>
             </section>
             <section class="col col-6">
                 <label class="label">date Fin</label>
                 <label id="dob" class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget ( edit_form.dateFin,{ 'attr': { 'class':'finishdate'|trans}}) }}
+                    {{ form_widget(edit_form.dateFin,{'id':'finishdate'~absence.id,'attr':{'class':'finishdate'|trans}})}}
                     {{ form_errors(edit_form.dateFin)}}
                 </label>
             </section>
@@ -44,11 +49,42 @@
         </div>
     </fieldset>
 
+    <fieldset>
+        <div class="row">
 
+            <div class="row">
+                <label class="label">Justifier</label>
+                {% for child in edit_form.justifier %}
+                    {% if child.vars.value == 0 %}
+                        <section class="col col-6">
+                            <label class="radio">
+                                {{ form_widget(child, { 'attr': {'type':'radio','checked':'checked'}}) }}
+                                <i></i>{{ form_label(child) }}</label>
+                        </section>
+                    {% else %}
+                        <section class="col col-6">
+                            <label class="radio">
+                                {{ form_widget(child, { 'attr': {'type':'radio'}}) }}
+                                <i></i>{{ form_label(child) }}</label>
+                        </section>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+            <div id="file{{absence.id}}" style="display: none">
+                <section  class="col col-6" >
+                    <label class="label">fichier</label>
+                    {{ form_widget (edit_form.file)}}
+                    {{ form_errors(edit_form.file)}}
+
+                </section>
+            </div>
+        </div>
+    </fieldset>
 
 </div>
 <div class="modal-footer">
-    {{ form_widget(edit_form._token) }}
+
 
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">

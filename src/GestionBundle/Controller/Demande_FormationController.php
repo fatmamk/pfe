@@ -45,8 +45,7 @@ class Demande_FormationController extends Controller
         $demande_Formation = new Demande_formation();
         $form = $this->createForm('GestionBundle\Form\Demande_FormationType', $demande_Formation);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $demande_Formation->setEtat("En attente");
             $em->persist($demande_Formation);
@@ -86,13 +85,34 @@ class Demande_FormationController extends Controller
      */
     public function editAction(Request $request, Demande_Formation $demande_Formation)
     {
-
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($demande_Formation);
         $editForm = $this->createForm('GestionBundle\Form\Demande_FormationType', $demande_Formation);
         $editForm->handleRequest($request);
-             if ($editForm->isSubmitted() && $editForm->isValid()) {
-                 $demande_Formation->setEtat("En attente");
-               $this->getDoctrine()->getManager()->flush();
+        if ($editForm->isSubmitted() ) {
+
+            $p=$demande_Formation->getEtat();
+            if($p=='En attente')
+            {
+                $demande_Formation->setEtat('En attente');
+                $em->persist($demande_Formation);
+                $em->flush($demande_Formation);
+            }
+
+            if($p=='accepter')
+            {
+                $demande_Formation->setEtat('accepter');
+                $em->persist($demande_Formation);
+                $em->flush($demande_Formation);
+            }
+            if($p=='Refusee')
+            {
+                $demande_Formation->setEtat('Refusee');
+                $em->persist($demande_Formation);
+                $em->flush($demande_Formation);
+            }
+
+
 
             return $this->redirectToRoute('demande_formation_index');
         }
@@ -125,6 +145,24 @@ class Demande_FormationController extends Controller
     }
 
 
+    /**
+     * Creates a new demandeConge entity.
+     *
+     * @Route("/accepte/{id}", name="demande_formation_accepte")
+     * @Method({"GET"})
+     */
+    public function accepte($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $demandedormation=$em->getRepository('GestionBundle:Demande_Formation')->find($id);
+        $demandedormation->setEtat("accepter");
+        // echo $demandeformation;
+        //die;
+        $em->persist($demandedormation);
+        $em->flush($demandedormation);
+
+        return $this->redirectToRoute('demande_formation_index');
+    }
 
     /**
      * Deletes a demande_Formation entity.

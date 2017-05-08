@@ -43,7 +43,7 @@ class NatureController extends Controller
         $form = $this->createForm('GestionBundle\Form\NatureType', $nature);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($nature);
             $em->flush($nature);
@@ -85,7 +85,7 @@ class NatureController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\NatureType', $nature);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('nature_edit', array('id' => $nature->getId()));

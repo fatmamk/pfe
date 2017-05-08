@@ -77,7 +77,7 @@
                                             <th>Nom</th>
                                             <th>Prenom</th>
                                             <th>Cv</th>
-                                            <th>Actions</th>
+                                            <th width="16%">Actions</th>
                                         </tr>
 
 
@@ -87,13 +87,13 @@
                                         <tbody>
                                         {% for formateur in formateurs %}
                                             <tr>
-                                            <td>{{ formateur.nom }}</td>
-                                            <td>{{ formateur.prenom }}</td>
-                                            <td>{{ formateur.cv }}</td>
+                                                <td width="15%">{{ formateur.nom }}</td>
+                                                <td width="15%">{{ formateur.prenom }}</td>
+                                                <td width="15%">{{ formateur.cv }}</td>
 
 
 
-                                                <td>
+                                                <td width="16%">
 
                                                     <div class="modal fade" id="deleteModal{{ formateur.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="MessageBoxContainer animated fadeIn fast" id="Msg1">
@@ -276,21 +276,7 @@
 
             pageSetUp();
 
-            /* // DOM Position key index //
 
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
 
             /* BASIC ;*/
             var responsiveHelper_dt_basic = undefined;

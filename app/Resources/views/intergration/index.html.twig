@@ -93,16 +93,24 @@
 
                                         </thead>
 
-                                        <tbody>employe
+                                        <tbody>
                                         {% for intergration in intergrations %}
                                             <tr>
+                                                <td>{{ intergration.responsable }}</td>
+                                                <td>{{ intergration.employe }}</td>
                                                 <td>{% if intergration.dateDebut %}{{ intergration.dateDebut|date('Y-m-d') }}{% endif %}</td>
                                                 <td>{% if intergration.dateFin %}{{ intergration.dateFin|date('Y-m-d') }}{% endif %}</td>
-
-                                                <td width="15%">
-
-
+                                                <td>
+                                                    {% if  intergration.etat=='Programmée' %}
+                                                        <span class="center-block padding-5 label label-warning">{{ intergration.etat }}</span>
+                                                    {% elseif intergration.etat=='En cours' %}
+                                                        <span class="center-block padding-5 label label-success">{{ intergration.etat }}</span>
+                                                    {% elseif intergration.etat=='Terminée' %}
+                                                        <span class="center-block padding-5 label label-danger">{{ intergration.etat }}</span>
+                                                    {% endif %}
                                                 </td>
+
+
 
                                                 <td>
 

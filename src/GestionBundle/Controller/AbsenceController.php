@@ -43,7 +43,7 @@ class AbsenceController extends Controller
         $form = $this->createForm('GestionBundle\Form\AbsenceType', $absence);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($absence);
             $em->flush($absence);
@@ -85,7 +85,7 @@ class AbsenceController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\AbsenceType', $absence);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('absence_index');

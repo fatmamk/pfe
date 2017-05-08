@@ -8,7 +8,6 @@
 
         <!-- MAIN CONTENT -->
         <div id="content">
-
             <div class="row">
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                     <h1 class="page-title txt-color-blueDark">
@@ -19,9 +18,7 @@
 							</span>
                     </h1>
                 </div>
-
             </div>
-
             <!-- widget grid -->
             <section id="widget-grid" class="">
 
@@ -29,21 +26,14 @@
                 <div class="row">
 
                     <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
                         <!-- Widget ID (each widget will need unique ID)-->
                         <div class="jarviswidget jarviswidget-color-darken"  data-widget-editbutton="false">
-
-
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                                 <h2>Liste des evaluations </h2>
-
                             </header>
-
                             <!-- widget div-->
                             <div>
-
-
                                 <!-- widget edit box -->
                                 <div class="jarviswidget-editbox">
                                     <!-- This area used as dropdown edit box -->
@@ -57,13 +47,6 @@
                                         <thead>
                                         <tr>
 
-
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Matricule" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Effectue" />
-                                            </th>
                                             <th class="hasinput">
                                                 <input type="text" class="form-control" placeholder="Afroid" />
                                             </th><th class="hasinput">
@@ -72,41 +55,39 @@
                                                 <input type="text" class="form-control" placeholder="Lieu" />
                                             </th><th class="hasinput">
                                                 <input type="text" class="form-control" placeholder="Duree" />
-                                            </th><th class="hasinput">
+                                            </th>
+                                            <th class="hasinput">
                                                 <input type="text" class="form-control" placeholder="Ambiance generale" />
                                             </th>
+                                            <th class="hasinput">
+                                                <input type="text" class="form-control" placeholder="Moyenne" />
+                                            </th>
+
                                             <th class="hasinput" >
                                                 <div class="text-right"><a href="#myModal"  data-toggle="modal" id="modal_link" class="btn btn-primary">
                                                         <i class="fa fa-plus"> <span class="hidden-mobile">Ajout</span>
                                                         </i></a></div>
-
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th>Matricule</th>
-                                            <th>Effectue</th>
                                             <th>Afroid</th>
                                             <th>Achaud</th>
                                             <th>Lieu</th>
                                             <th>Duree</th>
                                             <th>Ambiance generale</th>
+                                            <th>Moyenne</th>
                                             <th>Actions</th>
                                         </tr>
-
-
-
                                         </thead>
-
                                         <tbody>
                                         {% for evaluation in evaluations %}
                                             <tr>
-                                                <td>{{ evaluation.matricule }}</td>
-                                                <td>{{ evaluation.effectue }}</td>
                                                 <td>{{ evaluation.afroid }}</td>
                                                 <td>{{ evaluation.achaud }}</td>
                                                 <td>{{ evaluation.lieu }}</td>
                                                 <td>{{ evaluation.duree }}</td>
                                                 <td>{{ evaluation.ambianceGenerale }}</td>
+                                                <td><div id="rateYo{{ evaluation.id }}"></div></td>
                                                 <td>
                                                     <div class="modal fade" id="deleteModal{{ evaluation.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="MessageBoxContainer animated fadeIn fast" id="Msg1">
@@ -114,7 +95,7 @@
                                                                 ><i class="glyphicon glyphicon-remove text-danger"></i> Supprimer
                                                                     <span class="txt-color-orangeDark"><strong>
                                                                         </strong></span> ?</span>
-                                                                <p class="pText"><p><span>Voulez-vous vraiment supprimer <a href="#">{{ evaluation.matricule}}</a> ? </span></p>
+                                                                <p class="pText"><p><span>Voulez-vous vraiment supprimer <a href="#"></a> ? </span></p>
                                                                 <div class="MessageBoxButtonSection">
                                                                     <div >
                                                                         <button type="submit" class="btn btn-default" data-dismiss="modal">
@@ -135,7 +116,7 @@
                                                             <span class="fa fa-pencil"></span></div>
                                                     </a>
                                                     <div class="modal fade" id="editModal{{ evaluation.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog  modal-lg">
                                                             <br><br><br><br><br>
                                                             <div class="modal-content">
 
@@ -147,18 +128,13 @@
                                             </tr>
                                         {% endfor %}
                                         </tbody>
-
                                     </table>
-
                                 </div>
-                                <!-- end widget content -->
-                                <!-- end widget div -->
-
                             </div>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade"  id="myModal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog"   id="goTop">
+                            <div class="modal-dialog modal-lg">
                                 <br><br><br><br><br>
                                 <div class="modal-content">
 
@@ -172,9 +148,7 @@
             </section>
         </div>
         <!-- end widget div -->
-
     </div>
-
 
 
 {% endblock %}
@@ -265,36 +239,29 @@
     <script src="{{ asset('js/plugin/datatables/dataTables.tableTools.min.js')}}"></script>
     <script src="{{ asset('js/plugin/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/plugin/datatable-responsive/datatables.responsive.min.js')}}"></script>
-
-
-
-
-
+    <script src="{{ asset('js/jquery.rateyo.min.js')}}"></script>
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
         $(document).ready(function() {
 
-            pageSetUp();
+            {% for evaluation in evaluations %}
+            $("#rateYo{{ evaluation.id }}").rateYo({
+                rating: {{ evaluation.moyenne }},
+                starWidth: "20px",
+                normalFill: "#ccc",
+                ratedFill: "#E74C3C",
+                multiColor: {
 
-            /* // DOM Position key index //
+                    "startColor": "#FF0000", //RED
+                    "endColor"  : "#00FF00"  //GREEN
+                },
+                precision: 2,
+                readOnly: true
+            });
 
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            /* BASIC ;*/
+            {% endfor %}
             var responsiveHelper_dt_basic = undefined;
             var responsiveHelper_datatable_fixed_column = undefined;
             var responsiveHelper_datatable_col_reorder = undefined;

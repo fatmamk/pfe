@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +33,9 @@ class Activite
      * @var string
      *
      * @ORM\Column(name="Abreviation_Activite", type="string", length=30)
+     * @Assert\NotBlank()
      */
+
     private $abreviationActivite;
 
     /**

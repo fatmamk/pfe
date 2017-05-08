@@ -44,9 +44,9 @@ class FormateurController extends Controller
         $formateur = new Formateur();
         $form = $this->createForm('GestionBundle\Form\FormateurType', $formateur);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $formateur->upload();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($formateur);
             $em->flush($formateur);
@@ -66,16 +66,15 @@ class FormateurController extends Controller
      * @Method({"GET", "POST"})
      */
     public function new1Action(Request $request)
-    {
+    {    $em = $this->getDoctrine()->getManager();
         $formateur = new Formateur();
         $form = $this->createForm('GestionBundle\Form\FormateurType', $formateur);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted() ) {
+            $formateur->upload();
             $em->persist($formateur);
             $em->flush($formateur);
-
             return $this->redirectToRoute('formateur_index');
         }
 
@@ -136,7 +135,7 @@ class FormateurController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\FormateurType', $formateur);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('formateur_index');

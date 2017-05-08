@@ -3,6 +3,7 @@
 namespace GestionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Carriere
@@ -24,42 +25,46 @@ class Carriere
     /**
      * @var string
      *
-     * @ORM\Column(name="Libelle_Carriere", type="string", length=20)
+     * @ORM\Column(name="Libelle_Carriere", type="string", length=20,nullable=true)
      */
     private $libelleCarriere;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="Type_Contrat", type="string", length=30)
+     * @ORM\Column(name="etat", type="string", length=20,nullable=true)
+     */
+    private $etat;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Type_Contrat", type="string",nullable=true)
      */
     private $typeContrat;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Integre", type="string", length=30)
+     * @ORM\Column(name="Integre", type="boolean", nullable=true)
      */
     private $integre;
-
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Debut_Intergration", type="date")
+     * @ORM\Column(name="Debut_Intergration", type="date",nullable=true)
      */
     private $debutIntergration;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Fin_Integration", type="date")
+     * @ORM\Column(name="Fin_Integration", type="date",nullable=true)
      */
     private $finIntegration;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Date_Recrutement", type="date")
+     * @ORM\Column(name="Date_Recrutement", type="date",nullable=true)
      */
     private $dateRecrutement;
     
@@ -73,17 +78,34 @@ class Carriere
       
      //***********Employee**********
     /**
-     * @ORM\OneToOne(targetEntity="Employee" ,mappedBy="carriere")
-
+     * @ORM\OneToOne(targetEntity="Employee" ,mappedBy="carriere",cascade={"persist"})
+     *@ORM\JoinColumn(name="employeeCarriere_id" ,referencedColumnName="id",nullable=true, onDelete="SET NULL")
      */
       private $employee;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Fichier_Contrat", type="string", length=30)
+     * @ORM\Column(name="Fichier_Contrat", type="string", length=255,nullable=true)
      */
     private $fichierContrat;
+    private $file;
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile( UploadedFile $file)
+    {
+        $this->file = $file;
+    }
 
 
 
@@ -92,7 +114,42 @@ class Carriere
     public function __toString() {
         return $this->libelleCarriere;}
 
-   
+    public function getUploadDir()
+    {
+        return 'upload/files';
+    }
+    public function getAbsolutRoot()
+    {
+        return   $this->getUploadRoot().$this->fichierContrat;
+    }
+
+    public function getWebPath()
+    {
+        return   $this->getUploadDir().'/'.$this->fichierContrat;
+    }
+
+    public function getUploadRoot()
+    {
+        return   __DIR__.'/../../../web/'.$this->getUploadDir().'/'.$this->fichierContrat;
+    }
+
+
+    public function upload()
+    {
+        if($this->file==null)
+        {
+            return;
+        }
+        $this->fichierContrat=$this->file->getClientOriginalName();
+
+        if(!is_dir($this->getUploadRoot()))
+        {
+            mkdir($this->getUploadRoot(),'0777',true);
+        }
+        $this->file->move($this->getUploadRoot(),$this->fichierContrat);
+        unset($this->file);
+    }
+
 
     /**
      * Get id
@@ -309,5 +366,28 @@ class Carriere
     public function getEmployee()
     {
         return $this->employee;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     * @return Carriere
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string 
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 }

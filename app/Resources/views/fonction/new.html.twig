@@ -3,7 +3,9 @@
     <h2 class="modal-title" id="modal-fa5-label">Ajouter fonction </h2>
 </div>
 <div class="modal-body">
-    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('fonction_new'),'method':'POST'|trans}})}}
+    {{ form_start(form,{'attr':{'id':'smart-form-register','action':path('fonction_new'),'method':'POST'|trans}})}}
+
+<div  class="smart-form row">
     <section>
         <label class="label">Fonction</label>
         <label class="input">
@@ -12,12 +14,28 @@
             {{ form_errors(form.libelleFonction)}}
         </label>
 
-
     </section>
+</div>
+
+        <section>
+
+            <select type="file" multiple="multiple" size="6" id="postes" name="postes[]" class="initializeDuallistbox">
+
+                {% for choice in form.postes.vars.choices %}
+                    {% set entity = form.postes.vars.choices[choice.value].data %}
+
+                    <option value="{{ choice.value }}">{{ choice.label }}  </option>
+                {% endfor %}
+            </select>
+
+        </section>
+
+
+
+
 
 </div>
 <div class="modal-footer">
-    {{ form_widget(form._token) }}
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">
             Annuler

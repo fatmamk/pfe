@@ -43,7 +43,7 @@ class FormationComplementaireController extends Controller
         $form = $this->createForm('GestionBundle\Form\FormationComplementaireType', $formationComplementaire);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($formationComplementaire);
             $em->flush($formationComplementaire);
@@ -85,7 +85,7 @@ class FormationComplementaireController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\FormationComplementaireType', $formationComplementaire);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('formationcomplementaire_index');

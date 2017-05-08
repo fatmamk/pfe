@@ -43,7 +43,7 @@ class CarriereController extends Controller
         $form = $this->createForm('GestionBundle\Form\CarriereType', $carriere);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($carriere);
             $em->flush($carriere);
@@ -85,7 +85,7 @@ class CarriereController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\CarriereType', $carriere);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('carriere_index');

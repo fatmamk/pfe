@@ -19,19 +19,9 @@ class DemandeCongeType extends AbstractType
                 'placeholder' => 'DD-MM-YYYY',)))
             ->add('dateFinConge','date',array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',)))
-
             ->add('typeconge')
 
-            ->add('employe',EntityType::class,
-                array(
-
-                    'required' => false,
-                    'class' => 'GestionBundle:Employee',
-                    'property' => 'toString',
-
-
-
-                ))
+            
          ;
     }
     

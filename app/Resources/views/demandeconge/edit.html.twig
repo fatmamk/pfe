@@ -5,59 +5,99 @@
 <div class="modal-body">
     {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demandeconge_edit',{'id':demandeConge.id}),'method':'POST'|trans}})}}
 
+    {% if  (demandeConge.statutsConge=='accepter' or demandeConge.statutsConge=='Refusee' ) %}
 
         <div class="row">
             <fieldset>
-            <section class="col col-6">
-                <label class="label">Date de demande </label>
+                <section class="col col-6">
+                    <label class="label">Date de demande </label>
 
-                <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget(edit_form.dateDebutConge,{'attr':{'class':'startdate'|trans}})}}
-                    {{ form_errors(edit_form.dateDebutConge)}}
-                </label>
-            </section>
-            <section class="col col-6">
-                <label class="label">Date Souhaite </label>
+                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                        {{ form_widget(edit_form.dateDebutConge,{'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
 
-                <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget(edit_form.dateFinConge,{'attr':{'class':'startdate'|trans}})}}
-                    {{ form_errors(edit_form.dateFinConge)}}
-                </label>
-            </section>
-       </fieldset>
+                        {{ form_errors(edit_form.dateDebutConge)}}
+                    </label>
+                </section>
+                <section class="col col-6">
+                    <label class="label">Date Fin Conge </label>
+
+                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                        {{ form_widget(edit_form.dateFinConge,{'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
+                        {{ form_errors(edit_form.dateFinConge)}}
+                    </label>
+                </section>
+            </fieldset>
 
         </div>
 
         <div class="row">
             <fieldset>
-            <section class="col col-4">
-                <label class="label">statutsConge
-                    <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
+                <section class="col col-4">
+                    <label class="label">statutsConge
+                        <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
 
 
-                </label>
-            </section>
+                    </label>
+                </section>
 
-            <section class="col col-4">
-                <label class="label">typeConge </label>
-                <label class="select">
-                    {{ form_widget(edit_form.typeconge ) }}
-                    <i></i>
-                </label>
-            </section>
+                <section class="col col-4">
+                    <label class="label">typeConge </label>
+                    <label class="select">
+                        {{ form_widget(edit_form.typeconge,{'attr':{'disabled':'disabled'|trans}})}}
+                        <i></i>
+                    </label>
+                </section>
 
-            <section class="col col-4">
-                <label class="label">Employee </label>
-                <label class="select">
-                    {{ form_widget(edit_form.employe ) }}
 
-                    <i></i>
-                </label>
-            </section>
             </fieldset>
         </div>
 
+    {% else%}
 
+        <div class="row">
+            <fieldset>
+                <section class="col col-6">
+                    <label class="label">Date de demande </label>
+
+                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                        {{ form_widget(edit_form.dateDebutConge,{'id':'startdate'~demandeConge.id,'attr':{'class':'startdate'|trans}})}}
+
+                        {{ form_errors(edit_form.dateDebutConge)}}
+                    </label>
+                </section>
+                <section class="col col-6">
+                    <label class="label">Date Fin Conge </label>
+
+                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                        {{ form_widget(edit_form.dateFinConge,{'id':'finishdate'~demandeConge.id,'attr':{'class':'finishdate'|trans}})}}
+
+                        {{ form_errors(edit_form.dateFinConge)}}
+                    </label>
+                </section>
+            </fieldset>
+
+        </div>
+
+        <div class="row">
+            <fieldset>
+                <section class="col col-4">
+                    <label class="label">statutsConge
+                        <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
+
+
+                    </label>
+                </section>
+
+                <section class="col col-4">
+                    <label class="label">typeConge </label>
+                    <label class="select">
+                        {{ form_widget(edit_form.typeconge)}}
+                        <i></i>
+                    </label>
+                </section>
+            </fieldset>
+        </div>
+    {% endif %}
 
 
 
@@ -67,20 +107,39 @@
 
 
 <div class="modal-footer">
-    {{ form_widget(edit_form._token) }}
 
     <button type="button" class="btn btn-default"   data-dismiss="modal">
         Annuler
     </button>
+    {% if ( (demandeConge.statutsConge=='accepter') or (demandeConge.statutsConge=='Refusee') ) %}
+        <button onclick="window.location.href='{{ path('demandeconge_refuse', { 'id': demandeConge.id }) }}'"class="btn btn-danger" disabled><i class="fa fa-remove"></i> Refusé</button>
+        <button onclick="window.location.href='{{ path('demandeconge_accepte', { 'id': demandeConge.id }) }}'" class="btn bg-color-green txt-color-white" disabled><i class="glyphicon glyphicon-thumbs-up"></i> Accepter</button>
+        <button type="submit" class="btn btn-primary" disabled>
+            Modifier
+        </button>
 
+{% else %}
     <a href="{{ path('demandeconge_refuse', { 'id': demandeConge.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refusé</a>
     <a  href="{{ path('demandeconge_accepte', { 'id': demandeConge.id }) }} " class="btn bg-color-green txt-color-white" ><i class="glyphicon glyphicon-thumbs-up"></i> Accepter</a>
     <button type="submit" class="btn btn-primary">
         Modifier
     </button>
+    {% endif %}
+
+
 </div>
 
 {{ form_end(edit_form, {'render_rest': false}) }}
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,13 +26,10 @@ class Site
      * @var string
      *
      * @ORM\Column(name="Libelle_Site", type="string", length=30)
+     * @Assert\NotBlank()
      */
+
     private $libelleSite;
-
-
-
-
-
 
     /**
      *  @ORM\OneToMany(targetEntity="Employee", mappedBy="site",cascade={"persist"})

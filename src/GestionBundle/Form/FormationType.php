@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Form;
+use Doctrine\ORM\EntityRepository;
 use GestionBundle\Entity\Formation;
 use  GestionBundle\Entity\Nature;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,6 +21,7 @@ class FormationType extends AbstractType
     {
         $builder->add('titre')
             ->add('theme')
+            ->add('evalutionformation')
             ->add('contenue',TextareaType::class,array(
                 'attr'=>array('rows'=>'6','placeholder' => 'Contenue')
             ))
@@ -41,22 +43,22 @@ class FormationType extends AbstractType
             ->add('coutImateriel')
             ->add('coutMateriel')
 
-            ->add('Ocurrancedate','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
-                'placeholder' => 'DD-MM-YYYY',
+            ->add('Ocurrancedate','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy','required' => false, 'attr' => array(
+                'placeholder' => 'DD-MM-YYYY'
             )))
             ->add('OcurranceNbj',null,array('required' => false))
-            ->add('terminerA')
+            
 
             ->add('finApres', 'choice', array(
                 'choices' => array( 1 => 'Terminer à', 0 => 'Fin Apres'),
                 'expanded' => true,
                 'multiple' => false,
-                'required' => true
+
             ))
 
 
 
-            ->add('chaque',null,array('required' => false,))
+            ->add('chaque')
             ->add('reccurence')
 
             ->add('etat')
@@ -86,28 +88,18 @@ class FormationType extends AbstractType
                     'class' => 'GestionBundle:Formateur',
                     'property' => 'toString',
 
-                    'multiple'=>false
 
                 ))
 
        ->add('FormateurInterne')
             ->add('formationsemployee')
 
-
-
-            ->add('FormateurInterne')
-
-
-
-->add('jours', CollectionType::class, array(
+    ->add('jours', CollectionType::class, array(
     'entry_type' => JourType::class
 ))
 
-            ->add('employees',EntityType::class,array(
-                'class'=>'GestionBundle:Employee',
-                'choice_label'=>'toString',
-                'multiple'=>true,
-            ))
+            ->add('employees')
+
 
         ->add('jours', CollectionType::class, array('data_class'=> null,
             'type' =>new JourType(),

@@ -21,7 +21,6 @@
         </div>
     </nav>
 
-
     <br><br><br>
     {% set myVal = 1 %}
     {% for jour in edit_form.jours %}
@@ -31,12 +30,12 @@
             </section>
             <section class="col col-5" >
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                    {{ form_widget (jour.progMedi) }}
+                    {{ form_widget (jour.progmatin) }}
                 </label>
             </section>
             <section class="col col-5" >
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                    {{ form_widget (jour.progmatin) }}
+                    {{ form_widget (jour.progMedi) }}
                 </label>
             </section>
 
@@ -44,13 +43,9 @@
         {% set myVal = myVal + 1 %}
     {% endfor %}
 
-
-
 </div>
 
-
 <div class="modal-footer">
-    {{ form_widget(edit_form._token) }}
 
     <button type="button" class="btn btn-default" data-dismiss="modal">
         Annuler
@@ -59,9 +54,7 @@
         Ajouter
     </button>
 </div>
-
 <div style="display: none"> {{ form_end(edit_form, {'render_rest': true}) }}</div>
-
 </div>
 
 

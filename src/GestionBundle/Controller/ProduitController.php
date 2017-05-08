@@ -46,7 +46,7 @@ class ProduitController extends Controller
         $form = $this->createForm('GestionBundle\Form\ProduitType', $produit);
         $form->handleRequest($request);//t3abi formulaire
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush($produit);

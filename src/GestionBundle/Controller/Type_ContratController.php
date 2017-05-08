@@ -43,7 +43,7 @@ class Type_ContratController extends Controller
         $form = $this->createForm('GestionBundle\Form\Type_ContratType', $type_Contrat);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($type_Contrat);
             $em->flush($type_Contrat);
@@ -85,7 +85,7 @@ class Type_ContratController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\Type_ContratType', $type_Contrat);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('type_contrat_index');

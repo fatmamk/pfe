@@ -45,7 +45,7 @@ class Formateur
     private $cv;
 
  /**
-     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formateur" )
+     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formateur" ,cascade={"persist"})
      *
      */
     private $formation;

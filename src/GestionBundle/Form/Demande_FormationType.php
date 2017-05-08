@@ -17,6 +17,8 @@ class Demande_FormationType extends AbstractType
     {
         $builder
             ->add('theme')
+            ->add('employee')
+         
 
           
             ->add('dateSouhaite','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(

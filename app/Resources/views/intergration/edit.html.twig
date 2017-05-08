@@ -1,98 +1,80 @@
 <div class="modal-header" >
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
-    <h2 class="modal-title" id="modal-fa5-label"> Modofier demande integration</h2>
+    <h2 class="modal-title" id="modal-fa5-label"> Ajouter integration</h2>
 </div>
 <div class="modal-body">
-    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action': path('intergration_edit',{'id':intergration.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('intergration_edit',{'id':intergration.id}),'method':'POST'|trans}})}}
 
     <fieldset>
         <div class="row">
-            <fieldset>
-                <section class="col col-6">
-                    <label class="label">Date Debut</label>
+            <section class="col col-6">
+                <label class="label">Date de demande </label>
 
-                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                        {{ form_widget(edit_form.dateDebut,{'attr':{'class':'startdate'|trans}})}}
-                        {{ form_errors(edit_form.dateDebut)}}
-                    </label>
-                </section>
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget(edit_form.dateDebut,{'attr':{'class':'startdate'|trans}})}}
+                    {{ form_errors(edit_form.dateDebut)}}
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">Date Fin </label>
 
-                <section class="col col-6">
-                    <label class="label">Date Fin </label>
-
-                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                        {{ form_widget(edit_form.dateFin,{'attr':{'class':'startdate'|trans}})}}
-                        {{ form_errors(edit_form.dateFin)}}
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="label">Employé </label>
-                    <label class="select">
-                        {{ form_widget ( edit_form.employe) }}
-                        <i></i>
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="label">responsable </label>
+                <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                    {{ form_widget(edit_form.dateFin,{'attr':{'class':'startdate'|trans}})}}
+                    {{ form_errors(edit_form.dateFin)}}
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">Employee </label>
+                <label class="select">
+                    {{ form_widget(edit_form.employe ) }}
+                    <i></i>
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">responsable </label>
+                <label class="select">
                     {{ form_widget ( edit_form.responsable) }}
-                    <label class="select">
-                        <i></i>
-                    </label>
-                </section>
-
-                <section class="col col-6">
-                    <label class="label">Etat </label>
-                    <label class="select">
-                        <i></i>
-                    </label>
-                </section>
-            </fieldset>
-
-            <fieldset>
-                <section>
-                    <label class="label">Inforation</label>
-                    <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                        {{ form_widget ( edit_form.informations,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
-                    </label>
-                </section>
-                <section>
-                    <label class="label">Point Forte</label>
-                    <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                        {{ form_widget ( edit_form.pointforte,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
-                    </label>
-                </section>
-                <section>
-                    <label class="label">Point Faible</label>
-                    <label class="textarea"> <i class="icon-append fa fa-comment"></i>
-                        {{ form_widget ( edit_form.pointfaible,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
-                    </label>
-                </section>
-
-
-            </fieldset>
-        </div>
-        <div class="row">
-
-
-
+                    <i></i>
+                </label>
+            </section>
 
         </div>
+
     </fieldset>
 
 
 
     <fieldset>
+        <div class="row">
+            <section>
+                <label class="label">informations</label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( edit_form.informations,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
+                </label>
+            </section>
+            <section>
+                <label class="label">pointfaible</label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( edit_form.pointfaible,{ 'attr': {'type': 'text','name':'pointfaible'|trans } } ) }}
+                </label>
+            </section>
+            <section>
+                <label class="label">pointforte</label>
+                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                    {{ form_widget ( edit_form.pointforte,{ 'attr': {'type': 'text','name':'pointforte'|trans } } ) }}
+                </label>
+            </section>
+        </div>
 
     </fieldset>
 </div>
 <div class="modal-footer">
-    {{ form_widget(edit_form._token) }}
 
     <button type="button" class="btn btn-default"   data-dismiss="modal">
         Annuler
     </button>
     <button type="submit" class="btn btn-primary">
-       Modifier
+        Ajouter
     </button>
 </div>
 

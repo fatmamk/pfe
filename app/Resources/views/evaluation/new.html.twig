@@ -6,173 +6,239 @@
 </div>
 <div class="modal-body">
     {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('evaluation_new'),'method':'POST'|trans}})}}
+
+    <div class="row">
+            <section class="col col-4">
+                <label class="label">Formation </label>
+                <label class="select">
+                    {{ form_widget(form.formation ) }}
+                    <i></i>
+                </label>
+            </section>
+    </div>
+
     <div class="row">
         <section class="col col-4">
-            <label class="label">Matricule</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.matricule,{'attr': {'type':'text','placeholder':'matricule'|trans}}) }}
-                {{ form_errors(form.matricule)}}
-            </label>
+            <div class="rating">
+                {% for child in form.afroid %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">afroid</label>
+            </div>
+        </section>
+
+            <section class="col col-4">
+                <div class="rating">
+                    {% for child in form.achaud %}
+                        {% set a=child.vars.label %}
+
+                        {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                        <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                    {% endfor %}
+                    <label class="label">achaud</label>
+                </div>
+            </section>
+
+
+        <section class="col col-4">
+            <div class="rating">
+                {% for child in form.datePrevue %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">date Prevue</label>
+            </div>
+        </section>
+</div>
+<div class="row">
+
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.efficace %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">efficace</label>
+        </div>
+    </section>
+
+
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.methodePedalogique %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">Pédalogique</label>
+        </div>
+    </section>
+
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.conference %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">conference</label>
+        </div>
+    </section>
+
+
+</div>
+
+<div class="row">
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.supportDeCours %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">supportDeCours</label>
+        </div>
+    </section>
+
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.lieu %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">lieu</label>
+        </div>
+    </section>
+
+    <section class="col col-4">
+        <div class="rating">
+            {% for child in form.duree %}
+                {% set a=child.vars.label %}
+
+                {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+            {% endfor %}
+            <label class="label">duree</label>
+        </div>
+    </section>
+</div>
+
+
+    <div class="row">
+        <section class="col col-4">
+            <div class="rating">
+                {% for child in form.recpectHumain %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">recpectHumain</label>
+            </div>
         </section>
         <section class="col col-4">
-            <label class="label">Effectue</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.effectue,{'attr': {'type':'text','placeholder':'effectue'|trans}}) }}
-                {{ form_errors(form.effectue)}}
-            </label>
+            <div class="rating">
+                {% for child in form.contenueCours %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">contenueCours</label>
+            </div>
         </section>
 
+        <section class="col col-4">
+            <div class="rating">
+                {% for child in form.travauxPratique %}
+                    {% set a=child.vars.label %}
 
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">travaux Pratique</label>
+            </div>
+        </section>
 
     </div>
 
     <div class="row">
         <section class="col col-4">
-            <label class="label">Afroid</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.afroid,{'attr': {'type':'text','placeholder':'afroid'|trans}}) }}
-                {{ form_errors(form.afroid)}}
-            </label>
+            <div class="rating">
+                {% for child in form.objectif %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">objectif</label>
+            </div>
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+                {% for child in form.annimateur %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+                <label class="label">annimateur</label>
+            </div>
         </section>
 
         <section class="col col-4">
-            <label class="label">achaud</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.achaud,{'attr': {'type':'text','placeholder':'achaud'|trans}}) }}
-                {{ form_errors(form.achaud)}}
-            </label>
-        </section>
-        <section class="col col-4">
-            <label class="label">datePrevue</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.datePrevue,{'attr': {'type':'text','placeholder':'datePrevue'|trans}}) }}
-                {{ form_errors(form.datePrevue)}}
-            </label>
-        </section>
-    </div>
+            <div class="rating">
+                {% for child in form.ambianceGenerale %}
+                    {% set a=child.vars.label %}
 
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
 
-    <div class="row">
-        <section class="col col-4">
-            <label class="label">Commantaire</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.commantaire,{'attr': {'type':'text','placeholder':'commantaire'|trans}}) }}
-                {{ form_errors(form.commantaire)}}
-            </label>
-        </section>
-        <section class="col col-4">
-            <label class="label">Methodepedalogique</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.methodePedalogique,{'attr': {'type':'text','placeholder':'methodePedalogique'|trans}}) }}
-                {{ form_errors(form.methodePedalogique)}}
-            </label>
-        </section>
-        <section class="col col-4">
-            <label class="label">Conference</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.conference,{'attr': {'type':'text','placeholder':'conference'|trans}}) }}
-                {{ form_errors(form.conference)}}
-            </label>
-        </section>
-    </div>
-    <div class="row">
-
-        <section class="col col-4">
-            <label class="label">Supportdecours</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.supportDeCours,{'attr': {'type':'text','name':'site','placeholder':'supportDeCours'|trans}}) }}
-                {{ form_errors(form.supportDeCours)}}
-            </label>
+                {% endfor %}
+                <label class="label">ambianceGenerale</label>
+            </div>
         </section>
 
-        <section class="col col-4">
-            <label class="label">Lieu</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.lieu,{'attr': {'type':'text','name':'site','placeholder':'lieu'|trans}}) }}
-                {{ form_errors(form.lieu)}}
-            </label>
-        </section>
-        <section class="col col-4">
-            <label class="label">Duree</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.duree,{'attr': {'type':'text','name':'site','placeholder':'duree'|trans}}) }}
-                {{ form_errors(form.duree)}}
-            </label>
-        </section>
     </div>
 
     <div class="row">
-        <section class="col col-4">
-            <label class="label">Recpecthumain</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.recpectHumain,{'attr': {'type':'text','name':'site','placeholder':'recpectHumain'|trans}}) }}
-                {{ form_errors(form.recpectHumain)}}
+        <section class="">
+            <label class="label">Commentaire </label>
+            <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                {{ form_widget(form.commantaire,{'attr':{'type':'text','placeholder':'commantaire'|trans}}) }}
+
             </label>
         </section>
-
-        <section class="col col-4">
-            <label class="label">Contenuecours</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.contenueCours,{'attr': {'type':'text','name':'site','placeholder':'contenueCours'|trans}}) }}
-                {{ form_errors(form.contenueCours)}}
-            </label>
-        </section>
-        <section class="col col-4">
-            <label class="label">Travauxpratique</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.travauxPratique,{'attr': {'type':'text','name':'site','placeholder':'travauxPratique'|trans}}) }}
-                {{ form_errors(form.travauxPratique)}}
-            </label>
-        </section>
-    </div>
-    <div class="row">
-        <section class="col col-4">
-            <label class="label">Objectif</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.objectif,{'attr': {'type':'text','name':'site','placeholder':'objectif'|trans}}) }}
-                {{ form_errors(form.objectif)}}
-            </label>
-        </section>
-
-
-        <section class="col col-4">
-            <label class="label">Annimateur</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.annimateur,{'attr': {'type':'text','name':'site','placeholder':'annimateur'|trans}}) }}
-                {{ form_errors(form.annimateur)}}
-            </label>
-        </section>
-
-        <section class="col col-4">
-            <label class="label">Ambiancegenerale</label>
-            <label class="input">
-                <i class="icon-append fa fa-tag"></i>
-                {{ form_widget(form.ambianceGenerale,{'attr': {'type':'text','name':'site','placeholder':'ambianceGenerale'|trans}}) }}
-                {{ form_errors(form.ambianceGenerale)}}
-            </label>
-        </section>
-
-
     </div>
 </div>
+
 <div class="modal-footer">
-    {{ form_widget(form._token) }}
 
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">

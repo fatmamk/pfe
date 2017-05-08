@@ -1,6 +1,7 @@
 <?php
 
 namespace GestionBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,6 +27,7 @@ class Absence
      * @var string
      *
      * @ORM\Column(name="Justifier", type="boolean",nullable=true)
+     * @Assert\NotBlank()
      */
     private $justifier;
 
@@ -33,6 +35,7 @@ class Absence
      * @var \DateTime
      *
      * @ORM\Column(name="Date_Debut", type="date")
+     * @Assert\Date()
      */
     private $dateDebut;
 
@@ -40,13 +43,15 @@ class Absence
      * @var \DateTime
      *
      * @ORM\Column(name="Date_Fin", type="date")
+     * @Assert\Date()
      */
     private $dateFin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=30)
+     * @ORM\Column(name="name", type="string", length=255,nullable=true)
+     *
      */
     private $name;
 

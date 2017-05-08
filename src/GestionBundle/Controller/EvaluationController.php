@@ -43,11 +43,16 @@ class EvaluationController extends Controller
         $form = $this->createForm('GestionBundle\Form\EvaluationType', $evaluation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($evaluation);
-            $em->flush($evaluation);
+            $moy=($evaluation->getAchaud()+$evaluation->getAfroid()+$evaluation->getDatePrevue()+$evaluation->getEfficace()+
+                $evaluation->getMethodePedalogique()+$evaluation->getConference()+$evaluation->getSupportDeCours()+$evaluation->getLieu()
+                +$evaluation->getDuree()+$evaluation->getRecpectHumain()+$evaluation->getContenueCours()+$evaluation->getTravauxPratique()+$evaluation->getObjectif()+
+                $evaluation->getAmbianceGenerale())/14;
+            $evaluation->setMoyenne($moy);
 
+            $em->flush();
             return $this->redirectToRoute('evaluation_index');
         }
 
@@ -85,7 +90,7 @@ class EvaluationController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\EvaluationType', $evaluation);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('evaluation_index');
@@ -111,7 +116,7 @@ class EvaluationController extends Controller
         $evlua = $em->getRepository('GestionBundle:Evaluation')->find($id);
 
         $em->remove($evlua);
-        $em->flush($evlua);
+        $em->flush();
         $this->addFlash(
             'deletesuccess',
             ', la formation a été supprimé!'

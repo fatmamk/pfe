@@ -43,12 +43,12 @@ class DiscplineController extends Controller
         $form = $this->createForm('GestionBundle\Form\DiscplineType', $discpline);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($discpline);
             $em->flush($discpline);
 
-            return $this->redirectToRoute('discpline_show', array('id' => $discpline->getId()));
+            return $this->redirectToRoute('discpline_index');
         }
 
         return $this->render('discpline/new.html.twig', array(
@@ -85,10 +85,10 @@ class DiscplineController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\DiscplineType', $discpline);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('discpline_edit', array('id' => $discpline->getId()));
+            return $this->redirectToRoute('discpline_index');
         }
 
         return $this->render('discpline/edit.html.twig', array(

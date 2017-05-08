@@ -45,7 +45,7 @@ class FichierController extends Controller
         $form = $this->createForm('GestionBundle\Form\FichierType', $fichier);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $fichier->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($fichier);

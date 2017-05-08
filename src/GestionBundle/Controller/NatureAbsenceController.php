@@ -43,7 +43,7 @@ class NatureAbsenceController extends Controller
         $form = $this->createForm('GestionBundle\Form\NatureAbsenceType', $natureAbsence);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($natureAbsence);
             $em->flush($natureAbsence);
@@ -85,7 +85,7 @@ class NatureAbsenceController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\NatureAbsenceType', $natureAbsence);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('natureabsence_index');

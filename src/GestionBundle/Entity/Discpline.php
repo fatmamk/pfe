@@ -24,7 +24,7 @@ class Discpline
     /**
      * @var string
      *
-     * @ORM\Column(name="Nature", type="string", length=255, nullable=true,columnDefinition="enum('male', 'femelle')")
+     * @ORM\Column(name="Nature", type="string", length=255, nullable=true)
      */
     private $nature;
 
@@ -35,13 +35,13 @@ class Discpline
      */
     private $dateDebut;
 
+   
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datFin", type="date", nullable=true)
+     * @ORM\Column(name="dateFin", type="date", nullable=true)
      */
-    private $datFin;
-
+    private $dateFin;
     /**
      * @var string
      *
@@ -55,6 +55,8 @@ class Discpline
      * @ORM\Column(name="couse", type="string", length=255, nullable=true)
      */
     private $couse;
+
+
 
 
 
@@ -116,26 +118,26 @@ class Discpline
     }
 
     /**
-     * Set datFin
+     * Set dateFin
      *
-     * @param \DateTime $datFin
+     * @param \DateTime $dateFin
      * @return Discpline
      */
-    public function setDatFin($datFin)
+    public function setDateFin($dateFin)
     {
-        $this->datFin = $datFin;
+        $this->dateFin = $dateFin;
 
         return $this;
     }
 
     /**
-     * Get datFin
+     * Get dateFin
      *
      * @return \DateTime 
      */
-    public function getDatFin()
+    public function getDateFin()
     {
-        return $this->datFin;
+        return $this->dateFin;
     }
 
     /**

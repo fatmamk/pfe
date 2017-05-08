@@ -2,7 +2,7 @@
 
 namespace GestionBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="employee")
  * @ORM\Entity(repositoryClass="GestionBundle\Repository\EmployeeRepository")
  */
-class Employee
+class Employee extends BaseUser
 {
     /**
      * @var int
@@ -21,7 +21,7 @@ class Employee
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -43,6 +43,12 @@ class Employee
      * @ORM\Column(name="DateNaiss", type="date",nullable=true)
      */
     private $dateNaiss;
+    /**
+     * @var \dateintegration
+     *
+     * @ORM\Column(name="dateintegration", type="date",nullable=true)
+     */
+    private $dateintegration;
 
     /**
      * @var string
@@ -69,29 +75,17 @@ class Employee
      * @var string
      *
      * @ORM\Column(name="Num_Tel_Employee", type="string", length=20,nullable=true)
+     *
      */
     private $numTelEmployee;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email_Employee", type="string", length=30)
-     * @Assert\Email(
-     *     message = "Le email '{{ value }}' N'est pas un email valide.",
-     *     checkMX = false
-     * )
-     */
-    
-    private $emailEmployee;
+
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Email_Secondaire_Employee", type="string", length=30)
-     * @Assert\Email(
-     *     message = "Le email '{{ value }}' N'est pas un email valide.",
-     *     checkMX = true
-     * )
+     * @ORM\Column(name="Email_Secondaire_Employee", type="string", length=30,nullable=true)
+     * 
      */
     private $emailSecondaireEmployee;
 
@@ -193,11 +187,7 @@ class Employee
      */
     private $delivreLe;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Groupe",inversedBy="employees", cascade={"persist"})
-     * @ORM\JoinColumn(name="groupe_id" ,referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $groupe;
+
 
     /**
      *@ORM\ManyToOne(targetEntity="Site",inversedBy="employees" ,cascade={"persist"})
@@ -227,33 +217,24 @@ class Employee
     private $departement;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Formation", mappedBy="employees")
+     * @ORM\ManyToMany(targetEntity="Formation", mappedBy="employees",cascade={"persist"})
      *
      */
     private $formations;
-   
-
-
+    
 
     /**
-     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formationsemployee")
+     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formationsemployee",cascade={"persist"})
      */
 
     private $employeeinterne;
 
     /**
-     * @ORM\OneToOne(targetEntity="Carriere",inversedBy="employee" ,cascade={"persist"})
-     * @ORM\JoinColumn(name="carriere_id" ,referencedColumnName="id",nullable=true, onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Carriere",mappedBy="employee" )
      */
     private $carriere;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Activite",inversedBy="employees" ,cascade={"persist"})
-     * @ORM\JoinTable(name="activite_id" )
-     */
-    private $activites;
-
-    /**
+     /**
      * @ORM\OneToMany(targetEntity="Demande_Formation", mappedBy="employee" , cascade={"remove"}, orphanRemoval=true)
      */
     private $employeDemande;
@@ -263,7 +244,7 @@ class Employee
     private $demandeConge;
 
     /**
-     * * @ORM\OneToOne(targetEntity="Intergration" ,mappedBy="employe")
+     *  @ORM\OneToOne(targetEntity="Intergration" ,mappedBy="employe")
      */
     private $intergation;
 
@@ -271,7 +252,7 @@ class Employee
 
     public function __toString()
     {
-        return ($this->nom . ' ' . $this->prenom);
+        return ($this->getNom(). ' ' . $this->getPrenom());
     }
 
     public function toString()
@@ -279,30 +260,22 @@ class Employee
         return ($this->nom . ' ' . $this->prenom);
     }
 
-  
-  
+    
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $this->absences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->employeeinterne = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->activites = new \Doctrine\Common\Collections\ArrayCollection();
         $this->employeDemande = new \Doctrine\Common\Collections\ArrayCollection();
         $this->demandeConge = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+   
 
     /**
      * Set nom
@@ -371,6 +344,29 @@ class Employee
     public function getDateNaiss()
     {
         return $this->dateNaiss;
+    }
+
+    /**
+     * Set dateintegration
+     *
+     * @param \DateTime $dateintegration
+     * @return Employee
+     */
+    public function setDateintegration($dateintegration)
+    {
+        $this->dateintegration = $dateintegration;
+
+        return $this;
+    }
+
+    /**
+     * Get dateintegration
+     *
+     * @return \DateTime 
+     */
+    public function getDateintegration()
+    {
+        return $this->dateintegration;
     }
 
     /**
@@ -463,29 +459,6 @@ class Employee
     public function getNumTelEmployee()
     {
         return $this->numTelEmployee;
-    }
-
-    /**
-     * Set emailEmployee
-     *
-     * @param string $emailEmployee
-     * @return Employee
-     */
-    public function setEmailEmployee($emailEmployee)
-    {
-        $this->emailEmployee = $emailEmployee;
-
-        return $this;
-    }
-
-    /**
-     * Get emailEmployee
-     *
-     * @return string 
-     */
-    public function getEmailEmployee()
-    {
-        return $this->emailEmployee;
     }
 
     /**
@@ -673,6 +646,75 @@ class Employee
     }
 
     /**
+     * Set lieunais
+     *
+     * @param string $lieunais
+     * @return Employee
+     */
+    public function setLieunais($lieunais)
+    {
+        $this->lieunais = $lieunais;
+
+        return $this;
+    }
+
+    /**
+     * Get lieunais
+     *
+     * @return string 
+     */
+    public function getLieunais()
+    {
+        return $this->lieunais;
+    }
+
+    /**
+     * Set maison
+     *
+     * @param string $maison
+     * @return Employee
+     */
+    public function setMaison($maison)
+    {
+        $this->maison = $maison;
+
+        return $this;
+    }
+
+    /**
+     * Get maison
+     *
+     * @return string 
+     */
+    public function getMaison()
+    {
+        return $this->maison;
+    }
+
+    /**
+     * Set gsm
+     *
+     * @param string $gsm
+     * @return Employee
+     */
+    public function setGsm($gsm)
+    {
+        $this->gsm = $gsm;
+
+        return $this;
+    }
+
+    /**
+     * Get gsm
+     *
+     * @return string 
+     */
+    public function getGsm()
+    {
+        return $this->gsm;
+    }
+
+    /**
      * Set experience
      *
      * @param string $experience
@@ -785,29 +827,6 @@ class Employee
     public function getDelivreLe()
     {
         return $this->delivreLe;
-    }
-
-    /**
-     * Set groupe
-     *
-     * @param \GestionBundle\Entity\Groupe $groupe
-     * @return Employee
-     */
-    public function setGroupe(\GestionBundle\Entity\Groupe $groupe = null)
-    {
-        $this->groupe = $groupe;
-
-        return $this;
-    }
-
-    /**
-     * Get groupe
-     *
-     * @return \GestionBundle\Entity\Groupe 
-     */
-    public function getGroupe()
-    {
-        return $this->groupe;
     }
 
     /**
@@ -1002,39 +1021,6 @@ class Employee
     }
 
     /**
-     * Add activites
-     *
-     * @param \GestionBundle\Entity\Activite $activites
-     * @return Employee
-     */
-    public function addActivite(\GestionBundle\Entity\Activite $activites)
-    {
-        $this->activites[] = $activites;
-
-        return $this;
-    }
-
-    /**
-     * Remove activites
-     *
-     * @param \GestionBundle\Entity\Activite $activites
-     */
-    public function removeActivite(\GestionBundle\Entity\Activite $activites)
-    {
-        $this->activites->removeElement($activites);
-    }
-
-    /**
-     * Get activites
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getActivites()
-    {
-        return $this->activites;
-    }
-
-    /**
      * Add employeDemande
      *
      * @param \GestionBundle\Entity\Demande_Formation $employeDemande
@@ -1123,72 +1109,16 @@ class Employee
         return $this->intergation;
     }
 
-    /**
-     * Set lieunais
-     *
-     * @param string $lieunais
-     * @return Employee
-     */
-    public function setLieunais($lieunais)
+    public function getRole()
     {
-        $this->lieunais = $lieunais;
-
-        return $this;
+        $roles = ['ROLE_ADMIN', 'ROLE_USER'];
+        if(in_array('ROLE_ADMIN', $this->roles)) $role = 'Administrateur';
+        else $role = 'utilisateur';
+        return $role;
     }
 
-    /**
-     * Get lieunais
-     *
-     * @return string 
-     */
-    public function getLieunais()
+       public function getParent()
     {
-        return $this->lieunais;
-    }
-
-    /**
-     * Set maison
-     *
-     * @param string $maison
-     * @return Employee
-     */
-    public function setMaison($maison)
-    {
-        $this->maison = $maison;
-
-        return $this;
-    }
-
-    /**
-     * Get maison
-     *
-     * @return string 
-     */
-    public function getMaison()
-    {
-        return $this->maison;
-    }
-
-    /**
-     * Set gsm
-     *
-     * @param string $gsm
-     * @return Employee
-     */
-    public function setGsm($gsm)
-    {
-        $this->gsm = $gsm;
-
-        return $this;
-    }
-
-    /**
-     * Get gsm
-     *
-     * @return string 
-     */
-    public function getGsm()
-    {
-        return $this->gsm;
+        return 'FOSUserBundle';
     }
 }

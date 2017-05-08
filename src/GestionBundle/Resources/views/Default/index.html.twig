@@ -2,8 +2,10 @@
 {% block main %}
 
     {% if is_granted ('ROLE_ADMIN') %}
-    <h1>ROLE ADMIN</h1>
+        <h1>ROLE ADMIN</h1>
     {% else %}
-    <h1>ROLE USER</h1>
+        <h1>ROLE USER</h1>
     {% endif %}
+
+
 {% endblock %}

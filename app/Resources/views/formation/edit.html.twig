@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Ajouter Formation </h2>
 </div>
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('formation_edit',{'id':formation.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'id':'smart-form-register','action':path('formation_edit',{'id':formation.id}),'method':'POST'|trans}})}}
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading " style="background-color: #AC5287">
@@ -13,13 +13,10 @@
                         <i class="fa fa-lg fa-angle-up pull-right txt-color-white"></i>
                         Collapsible Group Item #1 </a></h4>
             </div>
-            <fieldset id="collapseOne" class="panel-collapse collapse in">
-                <header>
-                    Ajouter Formation
-                </header>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body padding-7 ">
 
-                <fieldset>
-                    <div class="row">
+                  <div  class="smart-form row">
                         <section class="col col-6">
                             <label class="label">titre </label>
 
@@ -43,12 +40,12 @@
 
                     </div>
 
-                    <div class="row">
+                    <div  class="smart-form row">
                         <section class="col col-6">
                             <label class="label">dateDebut </label>
 
                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget(edit_form.dateDebut,{'id':formation.id,'attr':{'class':'startdate'|trans}})}}
+                                {{ form_widget(edit_form.dateDebut,{'id':'startdate'~formation.id,'attr':{'class':'startdate'|trans}})}}
                                 {{ form_errors(edit_form.dateDebut)}}
                             </label>
                         </section>
@@ -56,13 +53,13 @@
                         <section class="col col-6">
                             <label class="label">dateFin </label>
                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                {{ form_widget(edit_form.dateFin,{'id':formation.id,'attr':{'class':'finishdate'|trans}})}}
+                                {{ form_widget(edit_form.dateFin,{'id':'finishdate'~formation.id,'attr':{'class':'finishdate'|trans}})}}
                                 {{ form_errors(edit_form.dateFin)}}
 
                             </label>
                         </section>
                     </div>
-                    <div class="row">
+                    <div  class="smart-form row">
 
                         <section class="col col-6">
                             <label class="label">coutImateriel </label>
@@ -83,7 +80,7 @@
 
 
                     </div>
-                    <div class="row">
+                    <div  class="smart-form row">
                         <section class="col col-6">
                             <label class="label">Objectf </label>
                             <label class="textarea"> <i class="icon-append fa fa-comment"></i>
@@ -99,7 +96,7 @@
                             </label>
                         </section>
                     </div>
-                    <div class="row">
+                    <div  class="smart-form row">
 
 
                         <section class="col col-4">
@@ -120,34 +117,35 @@
 
                             </label>
                         </section>
-                        <section class="col col-4">
-                            <label class="label">Etat
-                                <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
+                     </div>
 
+                        <div class="row">
+                        <section>
 
-                            </label>
+                            {{ form_widget(edit_form.employees,{'attr': {'type':'file','multiple':'multiple','size':'6','class':'initializeDuallistbox'|trans}}) }}
+
                         </section>
 
-                    </div>
-                    <div class="row">
+                      </div>
+                    <div  class="smart-form row">
                         <section>
 
                             <label class="label"> Formateur
 
-                                <a href="#myNewformateurModal"  class="for"  data-toggle="modal"    rel="tooltip" title="Ajouter type" style="display: none;"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
+                                <a href="#myNewformateurModal"  class="for{{ formation.id }}"  data-toggle="modal"    rel="tooltip" title="Ajouter type" style="display: none;"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
 
                                 <label  class="toggle " style=" display: inline; ">
-                                    {{ form_widget(edit_form.FormateurInterne,{'attr': {'class':'FormateurInterne'|trans}}) }}
+                                    {{ form_widget(edit_form.FormateurInterne,{'attr': {'class':'FormateurInterne'~formation.id|trans}}) }}
                                     <i data-swchon-text="Externe" data-swchoff-text="Interne"
                                        style="width:60px;transform: scale(1.1); margin-right: -15px ;"></i>
                                 </label>
 
                             </label>
 
-                            <label id="formationsemployee" class="label">liste formateur interne
+                            <label class="label formationsemployee {{ formation.id }}" >liste formateur interne
 
                                 <label  class="select">
-                                    {{ form_widget(edit_form.formationsemployee) }}
+                                    {{ form_widget(edit_form.formationsemployee,{'attr': {'class':'formationsemployee'~formation.id|trans}}) }}
 
                                     <i></i>
 
@@ -161,8 +159,8 @@
 
 
 
-                    <div class="row">
-                        <div  class="for"  style="display: none">
+                    <div  class="smart-form row">
+                        <div  class="for{{ formation.id }}"  style="display: none">
 
                             <label class="label">liste formateur Externe
 
@@ -180,12 +178,12 @@
 
 
 
-                    <div class=" row smart-form">
+                    <div  class="smart-form row">
                         <section class="col col-4">
                             <label class="label">Reccurence
                                 <label class="toggle " style=" display: inline; ">
 
-                                    {{ form_widget(edit_form.reccurence,{'attr': {'class':'reccurence'|trans}}) }}
+                                    {{ form_widget(edit_form.reccurence,{'attr': {'class':'reccurence'~formation.id|trans}}) }}
                                     <i data-swchon-text="Non" data-swchoff-text="Oui"
                                        style="width:60px;transform: scale(1.1); margin-right: -15px ;"> </i>
                                 </label></label>
@@ -193,7 +191,7 @@
 
                     </div>
 
-                    <div  class="dv" style="display: none">
+                    <div  class="smart-form row  dv{{ formation.id}}" style="display: none">
                         <div class="row">
                             <section class="col col-4">
                                 <label class="label">chaque</label>
@@ -218,16 +216,11 @@
                         </div>
 
 
-                        <div class="row">
-
-
-
-
+                        <div  class="smart-form row">
                             {% for child in edit_form.finApres %}
                                 {% if child.vars.value == 1 %}
                                     <section class="col col-6">
                                         <label class="radio">
-                                            <label class="radio">
                                                 {{ form_widget(child, { 'attr': {'type':'radio','checked':'checked'}}) }}
                                                 <i></i>{{ form_label(child) }}</label>
                                         </label>
@@ -243,7 +236,7 @@
 
 
                         </div>
-                        <div class="row" >
+                        <div  class="smart-form row">
 
 
                             <section class="col col-6">
@@ -267,24 +260,27 @@
                             </section>
 
 
-
                         </div>
 
 
                     </div>
                 </fieldset>
-            </fieldset>
-        </div></div></div>
+       </div>
 
+            </div>
+
+        </div>
+</div>
+
+</div>
 <div class="modal-footer">
-    {{ form_widget(edit_form._token) }}
 
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">
             Annuler
         </button>
         <button type="submit" class="btn btn-primary">
-            Enregiter
+            Modifier
         </button>
 
 

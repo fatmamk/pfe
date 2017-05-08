@@ -139,7 +139,12 @@ class Formation
      * @ORM\Column(name="date_Debut", type="date", nullable=true)
      */
     private $dateDebut;
-
+    /**
+     * @var 
+     *
+     * @ORM\Column(name="evalutionformation", type="float", nullable=true)
+     */
+    private $evalutionformation;
 
 
     /**
@@ -151,13 +156,7 @@ class Formation
 
     private $dateFin;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="terminerA", type="boolean",nullable=true)
-     */
 
-    private $terminerA;
 
     /**
      * @var \DateTime
@@ -181,10 +180,7 @@ class Formation
 
 
     private $typeFormation;
-
-
-
-
+    
     /**
      * @ORM\ManyToMany(targetEntity="Employee", inversedBy="formations",cascade={"persist"})
      * @ORM\JoinTable(name="employees_id" )
@@ -222,14 +218,25 @@ class Formation
      * @ORM\JoinColumn(name="formateur_id" ,referencedColumnName="id" , nullable=true, onDelete="SET NULL")
      */
     private $formateur;
+    /**
+ * @ORM\OneToMany(targetEntity="Document", mappedBy="formation",cascade={"remove"})
+ */
+
+    private $documents;
 
 
-    public function __toString() {
-        return $this->titre;
+    /**
+     * @ORM\OneToMany(targetEntity="Evaluation", mappedBy="formation",cascade={"persist"})
+     */
+    private $evaluations;
+
+
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
-
-
    
+    
     /**
      * Constructor
      */
@@ -238,12 +245,14 @@ class Formation
         $this->employees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->jours = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -266,7 +275,7 @@ class Formation
     /**
      * Get titre
      *
-     * @return string
+     * @return string 
      */
     public function getTitre()
     {
@@ -289,7 +298,7 @@ class Formation
     /**
      * Get objectif
      *
-     * @return string
+     * @return string 
      */
     public function getObjectif()
     {
@@ -312,7 +321,7 @@ class Formation
     /**
      * Get lieu
      *
-     * @return string
+     * @return string 
      */
     public function getLieu()
     {
@@ -335,7 +344,7 @@ class Formation
     /**
      * Get etat
      *
-     * @return string
+     * @return string 
      */
     public function getEtat()
     {
@@ -358,7 +367,7 @@ class Formation
     /**
      * Get coutImateriel
      *
-     * @return string
+     * @return string 
      */
     public function getCoutImateriel()
     {
@@ -381,7 +390,7 @@ class Formation
     /**
      * Get coutMateriel
      *
-     * @return string
+     * @return string 
      */
     public function getCoutMateriel()
     {
@@ -404,7 +413,7 @@ class Formation
     /**
      * Get theme
      *
-     * @return string
+     * @return string 
      */
     public function getTheme()
     {
@@ -427,7 +436,7 @@ class Formation
     /**
      * Get FormateurInterne
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getFormateurInterne()
     {
@@ -450,7 +459,7 @@ class Formation
     /**
      * Get FormateurExterne
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getFormateurExterne()
     {
@@ -473,7 +482,7 @@ class Formation
     /**
      * Get contenue
      *
-     * @return string
+     * @return string 
      */
     public function getContenue()
     {
@@ -496,7 +505,7 @@ class Formation
     /**
      * Get reccurence
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getReccurence()
     {
@@ -519,7 +528,7 @@ class Formation
     /**
      * Get chaque
      *
-     * @return integer
+     * @return integer 
      */
     public function getChaque()
     {
@@ -542,7 +551,7 @@ class Formation
     /**
      * Get periode
      *
-     * @return string
+     * @return string 
      */
     public function getPeriode()
     {
@@ -565,7 +574,7 @@ class Formation
     /**
      * Get finApres
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getFinApres()
     {
@@ -588,11 +597,34 @@ class Formation
     /**
      * Get dateDebut
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getDateDebut()
     {
         return $this->dateDebut;
+    }
+
+    /**
+     * Set evalutionformation
+     *
+     * @param float $evalutionformation
+     * @return Formation
+     */
+    public function setEvalutionformation($evalutionformation)
+    {
+        $this->evalutionformation = $evalutionformation;
+
+        return $this;
+    }
+
+    /**
+     * Get evalutionformation
+     *
+     * @return float 
+     */
+    public function getEvalutionformation()
+    {
+        return $this->evalutionformation;
     }
 
     /**
@@ -611,34 +643,11 @@ class Formation
     /**
      * Get dateFin
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getDateFin()
     {
         return $this->dateFin;
-    }
-
-    /**
-     * Set terminerA
-     *
-     * @param boolean $terminerA
-     * @return Formation
-     */
-    public function setTerminerA($terminerA)
-    {
-        $this->terminerA = $terminerA;
-
-        return $this;
-    }
-
-    /**
-     * Get terminerA
-     *
-     * @return boolean
-     */
-    public function getTerminerA()
-    {
-        return $this->terminerA;
     }
 
     /**
@@ -657,7 +666,7 @@ class Formation
     /**
      * Get Ocurrancedate
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getOcurrancedate()
     {
@@ -680,7 +689,7 @@ class Formation
     /**
      * Get OcurranceNbj
      *
-     * @return integer
+     * @return integer 
      */
     public function getOcurranceNbj()
     {
@@ -703,7 +712,7 @@ class Formation
     /**
      * Get typeFormation
      *
-     * @return \GestionBundle\Entity\Type_Formation
+     * @return \GestionBundle\Entity\Type_Formation 
      */
     public function getTypeFormation()
     {
@@ -736,7 +745,7 @@ class Formation
     /**
      * Get employees
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getEmployees()
     {
@@ -769,7 +778,7 @@ class Formation
     /**
      * Get formation
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getFormation()
     {
@@ -802,7 +811,7 @@ class Formation
     /**
      * Get jours
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getJours()
     {
@@ -825,7 +834,7 @@ class Formation
     /**
      * Get formationsemployee
      *
-     * @return \GestionBundle\Entity\Employee
+     * @return \GestionBundle\Entity\Employee 
      */
     public function getFormationsemployee()
     {
@@ -848,7 +857,7 @@ class Formation
     /**
      * Get demandeFormation
      *
-     * @return \GestionBundle\Entity\Demande_Formation
+     * @return \GestionBundle\Entity\Demande_Formation 
      */
     public function getDemandeFormation()
     {
@@ -871,10 +880,76 @@ class Formation
     /**
      * Get formateur
      *
-     * @return \GestionBundle\Entity\Formateur
+     * @return \GestionBundle\Entity\Formateur 
      */
     public function getFormateur()
     {
         return $this->formateur;
+    }
+
+    /**
+     * Add documents
+     *
+     * @param \GestionBundle\Entity\Document $documents
+     * @return Formation
+     */
+    public function addDocument(\GestionBundle\Entity\Document $documents)
+    {
+        $this->documents[] = $documents;
+
+        return $this;
+    }
+
+    /**
+     * Remove documents
+     *
+     * @param \GestionBundle\Entity\Document $documents
+     */
+    public function removeDocument(\GestionBundle\Entity\Document $documents)
+    {
+        $this->documents->removeElement($documents);
+    }
+
+    /**
+     * Get documents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * Add evaluations
+     *
+     * @param \GestionBundle\Entity\Evaluation $evaluations
+     * @return Formation
+     */
+    public function addEvaluation(\GestionBundle\Entity\Evaluation $evaluations)
+    {
+        $this->evaluations[] = $evaluations;
+
+        return $this;
+    }
+
+    /**
+     * Remove evaluations
+     *
+     * @param \GestionBundle\Entity\Evaluation $evaluations
+     */
+    public function removeEvaluation(\GestionBundle\Entity\Evaluation $evaluations)
+    {
+        $this->evaluations->removeElement($evaluations);
+    }
+
+    /**
+     * Get evaluations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvaluations()
+    {
+        return $this->evaluations;
     }
 }

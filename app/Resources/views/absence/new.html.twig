@@ -69,7 +69,7 @@
                             {% endfor %}
 
             </div>
-<div id="file" style="display: none">
+<div class="file{{ absence.id }}" style="display: none">
         <section  class="col col-6" >
             <label class="label">fichier</label>
                 {{ form_widget (form.file)}}
@@ -85,7 +85,7 @@
 
 </div>
 <div class="modal-footer">
-    {{ form_widget(form._token) }}
+
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">
             Annuler
