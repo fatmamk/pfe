@@ -45,6 +45,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        mapping_types:
+          enum: string
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -63,13 +65,13 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: GestionBundle\Entity\Employee
+    resetting:
+      token_ttl: 180
 
 
 
 swiftmailer:
     transport: "%mailer_transport%"
-    encryption: "%mailer_encryption%"
-    host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
