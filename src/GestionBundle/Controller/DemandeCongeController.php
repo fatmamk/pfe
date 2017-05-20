@@ -40,11 +40,13 @@ class DemandeCongeController extends Controller
     public function newAction(Request $request)
     {
         $demandeConge = new Demandeconge();
+        //$name=$request->get("nameemployee");
         $form = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $form->handleRequest($request);
-
+        $user = $this->get('security.context')->getToken()->getUser();
         if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
+            $demandeConge->setEmploye($user);
             $demandeConge->setStatutsConge("En attente");
             $em->persist($demandeConge);
             $em->flush($demandeConge);

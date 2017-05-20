@@ -58,7 +58,7 @@ class IntergrationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_intergration';
+        return null;
     }
 
 

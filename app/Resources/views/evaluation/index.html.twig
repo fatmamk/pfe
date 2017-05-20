@@ -70,6 +70,7 @@
                                             </th>
                                         </tr>
                                         <tr>
+                                            <th>Employé</th>
                                             <th>Afroid</th>
                                             <th>Achaud</th>
                                             <th>Lieu</th>
@@ -82,6 +83,7 @@
                                         <tbody>
                                         {% for evaluation in evaluations %}
                                             <tr>
+                                                <td>{{ evaluation.employe }}</td>
                                                 <td>{{ evaluation.afroid }}</td>
                                                 <td>{{ evaluation.achaud }}</td>
                                                 <td>{{ evaluation.lieu }}</td>

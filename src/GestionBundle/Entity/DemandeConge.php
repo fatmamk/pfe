@@ -48,7 +48,6 @@ class DemandeConge
      */
     private $typeconge;
 
-
     /**
      *@ORM\ManyToOne(targetEntity="Employee",inversedBy="demandeConge" ,cascade={"persist"})
      *@ORM\JoinColumn(name="employe_id" ,referencedColumnName="id", nullable=true, onDelete="SET NULL")
@@ -63,9 +62,6 @@ class DemandeConge
     }
 
 
-
-
-    
 
     /**
      * Get id

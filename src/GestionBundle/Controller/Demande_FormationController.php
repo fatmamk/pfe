@@ -45,7 +45,10 @@ class Demande_FormationController extends Controller
         $demande_Formation = new Demande_formation();
         $form = $this->createForm('GestionBundle\Form\Demande_FormationType', $demande_Formation);
         $form->handleRequest($request);
+        $user = $this->get('security.context')->getToken()->getUser();
+        //$name=$request->get("nameemployee");
         if ($form->isSubmitted() ) {
+            $demande_Formation->setEmployee($user);
             $em = $this->getDoctrine()->getManager();
             $demande_Formation->setEtat("En attente");
             $em->persist($demande_Formation);

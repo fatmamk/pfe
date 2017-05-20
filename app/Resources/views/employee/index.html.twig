@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
+
 {% block main %}
-    <!-- Modal new employee -->
     <div class="modal  fade modal-parent" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -11,10 +11,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-
-
-    <!-- /.modal -->
-
     <div class="modal fade modal-child " data-backdrop-limit="1" data-modal-parent="#myModal"
          id="myNewdepartementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -28,7 +24,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-
     <div class="modal fade modal-child " data-backdrop-limit="1" data-modal-parent="#myModal"
          id="myNewfonctionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -43,7 +38,6 @@
         </div><!-- /.modal-dialog -->
     </div>
     {% for employee in employees %}
-
         <div class="modal fade modal-parent-edit" id="myEditModal{{ employee.id }}" data-id="{{ employee.id }}"
              tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -63,9 +57,41 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
-
+    <!-- MAIN PANEL -->
     <div id="main" role="main">
 
+        <!-- RIBBON -->
+        <div id="ribbon">
+
+				<span class="ribbon-button-alignment">
+					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh"
+                          rel="tooltip" data-placement="bottom"
+                          data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings."
+                          data-html="true">
+						<i class="fa fa-refresh"></i>
+					</span>
+				</span>
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Ressource humaine</li>
+                <li>Employé</li>
+            </ol>
+            <!-- end breadcrumb -->
+
+            <!-- You can also add more buttons to the
+            ribbon for further usability
+
+            Example below:
+
+            <span class="ribbon-button-alignment pull-right">
+            <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+            <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+            <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+            </span> -->
+
+        </div>
+        <!-- END RIBBON -->
         <!-- MAIN CONTENT -->
         <div id="content">
 
@@ -79,6 +105,7 @@
 							</span>
                     </h1>
                 </div>
+
             </div>
 
             <!-- widget grid -->
@@ -87,145 +114,195 @@
                 <!-- row -->
                 <div class="row">
 
-                    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <article class="col-sm-12 col-md-12 col-lg-12">
 
-                        <div class="jarviswidget jarviswidget-color-darken" data-widget-editbutton="false">
 
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1"
+                             data-widget-editbutton="false">
+                            <!-- widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                            data-widget-colorbutton="false"
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true"
+                            data-widget-sortable="false"
+
+                            -->
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                <h2>Liste des Employés</h2>
-
+                                <h2>Liste des employé</h2>
                             </header>
 
                             <!-- widget div-->
                             <div>
-
 
                                 <!-- widget edit box -->
                                 <div class="jarviswidget-editbox">
                                     <!-- This area used as dropdown edit box -->
 
                                 </div>
+                                <!-- end widget edit box -->
+
                                 <!-- widget content -->
                                 <div class="widget-body no-padding">
-                                    <!-- FLASH MESSAGE -->
 
-                                    <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                        <thead>
-                                        <div class="text-right">
-                                            <a href="#myModal"  data-toggle="modal" id="modal_link" class="btn btn-primary">
-                                                <i class="fa fa-plus"> <span class="hidden-mobile">Ajouter</span></i>
-                                            </a>
-                                        </div>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Prénom</th>
-                                            <th>Date naissance</th>
-                                            <th>CIN</th>
-                                            <th>Email</th>
-                                            <th>Numéro de Téléphone</th>
-                                            <th>Matricule</th>
-                                            <th>Photo</th>
-                                            <th>Actions
-
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for employee in employees %}
+                                    <fieldset>
+                                        <table id="datatable_fixed_column"
+                                               class="table table-striped table-bordered table-hover" width="100%">
+                                            <thead>
                                             <tr>
-                                                <td>{{ employee.nom }}</td>
-                                                <td>{{ employee.prenom }}</td>
-                                                <td>{% if employee.dateNaiss %}{{ employee.dateNaiss|date('Y-m-d') }}{% endif %}</td>
-                                                <td>{{ employee.cINEmployee }}</td>
 
-                                                <td>{{ employee.numTelEmployee }}</td>
-                                                <td>{{ employee.matriculeEmployee }}</td>
-                                                <td>
-                                                    <img src="{{ asset('upload/images/'~employee.imageName ) }}"
-                                                         width="70px" height="70px" style="border-radius: 50%;">
-                                                </td>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
+                                                <th class="hasinput" style="width:17%">
+                                                    <input type="text" class="form-control" placeholder="Filter" />
+                                                </th>
 
-                                                <td>
-                                                    {% if employee.Enabled %}
-                                                    Compte Active
-                                                {% else %}
-                                                    Compte desactive
-                                                    {% endif %}<br>
-                                                    {% if employee.role == 'Administrateur' %}
-                                                        Role Admin
+                                                <th  style="width:17%">
+                                                </th>
+
+                                                <th  style="width:17%">
+                                                </th>
+                                                <th  style="width:17%">
+                                                </th>
+                                                <th  style="width:17%">
+                                                </th>
+                                                <th  style="width:17%">
+                                                </th>
+                                                <th  style="width:17%">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Date de naissance</th>
+                                                <th>CIN</th>
+                                                <th width="17%">Email</th>
+                                                <th>Numéro de Téléphone</th>
+                                                <th>État employé</th>
+                                                <th>Photo</th>
+                                                <th width="17%">Rôle</th>
+                                                <th width="17%">Déscactivé/Activé</th>
+                                                <th>Modifier</th>
+                                                <th>Détail</th>
+                                                <th>Supprimer</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for employee in employees %}
+                                            {% if employee.username !='administrateur' %}
+                                                <tr>
+                                                    <td>{{ employee.nom }}</td>
+                                                    <td>{{ employee.prenom }}</td>
+                                                    <td>{% if employee.dateNaiss %}{{ employee.dateNaiss|date('d-m-Y') }}{% endif %}</td>
+                                                    <td>{{ employee.cINEmployee }}</td>
+                                                    <td>{{ employee.email }}</td>
+                                                    <td>{{ employee.numTelEmployee }}</td>
+                                                    <td>
+                                                        {% if employee.Enabled %}
+                                                        Compte:Activé
                                                     {% else %}
-                                                        Role User
-                                                    {% endif %}
+                                                        Compte:Désactivé
+                                                        {% endif %}
 
+                                                        {% if employee.role == 'Administrateur' %}
+                                                            Role:Admin
+                                                        {% else %}
+                                                            Role:User
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <img src="{{ asset('upload/images/'~employee.imageName ) }}"
+                                                             width="70px" height="70px" style="border-radius: 50%;">
+                                                    </td>
 
-
-
-                                                </td>
-                                                <td>
-
-
-                                                    <div class="modal fade" id="deleteModal{{ employee.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="MessageBoxContainer animated fadeIn fast" id="Msg1">
-                                                            <div class="MessageBoxMiddle"><span class="MsgTitle"
-                                                                ><i class="glyphicon glyphicon-remove text-danger"></i> Supprimer
+                                                        <div class="modal fade" id="deleteModal{{ employee.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="MessageBoxContainer animated fadeIn fast" id="Msg1">
+                                                                <div class="MessageBoxMiddle"><span class="MsgTitle"
+                                                                    ><i class="glyphicon glyphicon-remove text-danger"></i> Supprimer
                                                                     <span class="txt-color-orangeDark"><strong>
                                                                         </strong></span> ?</span>
-                                                                <p class="pText"><p><span>Voulez-vous vraiment supprimer <a href="#">{{ employee.nom}}</a> ? </span></p>
-                                                                <div class="MessageBoxButtonSection">
-                                                                    <div >
-                                                                        <button type="submit" class="btn btn-default" data-dismiss="modal">
-                                                                            Annuler
-                                                                        </button>
+                                                                    <p class="pText"><p><span>Voulez-vous vraiment vous supprimer <a href="#">{{ employee.nom}}&nbsp; {{employee.prenom }}</a> ? </span></p>
+                                                                    <div class="MessageBoxButtonSection">
+                                                                        <div >
+                                                                            <button type="submit" class="btn btn-default" data-dismiss="modal">
+                                                                                Annuler
+                                                                            </button>
 
-                                                                        <button onclick="window.location.href='{{ path('employee_delete', { 'id': employee.id }) }}'" class="btn btn-danger"  id="lien">Supprimer</button>
-                                                                    </div>
+                                                                            <button onclick="window.location.href='{{ path('employee_delete', { 'id': employee.id }) }}'" class="btn btn-danger"  id="lien">Supprimer</button>
+                                                                        </div>
 
-                                                                </div></div></div></div>
+                                                                    </div></div></div>
+                                                        </div>
+                                                    <td>
+                                                        {% if employee.role == 'Administrateur' %}
+                                                            <a href="{{ path('User', { 'id': employee.id }) }}"> <button  class="btn btn-warning"><i class="icon md-account-o" aria-hidden="true"></i>user</button><br>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{{ path('Admin', { 'id': employee.id }) }}"><button class="btn bg-color-blueLight txt-color-white"><i class="icon md-account" aria-hidden="true"></i>admin</button>
+                                                            </a><br>
+                                                        {% endif %}
+                                                        </td>
+                                                        <td>
+                                                        {% if employee.Enabled %}
+                                                            <a href="{{ path('user_active_desactive', { 'id': employee.id }) }}" class="btn bg-color-magenta txt-color-white">Désactive<span class="fa fa-arrow-circle-left"></span></a><br>
+                                                        {% else %}
+                                                            <a href="{{ path('user_active_desactive', { 'id': employee.id }) }}" class="btn bg-color-magenta txt-color-white">Active<span class="fa fa-arrow-circle-right"></span></a><br>
+                                                        {% endif %}
 
 
-                                                    <a class="ui-pg-button ui-corner-all" rel="tooltip"  id="del_jqgrid" data-original-title="Supprimer" title=""
-                                                       aria-describedby="tooltip450112" data-toggle="modal" data-target="#deleteModal{{ employee.id }}">
-                                                        <div class="btn btn-danger">
-                                                            <span class="fa fa-trash-o"></span></div></a>
 
-                                                    {% if employee.Enabled %}
-                                                        <a href="{{ path('user_active_desactive', { 'id': employee.id }) }}" class="btn btn-warning">Desactive <span class="fa fa-arrow-circle-left"></span></a>
-                                                    {% else %}
-                                                        <a href="{{ path('user_active_desactive', { 'id': employee.id }) }}" class="btn btn-info">Active <span class="fa fa-arrow-circle-right"></span></a>
-                                                    {% endif %}
-                                                    {% if employee.role == 'Administrateur' %}
-                                                        <a href="{{ path('User', { 'id': employee.id }) }}"> <button  class="btn btn-warning"><i class="icon md-account-o" aria-hidden="true"></i> user</button>
+                                                    </td>
+                                                    <td>
+                                                        <a  href="#myEditModal{{ employee.id }}" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal"
+                                                            data-original-title="Modifier" >
+                                                            <div class="btn btn-sm btn-primary">
+                                                                <span class="fa fa-pencil"></span></div>
                                                         </a>
-                                                    {% else %}
-                                                        <a href="{{ path('Admin', { 'id': employee.id }) }}"><button class="btn btn-warning"><i class="icon md-account" aria-hidden="true"></i> admin</button>
+                                                        </td>
+                                                        <td>
+                                                        <a href="{{ path('employee_show', { 'id': employee.id }) }}" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal"
+                                                           data-original-title="les detaile " >
+                                                            <div class="btn btn-sm btn-success">
+                                                                <span class="fa fa-eye"></span></div>
                                                         </a>
-                                                    {% endif %}
 
+                                                        </td>
+                                                        <td>
+                                                        <a class="ui-pg-button ui-corner-all" rel="tooltip"  id="del_jqgrid" data-original-title="Supprimer" title=""
+                                                           aria-describedby="tooltip450112" data-toggle="modal" data-target="#deleteModal{{ employee.id }}">
+                                                            <div class="btn btn-danger">
+                                                                <span class="fa fa-trash-o"></span></div></a>
+                                                    </td>
 
-
-                                                    <a  href="#myEditModal{{ employee.id }}" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal"
-                                                        data-original-title="Modifier" >
-                                                        <div class="btn btn-sm btn-primary">
-                                                            <span class="fa fa-pencil"></span></div>
-                                                    </a>
-
-                                                    <a  href="#show" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal" data-original-title="Show selected row" >
-                                                        <div class="btn btn-sm btn-success">
-                                                            <span class="fa fa-eye"></span></div>
-                                                    </a>
-                                                    <a href="{{ path('employee_show', { 'id': employee.id }) }}" class="ui-pg-button ui-corner-all"  rel="tooltip" id="jqgrid_iledit" title=""  data-toggle="modal"
-                                                       data-original-title="Show selected row" >
-                                                        <div class="btn btn-sm btn-success">
-                                                            <span class="fa fa-eye"></span></div>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-
-                                    </table>
-
+                                                </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
                                 </div>
                                 <!-- end widget content -->
                                 <!-- end widget div -->
@@ -233,8 +310,6 @@
                             </div>
                         </div>
                         <!-- Modal -->
-
-
                     </article>
                 </div>
                 <!-- end widget content -->
@@ -243,7 +318,6 @@
         <!-- end widget div -->
 
     </div>
-    <!-- end widget -->
 
 
 
@@ -253,66 +327,64 @@
     <!--================================================== -->
 
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script data-pace-options='{ "restartOnRequestAfter": true }' src="{{ asset('js/plugin/pace/pace.min.js')}}"></script>
+    <script data-pace-options='{ "restartOnRequestAfter": true }'
+            src="{{ asset('js/plugin/pace/pace.min.js') }}"></script>
 
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
         if (!window.jQuery) {
-            document.write('<script src="{{ asset('js/libs/jquery-2.1.1.min.js')}}"><\/script>');
+            document.write('<script src="{{ asset('js/libs/jquery-2.1.1.min.js') }}"><\/script>');
         }
     </script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
         if (!window.jQuery.ui) {
-            document.write('<script src="{{ asset('js/libs/jquery-ui-1.10.3.min.js')}}"><\/script>');
+            document.write('<script src="{{ asset('js/libs/jquery-ui-1.10.3.min.js') }}"><\/script>');
         }
     </script>
 
-
-    <!--silm-->
-    <script src="{{ asset('js/slim.jquery.js')}}"></script>
-
     <!-- IMPORTANT: APP CONFIG -->
-    <script src="{{ asset('js/app.config.js')}}"></script>
+    <script src="{{ asset('js/app.config.js') }}"></script>
 
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="{{ asset('js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')}}"></script>
-
+    <script src="{{ asset('js/plugin/jquery-touch/jquery.ui.touch-punch.min.js') }}"></script>
 
     <!-- BOOTSTRAP JS -->
-    <script src="{{ asset('js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 
     <!-- CUSTOM NOTIFICATION -->
-    <script src="{{ asset('js/notification/SmartNotification.min.js')}}"></script>
+    <script src="{{ asset('js/notification/SmartNotification.min.js') }}"></script>
 
     <!-- JARVIS WIDGETS -->
-    <script src="{{ asset('js/smartwidgets/jarvis.widget.min.js')}}"></script>
+    <script src="{{ asset('js/smartwidgets/jarvis.widget.min.js') }}"></script>
 
     <!-- EASY PIE CHARTS -->
-    <script src="{{ asset('js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js') }}"></script>
 
     <!-- SPARKLINES -->
-    <script src="{{ asset('js/plugin/sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/sparkline/jquery.sparkline.min.js') }}"></script>
 
     <!-- JQUERY VALIDATE -->
-    <script src="{{ asset('js/plugin/jquery-validate/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/jquery-validate/jquery.validate.min.js') }}"></script>
 
     <!-- JQUERY MASKED INPUT -->
-    <script src="{{ asset('js/plugin/masked-input/jquery.maskedinput.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/masked-input/jquery.maskedinput.min.js') }}"></script>
+    <!--silm-->
+    <script src="{{ asset('js/slim.jquery.js') }}"></script>
 
     <!-- JQUERY SELECT2 INPUT -->
-    <script src="{{ asset('js/plugin/select2/select2.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/select2/select2.min.js') }}"></script>
 
     <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="{{ asset('js/plugin/bootstrap-slider/bootstrap-slider.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/bootstrap-slider/bootstrap-slider.min.js') }}"></script>
 
     <!-- browser msie issue fix -->
-    <script src="{{ asset('js/plugin/msie-fix/jquery.mb.browser.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/msie-fix/jquery.mb.browser.min.js') }}"></script>
 
     <!-- FastClick: For mobile devices -->
-    <script src="{{ asset('js/plugin/fastclick/fastclick.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/fastclick/fastclick.min.js') }}"></script>
 
     <!--[if IE 8]>
 
@@ -321,48 +393,217 @@
     <![endif]-->
 
     <!-- Demo purpose only -->
-    <script src="{{ asset('js/demo.min.js')}}"></script>
+    <script src="{{ asset('js/demo.min.js') }}"></script>
 
     <!-- MAIN APP JS FILE -->
-    <script src="{{ asset('js/app.min.js')}}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
     <!-- Voice command : plugin -->
-    <script src="{{ asset('js/speech/voicecommand.min.js')}}"></script>
+    <script src="{{ asset('js/speech/voicecommand.min.js') }}"></script>
 
     <!-- SmartChat UI : plugin -->
-    <script src="{{ asset('js/smart-chat-ui/smart.chat.ui.min.js')}}"></script>
-    <script src="{{ asset('js/smart-chat-ui/smart.chat.manager.min.js')}}"></script>
+    <script src="{{ asset('js/smart-chat-ui/smart.chat.ui.min.js') }}"></script>
+    <script src="{{ asset('js/smart-chat-ui/smart.chat.manager.min.js') }}"></script>
 
     <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="{{ asset('js/plugin/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('js/plugin/datatables/dataTables.colVis.min.js')}}"></script>
-    <script src="{{ asset('js/plugin/datatables/dataTables.tableTools.min.js')}}"></script>
-    <script src="{{ asset('js/plugin/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/plugin/datatable-responsive/datatables.responsive.min.js')}}"></script>
+    <script src="{{ asset('js/plugin/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugin/datatables/dataTables.colVis.min.js') }}"></script>
+    <script src="{{ asset('js/plugin/datatables/dataTables.tableTools.min.js') }}"></script>
+    <script src="{{ asset('js/plugin/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/plugin/datatable-responsive/datatables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/plugin/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+
+    {% block table %}
+        <script type="text/javascript">
+
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+            $(document).ready(function () {
+
+                pageSetUp();
+                /* // DOM Position key index //
+
+                 l - Length changing (dropdown)
+                 f - Filtering input (search)
+                 t - The Table! (datatable)
+                 i - Information (records)
+                 p - Pagination (paging)
+                 r - pRocessing
+                 < and > - div elements
+                 <"#id" and > - div with an id
+                 <"class" and > - div with a class
+                 <"#id.class" and > - div with an id and class
+
+                 Also see: http://legacy.datatables.net/usage/features
+                 */
+
+                /* BASIC ;*/
+                var responsiveHelper_dt_basic = undefined;
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var responsiveHelper_datatable_col_reorder = undefined;
+                var responsiveHelper_datatable_tabletools = undefined;
+
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+
+
+                /* END BASIC */
+
+                /* COLUMN FILTER  */
+                var otable = $('#datatable_fixed_column').DataTable({
+                    //bFilter: true,
+                    //"bInfo": false,
+                    bLengthChange: true,
+                    //"bAutoWidth": false,
+                    //"bPaginate": true,ltfC
+
+                    "bStateSave": true, // saves sort state using localStorage
+                    "sDom": "<'dt-toolbar'<'col-sm-3 col-xs-12  'f><'toolbar1'l><'toolbar2'C><'toolbar'> >" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+                        "sLengthMenu": "<label> <select name='my-table_length' aria-controls='my-table' class='form-control input-sm'> <option value='5'>5</option> <option value='10'>10</option> <option value='25'>25</option> <option value='50'>50</option> </select> lignes </label>",
+                        "sPageLength": "5"
+
+
+                    },
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_fixed_column) {
+                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_fixed_column.respond();
+                    }
+
+                });
+
+
+                // custom toolbar
+                $("div.toolbar").prepend('<button class=" btn btn-primary " data-toggle="modal" data-target="#myModal" style="margin-right: 10px;"> Ajouter employé</button>');
+                $("div.toolbar").addClass('text-right');
+                $('.fmsg').delay(2000).fadeOut(1000);
+
+                // Apply the filter
+                $(
+                        "#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+
+                    otable
+                            .column($(this).parent().index() + ':visible')
+                            .search(this.value)
+                            .draw();
+
+                });
+                /* END COLUMN FILTER */
+
+                /* COLUMN SHOW - HIDE */
+                $('#datatable_col_reorder').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "autoWidth": true,
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_col_reorder) {
+                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_col_reorder.respond();
+                    }
+                });
+
+                /* END COLUMN SHOW - HIDE */
+
+                /* TABLETOOLS */
+                $('#datatable_tabletools').dataTable({
+
+                    // Tabletools options:
+                    //   https://datatables.net/extensions/tabletools/button_options
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "oLanguage": {
+                        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
+                    },
+                    "oTableTools": {
+                        "aButtons": [
+                            "copy",
+                            "csv",
+                            "xls",
+                            {
+                                "sExtends": "pdf",
+                                "sTitle": "SmartAdmin_PDF",
+                                "sPdfMessage": "SmartAdmin PDF Export",
+                                "sPdfSize": "letter"
+                            },
+                            {
+                                "sExtends": "print",
+                                "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                            }
+                        ],
+                        "sSwfPath": "{{ asset('js/plugin/datatables/swf/copy_csv_xls_pdf.swf') }}"
+                    },
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_tabletools) {
+                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_tabletools.respond();
+                    }
+                });
+
+                /* END TABLETOOLS */
+
+            })
+
+        </script>
+    {% endblock %}
     <script src="{{ asset('js/plugin/jquery-form/jquery-form.min.js') }}"></script>
+
 
     <script type="text/javascript">
 
         // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             pageSetUp();
 
             //date
 
             $('.datenais').datepicker({
-                dateFormat : 'dd/mm/yy',
-                prevText : '<i class="fa fa-chevron-left"></i>',
-                nextText : '<i class="fa fa-chevron-right"></i>',
+                dateFormat: 'dd/mm/yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
 
             });
 
             $('.datelivre').datepicker({
-                dateFormat : 'dd/mm/yy',
-                prevText : '<i class="fa fa-chevron-left"></i>',
-                nextText : '<i class="fa fa-chevron-right"></i>',
+                dateFormat: 'dd/mm/yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
 
             });
 
@@ -406,9 +647,9 @@
             });
 
             <!-- Model de departement new -->
-            $('#addepartement').click(function() {
+            $('#addepartement').click(function () {
                 $nouv = $('#libelleDepartement').val();
-                $ur='http://localhost/projet/web/app_dev.php/departement/new1' ;
+                $ur = 'http://localhost/projet/web/app_dev.php/departement/new1';
                 var form = $(this).parent(); //ou mettre un id du formulaire
                 $.ajax({
                     url: $ur,
@@ -418,7 +659,7 @@
 
                     beforeSend: function () {
 
-                        console.log("22"+ $nouv);//return nouv
+                        console.log("22" + $nouv);//return nouv
                         $(".btnajax").prop('disabled', true);
                         $('.closeajax').removeAttr('data-dismiss');
                         $('.modal-child')
@@ -429,7 +670,7 @@
                     success: function () {
                         $.ajax({
                             type: 'get',
-                            url: 'http://localhost/projet/web/app_dev.php/departement/fc/'+$nouv,
+                            url: 'http://localhost/projet/web/app_dev.php/departement/fc/' + $nouv,
 
                             cache: false,
                             success: function (data) {
@@ -451,9 +692,9 @@
                 return false;
 
             });
-            $('#addfonction').click(function() {
+            $('#addfonction').click(function () {
                 $nouv = $('#libelleFonction').val();
-                $ur='http://localhost/projet/web/app_dev.php/fonction/new1' ;
+                $ur = 'http://localhost/projet/web/app_dev.php/fonction/new1';
                 var form = $(this).parent(); //ou mettre un id du formulaire
                 $.ajax({
                     url: $ur,
@@ -463,7 +704,7 @@
 
                     beforeSend: function () {
 
-                        console.log("22"+ $nouv);//return nouv
+                        console.log("22" + $nouv);//return nouv
                         $(".btnajax").prop('disabled', true);
                         $('.closeajax').removeAttr('data-dismiss');
                         $('.modal-child')
@@ -474,7 +715,7 @@
                     success: function () {
                         $.ajax({
                             type: 'get',
-                            url: 'http://localhost/projet/web/app_dev.php/fonction/fc/'+$nouv,
+                            url: 'http://localhost/projet/web/app_dev.php/fonction/fc/' + $nouv,
 
                             cache: false,
                             success: function (data) {
@@ -500,374 +741,205 @@
 
             $('body').slimParse();
             $('.startdate').datepicker({
-                dateFormat : 'dd.mm.yy',
-                prevText : '<i class="fa fa-chevron-left"></i>',
-                nextText : '<i class="fa fa-chevron-right"></i>'
+                dateFormat: 'dd.mm.yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>'
 
             });
-
-            /* // DOM Position key index //
-
-             l - Length changing (dropdown)
-             f - Filtering input (search)
-             t - The Table! (datatable)
-             i - Information (records)
-             p - Pagination (paging)
-             r - pRocessing
-             < and > - div elements
-             <"#id" and > - div with an id
-             <"class" and > - div with a class
-             <"#id.class" and > - div with an id and class
-
-             Also see: http://legacy.datatables.net/usage/features
-             */
-
-            /* BASIC ;*/
-            var responsiveHelper_dt_basic = undefined;
-            var responsiveHelper_datatable_fixed_column = undefined;
-            var responsiveHelper_datatable_col_reorder = undefined;
-            var responsiveHelper_datatable_tabletools = undefined;
-
-            var breakpointDefinition = {
-                tablet : 1024,
-                phone : 480
-            };
-
-            $('#dt_basic').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>"+
-                "t"+
-                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth" : true,
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "preDrawCallback" : function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_dt_basic) {
-                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
-                    }
-                },
-                "rowCallback" : function(nRow) {
-                    responsiveHelper_dt_basic.createExpandIcon(nRow);
-                },
-                "drawCallback" : function(oSettings) {
-                    responsiveHelper_dt_basic.respond();
-                }
-            });
-
-            /* END BASIC */
-
-            /* COLUMN FILTER  */
-            var otable = $('#datatable_fixed_column').DataTable({
-                //"bFilter": false,
-                //"bInfo": false,
-                "bLengthChange":true,
-                //"bAutoWidth": false,
-                //"bPaginate": false,
-                "bStateSave": true ,// saves sort state using localStorage
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
-                "t"+
-                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "autoWidth" : true,
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "preDrawCallback" : function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_fixed_column) {
-                        responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                    }
-                },
-                "rowCallback" : function(nRow) {
-                    responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-                },
-                "drawCallback" : function(oSettings) {
-                    responsiveHelper_datatable_fixed_column.respond();
-                }
-
-            });
-
-            // custom toolbar
-            $("div.toolbar").html('<div class="text-right"><a href="#myModal"  aria-controls="dt_basic" data-toggle="modal" id="modal_link " class="btn btn-primary"><i class="fa fa-plus"> <span class="hidden-mobile">Add New Row</span> </a></div>');
-
-
-
-
-            // Apply the filter
-            $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
-
-                otable
-                        .column( $(this).parent().index()+':visible' )
-                        .search( this.value )
-                        .draw();
-
-            } );
-            /* END COLUMN FILTER */
-
-            /* COLUMN SHOW - HIDE */
-            $('#datatable_col_reorder').dataTable({
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>"+
-                "t"+
-                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "autoWidth" : true,
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "preDrawCallback" : function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_col_reorder) {
-                        responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
-                    }
-                },
-                "rowCallback" : function(nRow) {
-                    responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
-                },
-                "drawCallback" : function(oSettings) {
-                    responsiveHelper_datatable_col_reorder.respond();
-                }
-            });
-            /* END COLUMN SHOW - HIDE */
-
-            /* TABLETOOLS */
-            $('#datatable_tabletools').dataTable({
-
-                // Tabletools options:
-                //   https://datatables.net/extensions/tabletools/button_options
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>"+
-                "t"+
-                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "oTableTools": {
-                    "aButtons": [
-                        "copy",
-                        "csv",
-                        "xls",
-                        {
-                            "sExtends": "pdf",
-                            "sTitle": "SmartAdmin_PDF",
-                            "sPdfMessage": "SmartAdmin PDF Export",
-                            "sPdfSize": "letter"
-                        },
-                        {
-                            "sExtends": "print",
-                            "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                        }
-                    ],
-                    "sSwfPath": "js/plugin/datatables/swf/copy_csv_xls_pdf.swf"
-                },
-                "autoWidth" : true,
-                "preDrawCallback" : function() {
-                    // Initialize the responsive datatables helper once.
-                    if (!responsiveHelper_datatable_tabletools) {
-                        responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
-                    }
-                },
-                "rowCallback" : function(nRow) {
-                    responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
-                },
-                "drawCallback" : function(oSettings) {
-                    responsiveHelper_datatable_tabletools.respond();
-                }
-            });
-
-
 
 
         })
-
         pageSetUp();
         var errorClass = 'invalid';
         var errorElement = 'em';
 
         var $checkoutForm = $('#checkout-form').validate({
-            errorClass		: errorClass,
-            errorElement	: errorElement,
-            highlight: function(element) {
+            errorClass: errorClass,
+            errorElement: errorElement,
+            highlight: function (element) {
                 $(element).parent().removeClass('state-success').addClass("state-error");
                 $(element).removeClass('valid');
             },
-            unhighlight: function(element) {
+            unhighlight: function (element) {
                 $(element).parent().removeClass("state-error").addClass('state-success');
                 $(element).addClass('valid');
             },
 
             // Rules for form validation
-            rules : {
-                username : {
-                    required : true
+            rules: {
+                username: {
+                    required: true
                 },
-                email : {
-                    required : true,
-                    email : true
+                email: {
+                    required: true,
+                    email: true
                 },
-                nom : {
-                    required : true
+                nom: {
+                    required: true
                 },
-                password : {
-                    required : true,
+                password: {
+                    required: true,
                 },
-                prenom : {
-                    required : true
+                prenom: {
+                    required: true
 
                 },
-                emailSecondaireEmployee : {
-                    required : false,
-                    emailSecondaireEmployee : false
+                emailSecondaireEmployee: {
+                    required: false,
+                    emailSecondaireEmployee: false
                 },
-                numTelEmployee : {
-                    required : true
+                numTelEmployee: {
+                    required: true
                 },
-                dateNaiss : {
-                    required : true
+                dateNaiss: {
+                    required: true
                 },
-                lieunais : {
-                    required : true
+                lieunais: {
+                    required: true
                 },
 
-                gradeEmployee : {
-                    required : true,
+                gradeEmployee: {
+                    required: true,
                 },
-                address : {
-                    required : true
+                address: {
+                    required: true
                 },
-                name : {
-                    required : true
+                name: {
+                    required: true
                 },
-                cINEmployee : {
-                    required : true,
+                cINEmployee: {
+                    required: true,
 
                 },
-                cvv : {
-                    required : true,
-                    digits : true
+                cvv: {
+                    required: true,
+                    digits: true
                 },
-                sexe : {
-                    required : true
+                sexe: {
+                    required: true
                 },
-                departement : {
-                    required : true
+                departement: {
+                    required: true
                 },
-                fonctions : {
-                    required : true
+                fonctions: {
+                    required: true
                 },
-                rIBEmployee : {
-                    required : true
+                rIBEmployee: {
+                    required: true
                 },
-                competance : {
-                    required : true,
+                competance: {
+                    required: true,
 
                 },
-                experience : {
-                    required : true,
+                experience: {
+                    required: true,
 
                 },
-                diplome : {
-                    required : true,
+                diplome: {
+                    required: true,
 
-                } ,
-                matriculeEmployee : {
-                    required : true,
+                },
+                matriculeEmployee: {
+                    required: true,
 
-                } ,
-                aptitudePhysique : {
-                    required : true,
+                },
+                aptitudePhysique: {
+                    required: true,
 
                 }
             },
 
             // Messages for form validation
-            messages : {
-                nom : {
-                    required : 'Veuillez saisir le nom '
+            messages: {
+                nom: {
+                    required: 'Veuillez saisir le nom '
                 },
-                prenom : {
-                    required : 'Veuillez saisir le nom prenom'
-                },
-
-                email : {
-                    required : "Entrez l'adresse email",
-                    email : "S'il vous plaît, mettez une adresse email valide"
+                prenom: {
+                    required: 'Veuillez saisir le nom prenom'
                 },
 
-                password : {
-                    required : true,
-                    password : "S'il vous plaît, mettez une adresse email valide",
-                    minlength : 3,
-                    maxlength : 20
+                email: {
+                    required: "Entrez l'adresse email",
+                    email: "S'il vous plaît, mettez une adresse email valide"
                 },
 
-                passwordConfirm : {
-                    required : true,
-                    minlength : 3,
-                    maxlength : 20,
-                    equalTo : '#password'
-                },
-                emailSecondaireEmployee : {
-                    required : "Entrez l'adresse email",
-                    emailSecondaireEmployee : "S'il vous plaît, mettez une adresse email valide"
-                },
-                numTelEmployee : {
-                    required : "S'il vous plaît entrer le numéro de téléphone"
-                },
-                dateNaiss : {
-                    required : 'Entrer la date de naissance'
-                },
-                lieunais : {
-                    required : "S'il vous plaît entrer lieu de naissance"
+                password: {
+                    required: true,
+                    password: "S'il vous plaît, mettez une adresse email valide",
+                    minlength: 3,
+                    maxlength: 20
                 },
 
-                gradeEmployee : {
-                    required : 'Please enter Grade',
+                passwordConfirm: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20,
+                    equalTo: '#password'
                 },
-                rIBEmployee : {
-                    required : 'Please enter numero RIB',
+                emailSecondaireEmployee: {
+                    required: "Entrez l'adresse email",
+                    emailSecondaireEmployee: "S'il vous plaît, mettez une adresse email valide"
                 },
-                address : {
-                    required : 'Please enter your full address'
+                numTelEmployee: {
+                    required: "S'il vous plaît entrer le numéro de téléphone"
                 },
-                name : {
-                    required : 'Please enter name on your card'
+                dateNaiss: {
+                    required: 'Entrer la date de naissance'
                 },
-                cINEmployee : {
-                    required : 'Please enter le numero cin '
+                lieunais: {
+                    required: "S'il vous plaît entrer lieu de naissance"
                 },
-                cvv : {
-                    required : 'Enter CVV2',
-                    digits : 'Digits only'
+
+                gradeEmployee: {
+                    required: 'Please enter Grade',
                 },
-                sexe : {
-                    required : "S'il vous plaît sélectionnez genre du personne"
+                rIBEmployee: {
+                    required: 'Please enter numero RIB',
                 },
-                departement : {
-                    required : 'Sélectionnez  département'
+                address: {
+                    required: 'Please enter your full address'
                 },
-                fonctions : {
-                    required : 'Sélectionnez  fonction'
+                name: {
+                    required: 'Please enter name on your card'
                 },
-                site : {
-                    required : 'Sélectionnez  site'
+                cINEmployee: {
+                    required: 'Please enter le numero cin '
                 },
-                competance : {
-                    required : 'Enter competance',
+                cvv: {
+                    required: 'Enter CVV2',
+                    digits: 'Digits only'
                 },
-                experience : {
-                    required : 'Enter experience',
-                } ,
-                diplome : {
-                    required : 'Enter experience',
+                sexe: {
+                    required: "S'il vous plaît sélectionnez genre du personne"
                 },
-                aptitudePhysique : {
-                    required : 'Enter experience',
+                departement: {
+                    required: 'Sélectionnez  département'
+                },
+                fonctions: {
+                    required: 'Sélectionnez  fonction'
+                },
+                site: {
+                    required: 'Sélectionnez  site'
+                },
+                competance: {
+                    required: 'Enter competance',
+                },
+                experience: {
+                    required: 'Enter experience',
+                },
+                diplome: {
+                    required: 'Enter experience',
+                },
+                aptitudePhysique: {
+                    required: 'Enter experience',
                 }
-                ,matriculeEmployee : {
-                    required : 'Enter matriculeEmployee',
+                , matriculeEmployee: {
+                    required: 'Enter matriculeEmployee',
                 }
             },
 
             // Do not change code below
-            errorPlacement : function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
         });
@@ -876,8 +948,5 @@
 
 
     </script>
-
-
-
 
 {% endblock %}

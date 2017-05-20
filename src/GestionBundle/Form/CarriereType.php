@@ -16,7 +16,7 @@ class CarriereType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('libelleCarriere')
-            ->add('integre',CheckboxType::class)
+            ->add('integre')
             ->add('etat')
             ->add('dateRecrutement','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy', 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY',
@@ -46,7 +46,7 @@ class CarriereType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_carriere';
+        return null;
     }
 
 

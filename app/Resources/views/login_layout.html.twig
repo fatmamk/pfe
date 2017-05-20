@@ -1,7 +1,7 @@
 <html lang="en-us" id="extr-page">
 <head>
     <meta charset="utf-8">
-    <title> SmartAdmin</title>
+    <title> QualiMaker</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -27,8 +27,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/demo.min.css')}}">
 
     <!-- #FAVICONS -->
-    <link rel="shortcut icon" href="{{asset ('img/favicon/favicon.ico')}}" type="image/x-icon">
-    <link rel="icon" href="{{asset ('img/favicon/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset ('img/quli.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset ('img/quli.png')}}" type="image/x-icon">
 
     <!-- #GOOGLE FONT -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
@@ -57,25 +57,27 @@
 <header id="header">
 
     <div id="logo-group">
-        <span id="logo"> <img src="{{asset ('img/quli.png')}}" alt="SmartAdmin"> </span>
+        <span id="logo"> <img src="{{asset ('img/quli.png')}}" alt="QualiMaker"> </span>
     </div>
     <span id="extr-page-header-space">
+        {% if error is defined %}
         {% if error %}
-
             <div id="divSmallBoxes " >
                                 <div class="textoFull fmsg">
-                                        <span><div class="miniIcono">
+                                        <span>
+                                            <div class="miniIcono">
                                                 <i class="fa-fw fa fa-check"></i><strong>Erreur</strong>
-                                                {{ error.messageKey|trans({},'FOSUserBundle' )}}
+                                              
                                                 <i class=" fa fa-thumbs-o-down fa-lg fa-fw  bounce animated"></i></div>
                                         </span>
                                         <p><i class="fa fa-clock-o"></i> <i>2 seconds ago...</i></p>
                                 </div>
                             </div>
-
+        {% endif %}
         {% endif %}
 
     </span>
+
 </header>
 
 <div id="main" role="main">
@@ -84,24 +86,27 @@
     <div id="content" class="container">
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+            <div class="col-xs-7 col-sm-9 col-md-12 col-lg-4 hidden-xs hidden-sm">
                 <h1 class="txt-color-red login-header-big">QualiMaker</h1>
-                <div class="hero">
+                <div class="">
 
                     <div class="pull-left login-desc-box-l">
                         <h4 class="paragraph-header">QualiMaker, partout où vous allez!</h4>
 
                     </div>
 
-                    <img src="{{ asset('img/lab.jpg') }}" class="pull-right display-image" alt="" style="width:500px">
+                    <img class="pull-right display-image" alt="" style="width:500px">
 
                 </div>
             </div>
 
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-4">
+                <div class="well no-padding">
 
-        </div>
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+
+                </div>
     </div>
 </div>
 
@@ -155,7 +160,7 @@
                 },
                 _password : {
                     required : true,
-                    minlength : 3,
+                    minlength : 0,
                     maxlength : 20
                 }
             },

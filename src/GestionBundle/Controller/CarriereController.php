@@ -44,6 +44,7 @@ class CarriereController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            $carriere->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($carriere);
             $em->flush($carriere);

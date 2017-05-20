@@ -27,8 +27,6 @@ class Formation
      * @ORM\Column(name="titre", type="string", length=30,nullable=true)
      */
     private $titre;
-
-
     /**
      * @var string
      *
@@ -58,14 +56,14 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="CoutImateriel", type="string", length=255,nullable=true)
+     * @ORM\Column(name="CoutImateriel", type="float", length=255,nullable=true)
      */
     private $coutImateriel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="coutMateriel", type="string", length=255,nullable=true)
+     * @ORM\Column(name="coutMateriel", type="float", length=255,nullable=true)
      */
     private $coutMateriel;
 
@@ -195,11 +193,7 @@ class Formation
 
     private $formation;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Jour", mappedBy="formation",cascade={"persist","remove"})
-     */
 
-    private $jours;
     /**
      *@ORM\ManyToOne(targetEntity="Employee",inversedBy="employeeinterne" ,cascade={"persist"})
      *@ORM\JoinColumn(name="employeeinterne_id" ,referencedColumnName="id")
@@ -235,8 +229,6 @@ class Formation
     {
         return (string) $this->getId();
     }
-   
-    
     /**
      * Constructor
      */
@@ -244,7 +236,6 @@ class Formation
     {
         $this->employees = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->jours = new \Doctrine\Common\Collections\ArrayCollection();
         $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
         $this->evaluations = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -354,7 +345,7 @@ class Formation
     /**
      * Set coutImateriel
      *
-     * @param string $coutImateriel
+     * @param float $coutImateriel
      * @return Formation
      */
     public function setCoutImateriel($coutImateriel)
@@ -367,7 +358,7 @@ class Formation
     /**
      * Get coutImateriel
      *
-     * @return string 
+     * @return float 
      */
     public function getCoutImateriel()
     {
@@ -377,7 +368,7 @@ class Formation
     /**
      * Set coutMateriel
      *
-     * @param string $coutMateriel
+     * @param float $coutMateriel
      * @return Formation
      */
     public function setCoutMateriel($coutMateriel)
@@ -390,7 +381,7 @@ class Formation
     /**
      * Get coutMateriel
      *
-     * @return string 
+     * @return float 
      */
     public function getCoutMateriel()
     {
@@ -783,39 +774,6 @@ class Formation
     public function getFormation()
     {
         return $this->formation;
-    }
-
-    /**
-     * Add jours
-     *
-     * @param \GestionBundle\Entity\Jour $jours
-     * @return Formation
-     */
-    public function addJour(\GestionBundle\Entity\Jour $jours)
-    {
-        $this->jours[] = $jours;
-
-        return $this;
-    }
-
-    /**
-     * Remove jours
-     *
-     * @param \GestionBundle\Entity\Jour $jours
-     */
-    public function removeJour(\GestionBundle\Entity\Jour $jours)
-    {
-        $this->jours->removeElement($jours);
-    }
-
-    /**
-     * Get jours
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getJours()
-    {
-        return $this->jours;
     }
 
     /**

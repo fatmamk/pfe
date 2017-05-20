@@ -22,7 +22,8 @@ class EmployeeController extends Controller
      * @Method("GET")
      */
     public function indexAction()
-    {
+    {        $employee = new Employee();
+
         $em = $this->getDoctrine()->getManager();
 
         $employees = $em->getRepository('GestionBundle:Employee')->findAll();
@@ -30,6 +31,7 @@ class EmployeeController extends Controller
         return $this->render('employee/index.html.twig', array(
             'employees' => $employees,
         ));
+
     }
 
     /**
@@ -44,50 +46,48 @@ class EmployeeController extends Controller
         $form = $this->createForm('GestionBundle\Form\EmployeeType', $employee);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
 
+        if ($form->isSubmitted()) {
 
             if ( $request->request->get('imageFile') )//b3athha symfony
             {
-
                 if (Slim::getImages("imageFile") ) //image mi slim
                 {
                     $images = Slim::getImages("imageFile");
-
                     if ($images[0] )
                     {
                         $image=$images[0];
-
                         // Original file name
                         $name = $image['input']['name'];
                         // Base64 of the image
                         $data = $image['output']['data'];
                         // Server path
                         $path =  $this->get('kernel')->getRootDir() . '/../web/upload/images';//win tet7at taswira
-
                         // Save the file to the server
                         $file = Slim::saveFile($data, $name, $path);//tsagel dossier
-
                         // Get the absolute web path to the image
                         //$imagePath = asset('img/users/' . $file['name']);
-
                         $employee->setImageName($file['name']);//emlpoyee entity
                     }
                 }
-
 
             }
             else
                 $employee->setImageName(null);
 
-
             $em = $this->getDoctrine()->getManager();
+            $employee->setPlainPassword('test');
+
             $em->persist($employee);
             $em->flush($employee);
             $this->addFlash(
                 'success',
                 ', la formation a été ajouté!'
             );
+
+
+
+
 
             return $this->redirectToRoute('employee_index');
         }
@@ -262,5 +262,22 @@ class EmployeeController extends Controller
         $this->get('session')->getFlashBag()->add('info', " modification enregistres .");
 
         return $this->redirectToRoute('employee_index');
+    }
+
+    public function SendMailAction(Request $request )
+    {
+        $emailto=$request->get("inputmail");
+        if ($request->getMethod() == 'POST') {
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Ropense')
+                ->setFrom('codesymfony@gmail.com')
+                ->setTo($emailto)
+                ->setCharset('utf-8')
+                ->setContentType('text/html')
+                ->setBody($request->get("contenutextarea"));
+            $this->get('mailer')->send($message);
+            $this->get('session')->getFlashBag()->add('success', " hahah");
+            return $this->redirectToRoute('employee_index');
+        }
     }
 }

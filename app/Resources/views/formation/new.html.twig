@@ -22,7 +22,7 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-6">
-                                    <label class="label">titre </label>
+                                    <label class="label">Titre </label>
 
                                     <label class="input"> <i class="icon-append fa fa-user"></i>
                                         {{ form_widget(form.titre,{'attr':{'type':'text','placeholder':'Titre'|trans}}) }}
@@ -32,7 +32,7 @@
 
 
                                 <section class="col col-6">
-                                    <label class="label">theme </label>
+                                    <label class="label">Théme </label>
 
                                     <label class="input"> <i class="icon-append fa fa-briefcase"></i>
                                         {{ form_widget(form.theme,{'attr':{'type':'text','placeholder':'Theme'|trans}}) }}
@@ -45,7 +45,7 @@
 
                             <div class="row">
                                 <section class="col col-6">
-                                    <label class="label">dateDebut </label>
+                                    <label class="label">Date début </label>
 
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                         {{ form_widget(form.dateDebut,{'attr':{'class':'startdate'|trans}}) }}
@@ -54,7 +54,7 @@
                                 </section>
 
                                 <section class="col col-6">
-                                    <label class="label">dateFin </label>
+                                    <label class="label">Date fin </label>
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                         {{ form_widget(form.dateFin,{'attr':{'class':'finishdate'|trans}}) }}
                                         {{ form_errors(form.dateFin) }}
@@ -65,7 +65,7 @@
                             <div class="smart-form">
 
                                 <section class="col col-6">
-                                    <label class="label">coutImateriel </label>
+                                    <label class="label">Coût immatériel </label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.coutImateriel ) }}
 
@@ -73,7 +73,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-6">
-                                    <label class="label">coutMateriel </label>
+                                    <label class="label">Coût matériel </label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.coutMateriel) }}
 
@@ -83,14 +83,14 @@
 
                             <div class="row">
                                 <section class="col col-6">
-                                    <label class="label">Objectf </label>
+                                    <label class="label">objectif </label>
                                     <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.objectif,{'attr':{'type':'text','placeholder':'Tell us about your project'|trans}}) }}
 
                                     </label>
                                 </section>
                                 <section class="col col-6">
-                                    <label class="label">contenue </label>
+                                    <label class="label">Contenue </label>
                                     <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.contenue,{'attr':{'type':'text','placeholder':'Tell us about your project'|trans}}) }}
 
@@ -99,10 +99,8 @@
                             </div>
 
                             <div class="row">
-
-
                                 <section class="col col-4">
-                                    <label class="label">typeFormation </label>
+                                    <label class="label">type formation </label>
                                     <label class="select">
                                         {{ form_widget(form.typeFormation ) }}
 
@@ -112,7 +110,7 @@
                                 </section>
 
                                 <section class="col col-4">
-                                    <label class="label">lieu </label>
+                                    <label class="label">Lieu</label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.lieu ) }}
 
@@ -148,7 +146,7 @@
                                         </label>
                                     </label>
 
-                                    <label id="formationsemployee" class="label">liste formateur interne
+                                    <label id="formationsemployee" class="label">liste des formateurs interne
                                         <label class="select">
                                             {{ form_widget(form.formationsemployee) }}
                                             <i></i>
@@ -160,7 +158,7 @@
 
                             <div class="row">
                                 <div class="for" style="display: none">
-                                    <label class="label">liste formateur Externe
+                                    <label class="label">liste des formateurs externe
                                         <label class="select">
                                             {{ form_widget(form.formateur) }}
                                             <i></i>
@@ -172,7 +170,7 @@
                             </div>
                             <div class=" row smart-form">
                                 <section class="col col-4">
-                                    <label class="label">Reccurence
+                                    <label class="label">Recurrence
                                         <label class="toggle " style=" display: inline; ">
 
                                             {{ form_widget(form.reccurence,{'attr': {'class':'reccurence'|trans}}) }}
@@ -185,7 +183,7 @@
                             <div class="dv" style="display: none">
                                 <div class="row">
                                     <section class="col col-4">
-                                        <label class="label">chaque</label>
+                                        <label class="label">Chaque</label>
 
                                         <label class="input"> <i class="icon-append fa fa-comment"></i>
                                             {{ form_widget(form.chaque) }}
@@ -195,7 +193,7 @@
 
 
                                     <section class=" col col-4 ">
-                                        <label class="label">periode</label>
+                                        <label class="label">période</label>
                                         <label class="select">
                                             {{ form_widget(form.periode) }}
 
@@ -231,7 +229,7 @@
 
 
                                     <section class="col col-6">
-                                        <label class="label">Ocurrancedate</label>
+                                        <label class="label">Occurrence date</label>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             {{ form_widget(form.Ocurrancedate,{'attr':{'class':'date'|trans}}) }}
                                             {{ form_widget(form.Ocurrancedate) }}
@@ -240,7 +238,7 @@
 
 
                                     <section class="col col-6">
-                                        <label class="label">Ocurrance</label>
+                                        <label class="label">Occurrence</label>
 
                                         <label class="input"> <i class="icon-append fa fa-comment"></i>
                                             {{ form_widget(form.OcurranceNbj) }}

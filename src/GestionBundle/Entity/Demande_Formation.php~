@@ -43,7 +43,12 @@ class Demande_Formation
      * @ORM\Column(name="theme", type="string", length=30)
      */
     private $theme;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="employe", type="string", length=30, nullable=true)
+     */
+    private $employe;
     /**
      * @var string
      *
@@ -76,10 +81,10 @@ class Demande_Formation
      */
     private $employee;
 
-
-
-
-
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
 
     /**
      * Get id
@@ -115,6 +120,29 @@ class Demande_Formation
     }
 
     /**
+     * Set dateSouhaite
+     *
+     * @param \DateTime $dateSouhaite
+     * @return Demande_Formation
+     */
+    public function setDateSouhaite($dateSouhaite)
+    {
+        $this->dateSouhaite = $dateSouhaite;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSouhaite
+     *
+     * @return \DateTime 
+     */
+    public function getDateSouhaite()
+    {
+        return $this->dateSouhaite;
+    }
+
+    /**
      * Set theme
      *
      * @param string $theme
@@ -135,6 +163,29 @@ class Demande_Formation
     public function getTheme()
     {
         return $this->theme;
+    }
+
+    /**
+     * Set employe
+     *
+     * @param string $employe
+     * @return Demande_Formation
+     */
+    public function setEmploye($employe)
+    {
+        $this->employe = $employe;
+
+        return $this;
+    }
+
+    /**
+     * Get employe
+     *
+     * @return string 
+     */
+    public function getEmploye()
+    {
+        return $this->employe;
     }
 
     /**
@@ -250,33 +301,5 @@ class Demande_Formation
     public function getEmployee()
     {
         return $this->employee;
-    }
-
-    /**
-     * Set dateSouhaite
-     *
-     * @param \DateTime $dateSouhaite
-     * @return Demande_Formation
-     */
-    public function setDateSouhaite($dateSouhaite)
-    {
-        $this->dateSouhaite = $dateSouhaite;
-
-        return $this;
-    }
-
-    /**
-     * Get dateSouhaite
-     *
-     * @return \DateTime 
-     */
-    public function getDateSouhaite()
-    {
-        return $this->dateSouhaite;
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getId();
     }
 }

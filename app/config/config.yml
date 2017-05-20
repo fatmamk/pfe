@@ -66,12 +66,14 @@ fos_user:
     firewall_name: main
     user_class: GestionBundle\Entity\Employee
     resetting:
-      token_ttl: 180
+      token_ttl: 360
 
 
 
+# Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: '%mailer_transport%'
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+   # port:      '%mailer_port%'
+    password:  '%mailer_password%'

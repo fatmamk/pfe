@@ -86,6 +86,12 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(name="employe", type="string", length=20,nullable=true)
+     */
+    private $employe;
+    /**
+     * @var string
+     *
      * @ORM\Column(name="duree", type="integer", nullable=true)
      */
     private $duree;
@@ -574,5 +580,28 @@ class Evaluation
     public function getFormation()
     {
         return $this->formation;
+    }
+
+    /**
+     * Set employe
+     *
+     * @param string $employe
+     * @return Evaluation
+     */
+    public function setEmploye($employe)
+    {
+        $this->employe = $employe;
+
+        return $this;
+    }
+
+    /**
+     * Get employe
+     *
+     * @return string 
+     */
+    public function getEmploye()
+    {
+        return $this->employe;
     }
 }

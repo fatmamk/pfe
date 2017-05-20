@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Ajouter integration</h2>
 </div>
 <div class="modal-body">
-    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('intergration_new'),'method':'POST'|trans}})}}
+    {{ form_start(form,{'attr':{'class':'smart-form','id':'checkout-form','action':path('intergration_new'),'method':'POST'|trans}})}}
 
     <fieldset>
         <div class="row">
@@ -25,14 +25,14 @@
                 </label>
             </section>
             <section class="col col-6">
-                <label class="label">Employee </label>
+                <label class="label">Employé </label>
                 <label class="select">
                     {{ form_widget(form.employe ) }}
                     <i></i>
                 </label>
             </section>
             <section class="col col-6">
-                <label class="label">responsable </label>
+                <label class="label">Responsable </label>
                 <label class="select">
                     {{ form_widget ( form.responsable) }}
                     <i></i>
@@ -47,19 +47,19 @@
     <fieldset>
         <div class="row">
             <section>
-                <label class="label">informations</label>
+                <label class="label">Informations</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( form.informations,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
                 </label>
             </section>
             <section>
-                <label class="label">pointfaible</label>
+                <label class="label">Point faible</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( form.pointfaible,{ 'attr': {'type': 'text','name':'pointfaible'|trans } } ) }}
                 </label>
             </section>
             <section>
-                <label class="label">pointforte</label>
+                <label class="label">Point forte</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( form.pointforte,{ 'attr': {'type': 'text','name':'pointforte'|trans } } ) }}
                 </label>

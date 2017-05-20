@@ -17,13 +17,11 @@ class FonctionType extends AbstractType
         $builder
             ->add('libelleFonction')
             ->add('employees')
-
-
             ->add('postes')
 
-        ;
-    }
-    
+
+
+;    }
     /**
      * {@inheritdoc}
      */

@@ -1,9 +1,9 @@
 <div class="modal-header" >
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
-    <h2 class="modal-title" id="modal-fa5-label"> Ajouter integration</h2>
+    <h2 class="modal-title" id="modal-fa5-label"> Modifier integration</h2>
 </div>
 <div class="modal-body">
-    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('intergration_edit',{'id':intergration.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'checkout-form','action':path('intergration_edit',{'id':intergration.id}),'method':'POST'|trans}})}}
 
     <fieldset>
         <div class="row">
@@ -24,14 +24,14 @@
                 </label>
             </section>
             <section class="col col-6">
-                <label class="label">Employee </label>
+                <label class="label">Employé </label>
                 <label class="select">
                     {{ form_widget(edit_form.employe ) }}
                     <i></i>
                 </label>
             </section>
             <section class="col col-6">
-                <label class="label">responsable </label>
+                <label class="label">Responsable </label>
                 <label class="select">
                     {{ form_widget ( edit_form.responsable) }}
                     <i></i>
@@ -47,19 +47,19 @@
     <fieldset>
         <div class="row">
             <section>
-                <label class="label">informations</label>
+                <label class="label">Informations</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( edit_form.informations,{ 'attr': {'type': 'text','name':'informations'|trans } } ) }}
                 </label>
             </section>
             <section>
-                <label class="label">pointfaible</label>
+                <label class="label">Point faible</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( edit_form.pointfaible,{ 'attr': {'type': 'text','name':'pointfaible'|trans } } ) }}
                 </label>
             </section>
             <section>
-                <label class="label">pointforte</label>
+                <label class="label">Point forte</label>
                 <label class="textarea"> <i class="icon-append fa fa-comment"></i>
                     {{ form_widget ( edit_form.pointforte,{ 'attr': {'type': 'text','name':'pointforte'|trans } } ) }}
                 </label>
@@ -74,7 +74,7 @@
         Annuler
     </button>
     <button type="submit" class="btn btn-primary">
-        Ajouter
+        Modifier
     </button>
 </div>
 

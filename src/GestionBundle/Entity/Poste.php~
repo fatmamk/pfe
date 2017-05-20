@@ -27,17 +27,26 @@ class Poste
      * @ORM\Column(name="libellePoste", type="string", length=255, nullable=true)
      */
     private $libellePoste;
-
+    
     /**
      * @ORM\ManyToMany(targetEntity="Fonction", mappedBy="postes")
+     *
      */
-    private $fonctions;
+    private $formations;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-
     public function getId()
     {
         return $this->id;
@@ -67,109 +76,39 @@ class Poste
     }
 
     /**
-     * Set fonction
+     * Add formations
      *
-     * @param \GestionBundle\Entity\Fonction $fonction
+     * @param \GestionBundle\Entity\Fonction $formations
      * @return Poste
      */
-    public function setFonction(\GestionBundle\Entity\Fonction $fonction = null)
+    public function addFormation(\GestionBundle\Entity\Fonction $formations)
     {
-        $this->fonction = $fonction;
+        $this->formations[] = $formations;
 
         return $this;
     }
 
     /**
-     * Get fonction
+     * Remove formations
      *
-     * @return \GestionBundle\Entity\Fonction 
+     * @param \GestionBundle\Entity\Fonction $formations
      */
-    public function getFonction()
+    public function removeFormation(\GestionBundle\Entity\Fonction $formations)
     {
-        return $this->fonction;
+        $this->formations->removeElement($formations);
     }
 
+    /**
+     * Get formations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFormations()
+    {
+        return $this->formations;
+    }
     public function __toString()
     {
-        return $this->libellePoste;
-    }
-    public function toString()
-
-{
-    return $this->libellePoste;
-}
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->fonctions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add fonctions
-     *
-     * @param \GestionBundle\Entity\Fonction $fonctions
-     * @return Poste
-     */
-    public function addFonction(\GestionBundle\Entity\Fonction $fonctions)
-    {
-        $this->fonctions[] = $fonctions;
-
-        return $this;
-    }
-
-    /**
-     * Remove fonctions
-     *
-     * @param \GestionBundle\Entity\Fonction $fonctions
-     */
-    public function removeFonction(\GestionBundle\Entity\Fonction $fonctions)
-    {
-        $this->fonctions->removeElement($fonctions);
-    }
-
-    /**
-     * Get fonctions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFonctions()
-    {
-        return $this->fonctions;
-    }
-
-    /**
-     * Add postes
-     *
-     * @param \GestionBundle\Entity\Poste $postes
-     * @return Poste
-     */
-    public function addPoste(\GestionBundle\Entity\Poste $postes)
-    {
-        $this->postes[] = $postes;
-
-        return $this;
-    }
-
-    /**
-     * Remove postes
-     *
-     * @param \GestionBundle\Entity\Poste $postes
-     */
-    public function removePoste(\GestionBundle\Entity\Poste $postes)
-    {
-        $this->postes->removeElement($postes);
-    }
-
-    /**
-     * Get postes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPostes()
-    {
-        return $this->postes;
+        return (String)$this->libellePoste;
     }
 }

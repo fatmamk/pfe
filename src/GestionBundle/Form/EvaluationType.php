@@ -17,8 +17,10 @@ class EvaluationType extends AbstractType
         $builder
 
         ->add('moyenne')
-        ->add('formation')
 
+
+            ->add('formation', 'entity', array(
+    'class' => 'GestionBundle:Formation', 'property' => 'titre',))
 
             ->add('afroid','choice', array(
                 'choices' => array(

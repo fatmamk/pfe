@@ -40,11 +40,13 @@ class EvaluationController extends Controller
     public function newAction(Request $request)
     {
         $evaluation = new Evaluation();
+        $name=$request->get("nameemployee");
         $form = $this->createForm('GestionBundle\Form\EvaluationType', $evaluation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
+            $evaluation->setEmploye($name);
             $em->persist($evaluation);
             $moy=($evaluation->getAchaud()+$evaluation->getAfroid()+$evaluation->getDatePrevue()+$evaluation->getEfficace()+
                 $evaluation->getMethodePedalogique()+$evaluation->getConference()+$evaluation->getSupportDeCours()+$evaluation->getLieu()

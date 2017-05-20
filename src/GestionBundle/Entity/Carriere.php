@@ -44,30 +44,16 @@ class Carriere
     /**
      * @var string
      *
-     * @ORM\Column(name="Integre", type="boolean", nullable=true)
+     * @ORM\Column(name="Integre", type="boolean")
      */
     private $integre;
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="Debut_Intergration", type="date",nullable=true)
-     */
-    private $debutIntergration;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="Fin_Integration", type="date",nullable=true)
-     */
-    private $finIntegration;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="Date_Recrutement", type="date",nullable=true)
      */
     private $dateRecrutement;
-    
+
     //*********Type Carrier****************
      /**
      * @ORM\ManyToOne(targetEntity="Type_Contrat", inversedBy="carrieres")
@@ -75,7 +61,7 @@ class Carriere
      */
 
        private $typecontrar;
-      
+
      //***********Employee**********
     /**
      * @ORM\OneToOne(targetEntity="Employee" ,mappedBy="carriere",cascade={"persist"})
@@ -89,6 +75,7 @@ class Carriere
      * @ORM\Column(name="Fichier_Contrat", type="string", length=255,nullable=true)
      */
     private $fichierContrat;
+    
     private $file;
 
     /**
@@ -102,17 +89,14 @@ class Carriere
     /**
      * @param mixed $file
      */
-    public function setFile( UploadedFile $file)
+    public function setFile(UploadedFile $file)
     {
         $this->file = $file;
     }
 
-
-
-
-
     public function __toString() {
-        return $this->libelleCarriere;}
+        return $this->libelleCarriere;
+    }
 
     public function getUploadDir()
     {
@@ -133,7 +117,6 @@ class Carriere
         return   __DIR__.'/../../../web/'.$this->getUploadDir().'/'.$this->fichierContrat;
     }
 
-
     public function upload()
     {
         if($this->file==null)
@@ -149,6 +132,7 @@ class Carriere
         $this->file->move($this->getUploadRoot(),$this->fichierContrat);
         unset($this->file);
     }
+
 
 
     /**
@@ -185,6 +169,29 @@ class Carriere
     }
 
     /**
+     * Set etat
+     *
+     * @param string $etat
+     * @return Carriere
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string 
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
      * Set typeContrat
      *
      * @param string $typeContrat
@@ -210,7 +217,7 @@ class Carriere
     /**
      * Set integre
      *
-     * @param string $integre
+     * @param boolean $integre
      * @return Carriere
      */
     public function setIntegre($integre)
@@ -223,57 +230,11 @@ class Carriere
     /**
      * Get integre
      *
-     * @return string 
+     * @return boolean 
      */
     public function getIntegre()
     {
         return $this->integre;
-    }
-
-    /**
-     * Set debutIntergration
-     *
-     * @param \DateTime $debutIntergration
-     * @return Carriere
-     */
-    public function setDebutIntergration($debutIntergration)
-    {
-        $this->debutIntergration = $debutIntergration;
-
-        return $this;
-    }
-
-    /**
-     * Get debutIntergration
-     *
-     * @return \DateTime 
-     */
-    public function getDebutIntergration()
-    {
-        return $this->debutIntergration;
-    }
-
-    /**
-     * Set finIntegration
-     *
-     * @param \DateTime $finIntegration
-     * @return Carriere
-     */
-    public function setFinIntegration($finIntegration)
-    {
-        $this->finIntegration = $finIntegration;
-
-        return $this;
-    }
-
-    /**
-     * Get finIntegration
-     *
-     * @return \DateTime 
-     */
-    public function getFinIntegration()
-    {
-        return $this->finIntegration;
     }
 
     /**
@@ -366,28 +327,5 @@ class Carriere
     public function getEmployee()
     {
         return $this->employee;
-    }
-
-    /**
-     * Set etat
-     *
-     * @param string $etat
-     * @return Carriere
-     */
-    public function setEtat($etat)
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    /**
-     * Get etat
-     *
-     * @return string 
-     */
-    public function getEtat()
-    {
-        return $this->etat;
     }
 }

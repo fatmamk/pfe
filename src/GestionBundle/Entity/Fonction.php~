@@ -29,17 +29,14 @@ class Fonction
     private $libelleFonction;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Poste",inversedBy="fonctions" ,cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Poste", inversedBy="fonctions",cascade={"persist"})
      * @ORM\JoinTable(name="Fonctionposte_id" )
      */
     private $postes;
-
     /**
      *  @ORM\OneToMany(targetEntity="Employee", mappedBy="fonctions",cascade={"persist"})
      */
     private $employees;
-
-
 
 
     public function __toString() {

@@ -34,11 +34,7 @@ class Jour
      * @ORM\Column(name="progmatin", type="string", length=255, nullable=true)
      */
     private $progmatin;
-    /**
-     *@ORM\ManyToOne(targetEntity="Formation",inversedBy="jours" )
-     *@ORM\JoinColumn(name="formations_id" ,referencedColumnName="id")
-     */
-    private $formation;
+
 
 
 

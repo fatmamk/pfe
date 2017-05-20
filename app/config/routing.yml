@@ -37,6 +37,12 @@ user_active_desactive:
     path:     /{id}/active
     defaults: { _controller: GestionBundle:Employee:active }
 
+Send_Mail:
+    path:     /SendMail
+    defaults: { _controller: GestionBundle:Employee:SendMail }
+
+
+
 gestion_formation_complementaire:
     resource: "@GestionBundle/Controller/FormationComplementaireController.php"
     type:     annotation

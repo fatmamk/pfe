@@ -41,16 +41,17 @@ class FormationType extends AbstractType
 
             ->add('lieu')
             ->add('coutImateriel')
+
             ->add('coutMateriel')
 
             ->add('Ocurrancedate','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy','required' => false, 'attr' => array(
                 'placeholder' => 'DD-MM-YYYY'
             )))
             ->add('OcurranceNbj',null,array('required' => false))
-            
+
 
             ->add('finApres', 'choice', array(
-                'choices' => array( 1 => 'Terminer à', 0 => 'Fin Apres'),
+                'choices' => array( 1 => 'Terminer à', 0 => 'Fin aprés'),
                 'expanded' => true,
                 'multiple' => false,
 
@@ -93,18 +94,11 @@ class FormationType extends AbstractType
 
        ->add('FormateurInterne')
             ->add('formationsemployee')
-
-    ->add('jours', CollectionType::class, array(
-    'entry_type' => JourType::class
-))
-
+            
             ->add('employees')
 
 
-        ->add('jours', CollectionType::class, array('data_class'=> null,
-            'type' =>new JourType(),
-
-        ));
+     ;
 
 
 

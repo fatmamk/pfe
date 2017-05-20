@@ -6,20 +6,29 @@
     {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demande_formation_new',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
 
     <fieldset>
+
         <div class="row">
             <div class="row">
-            <section class="col col-6">
-                <label class="label">Théme </label>
-                <label class="input"> <i class="icon-append fa fa-pencil"></i>
-                    {{ form_widget(form.theme,{'attr': {'type':'text','name':'libelleFromation','placeholder':'theme'|trans}}) }}
-                    {{ form_errors(form.theme)}}
+                <section class="col col-6">
+                    <label class="label">Nom et Prénom</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                        <div class="col-lg-12 form-group">
+                            <input type="text" class="form-control" value="{{ app.user.getNom() }}&nbsp;{{ app.user.getPrenom() }}" name="nameemployee">
+                        </div>
                     </label>
-            </section>
+                </section>
+                <section class="col col-6">
+                    <label class="label">Théme </label>
+                    <label class="input"> <i class="icon-append fa fa-pencil"></i>
+                        {{ form_widget(form.theme,{'attr': {'type':'text','name':'libelleFromation','placeholder':'theme'|trans}}) }}
+                        {{ form_errors(form.theme)}}
+                    </label>
+                </section>
+            </div>
+            <div class="row">
                 <section class="col col-4">
                     <label class="label">Etat
                         <h2 class="center-block padding-5 alert alert-warning"> en attente </h2>
-
-
                     </label>
                 </section>
             </div>
