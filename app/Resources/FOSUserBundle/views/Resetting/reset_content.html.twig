@@ -1,8 +1,25 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST"
+      class="fos_user_resetting_reset smart-form client-form">
+    <header>
+        réinitialiser le mot de passe
+    </header>
+
     {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
-    </div>
+    <footer>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}"  class="btn btn-primary"  />
+    </footer>
 </form>
+
+<style type="text/css">
+
+    #fos_user_resetting_form {
+
+        padding: 15px;
+    }
+
+</style>
