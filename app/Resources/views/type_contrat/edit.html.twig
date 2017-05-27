@@ -1,18 +1,12 @@
-
-<div class="modal-header" style="
-    background: cornflowerblue;">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        &times;
-    </button>
-    <h4 class="modal-title">
-        <i class="fa fa-edit"> TYPE CONTRAT </i>
-    </h4>
+<div class="modal-header">
+    <button type="button" class="close  closeajax" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">Modifier type contart </h2>
 </div>
 <div class="modal-body">
-    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('type_contrat_edit',{'id': type_Contrat.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'class':'smart-form checkout-form','id':'smart-form-register','action':path('type_contrat_edit',{'id': type_Contrat.id}),'method':'POST'|trans}})}}
 
     <section>
-        <label class="label">LibelleContrat</label>
+        <label class="label">Libelle</label>
         <label class="input">
             <i class="icon-append fa fa-tag"></i>
             {{ form_widget(edit_form.libelleTypeC,{'attr': {'type':'text','name':'libelleTypeC','placeholder':'libelleTypeContrat'|trans}}) }}
@@ -25,10 +19,10 @@
 
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">
-            Cancel
+            Annuler
         </button>
         <button type="submit" class="btn btn-primary">
-            Edit
+            Modifier
         </button>
 
 

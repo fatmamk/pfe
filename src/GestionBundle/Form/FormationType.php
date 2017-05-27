@@ -61,26 +61,12 @@ class FormationType extends AbstractType
 
             ->add('chaque')
             ->add('reccurence')
-
             ->add('etat')
             ->add('periode', 'choice', array('choices' => array('mois' => 'Mois','semaine' => 'Semaine','jour'=>'Jour','jours'=>'Jours'),'empty_value' => false,
                 'required' => false, 'multiple'=>false))
 
             ->add('demandeFormation')
-        ->add('typeFormation',EntityType::class,
-        array(
-            'empty_value' => false,
-            'required' => false,
-            'class' => 'GestionBundle:Type_Formation',
-            'property' => 'libelleTypeF',
-
-
-
-            'multiple'=>false
-
-
-    ))
-
+        ->add('typeFormation')
 
             ->add('formateur',EntityType::class,
                 array(
@@ -89,15 +75,11 @@ class FormationType extends AbstractType
                     'class' => 'GestionBundle:Formateur',
                     'property' => 'toString',
 
-
                 ))
-
        ->add('FormateurInterne')
             ->add('formationsemployee')
             
             ->add('employees')
-
-
      ;
 
 

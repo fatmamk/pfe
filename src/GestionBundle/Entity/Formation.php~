@@ -178,7 +178,7 @@ class Formation
 
 
     private $typeFormation;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Employee", inversedBy="formations",cascade={"persist"})
      * @ORM\JoinTable(name="employees_id" )

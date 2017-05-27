@@ -321,7 +321,7 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                        <img src="{{ asset('img/user1.JPG')}}"{{ app.user.username }} alt="me" class="online" />
+                        <img src="{{ asset('upload/images/')}}{{ app.user.imageName }}" alt="me" class="online" />
 						<span style="color:#2fde00;">
 							 {{ app.user.username }}&nbsp;{{ app.user.prenom }}
 						</span>
@@ -395,7 +395,11 @@
                                     <a href="{{ path('formationcomplementaire_index') }}" title="Formation complimentaire"><i class="fa fa-lg fa-fw"></i><span class="menu-item-parent">Complementaire</span></a>
                                 </li>
                             {%  endif %}
-
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="{% block active28 %}{% endblock %}">
+                                    <a href="{{ path('type_formation_index') }}" title="type formation"><i class="fa fa-lg fa-fw"></i><span class="menu-item-parent">Type formation</span></a>
+                                </li>
+                            {%  endif %}
 
 
 
@@ -424,7 +428,7 @@
                         </li>
 
                     <li class="{% block active25 %}{% endblock %}">
-                        <a href="{{ path('poste_index') }}" title="Demande Formation"><i class="fa fa-cube fa-lg fa-fw"></i><span class="menu-item-parent">Poste</span></a>
+                        <a href="{{ path('poste_index') }}" title="poste"><i class="fa fa-cube fa-lg fa-fw"></i><span class="menu-item-parent">Poste</span></a>
                     </li>
 
                         <li class="{% block active33 %}{% endblock %}">
@@ -451,10 +455,16 @@
 
 
 
-
+                    {%  endif %}
                 </ul>
+
             </li>
-            {%  endif %}
+
+
+            <li class="{% block active45%}{% endblock %}">
+                <a href="{{ path('fos_user_change_password') }}" title="Type Contrat"><span class="menu-item-parent">Modifier mot de passe</span></a>
+
+            </li>
         </ul>
 
     </nav>

@@ -57,7 +57,7 @@ class Demande_FormationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_demande_formation';
+        return null;
     }
 
 

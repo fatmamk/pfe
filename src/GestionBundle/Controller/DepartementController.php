@@ -49,7 +49,10 @@ class DepartementController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($departement);
             $em->flush($departement);
-
+            $this->addFlash(
+                'success',
+                ', le département a été ajouter!'
+            );
             return $this->redirectToRoute('departement_index');
         }
 
@@ -173,6 +176,7 @@ class DepartementController extends Controller
             'deletesuccess',
             ', le département a été supprimé!'
         );
+        return $this->redirectToRoute('departement_index');
     }
     /**
      * Creates a form to delete a departement entity.

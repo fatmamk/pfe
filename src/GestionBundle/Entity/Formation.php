@@ -56,14 +56,14 @@ class Formation
     /**
      * @var string
      *
-     * @ORM\Column(name="CoutImateriel", type="float", length=255,nullable=true)
+     * @ORM\Column(name="CoutImateriel", type="float",nullable=true)
      */
     private $coutImateriel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="coutMateriel", type="float", length=255,nullable=true)
+     * @ORM\Column(name="coutMateriel", type="float",nullable=true)
      */
     private $coutMateriel;
 
@@ -178,7 +178,7 @@ class Formation
 
 
     private $typeFormation;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Employee", inversedBy="formations",cascade={"persist"})
      * @ORM\JoinTable(name="employees_id" )

@@ -177,7 +177,7 @@
                                                                         </strong></span> ?</span>
                                                                     <p class="pText">
                                                                     <p><span>Voulez-vous vraiment supprimer <a
-                                                                                    href="#">{{ demandeConge.id }}</a> ? </span>
+                                                                                    href="#">{{ app.user.getNom() }}&nbsp;{{ app.user.getPrenom() }}</a> ? </span>
                                                                     </p>
                                                                     <div class="MessageBoxButtonSection">
                                                                         <div>
@@ -218,7 +218,7 @@
                                                         <div class="modal fade" id="editModal{{ demandeConge.id }}"
                                                              tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                                              aria-hidden="true">
-                                                            <div class="modal-dialog">
+                                                            <div class="modal-dialog modal-lg">
                                                                 <br><br><br><br><br>
                                                                 <div class="modal-content">
 
@@ -520,169 +520,35 @@
 
             pageSetUp();
 
-            //date
 
-            $('.datenais').datepicker({
-                dateFormat: 'dd/mm/yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-
-            });
-
-            $('.datelivre').datepicker({
-                dateFormat: 'dd/mm/yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>',
-
-            });
-
-            $('.modal-child').on('show.bs.modal', function () {
-                var modalParent = $(this).attr('data-modal-parent');
-                $(modalParent).css('opacity', 0);
-                $(modalParent).data('bs.modal').$backdrop.css('opacity', 0);
-            });
-
-
-            $('.modal-child').on('hide.bs.modal', function () {
-                var modalParent = $(this).attr('data-modal-parent');
-                $(modalParent).css('opacity', 1);
-                $(modalParent).data('bs.modal').$backdrop.css('opacity', 0.5);
-                $('body').css('overflow-y', 'hidden');
-
-            });
-
-            $('.modal-parent').on('hide.bs.modal', function () {
-                $('body').css('overflow-y', '');
-            });
-
-            <!-- Model de edit -->
-            $('.modal-child-edit').on('show.bs.modal', function () {
-                var modalParent = $(this).attr('data-modal-parent');
-                $(modalParent).css('opacity', 0);
-                $(modalParent).data('bs.modal').$backdrop.css('opacity', 0);
-            });
-
-
-            $('.modal-child-edit').on('hide.bs.modal', function () {
-                var modalParent = $(this).attr('data-modal-parent');
-                $(modalParent).css('opacity', 1);
-                $(modalParent).data('bs.modal').$backdrop.css('opacity', 0.5);
-                $('body').css('overflow-y', 'hidden');
-
-            });
-
-            $('.modal-parent-edit').on('hide.bs.modal', function () {
-                $('body').css('overflow-y', '');
-            });
-
-            <!-- Model de departement new -->
-            $('#addepartement').click(function () {
-                $nouv = $('#libelleDepartement').val();
-                $ur = 'http://localhost/projet/web/app_dev.php/departement/new1';
-                var form = $(this).parent(); //ou mettre un id du formulaire
-                $.ajax({
-                    url: $ur,
-                    type: "POST",
-                    data: $('form').serialize(),
-                    cache: false,
-
-                    beforeSend: function () {
-
-                        console.log("22" + $nouv);//return nouv
-                        $(".btnajax").prop('disabled', true);
-                        $('.closeajax').removeAttr('data-dismiss');
-                        $('.modal-child')
-                                .find('.modal-body')
-                                .append('<div class="progress progress-striped active loading" display="block" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div class="progress progress-striped active loading">');
-
-                    },
-                    success: function () {
-                        $.ajax({
-                            type: 'get',
-                            url: 'http://localhost/projet/web/app_dev.php/departement/fc/' + $nouv,
-
-                            cache: false,
-                            success: function (data) {
-                                $("[name='departement']").append($('<option>', {
-                                    value: data.depatement_id,
-                                    text: $nouv
-
-                                }));
-                            }
-                        });
-                        //message
-                        $('.loading').remove();
-                        $(".btnajax").prop('disabled', false);
-                        $('.closeajax').attr('data-dismiss', 'modal');
-                        $('.fmsg span').append('Departement a été ajouté !');
-                        $('.fmsg').show().delay(2000).fadeOut(1000);
-                    }
-                });
-                return false;
-
-            });
-            $('#addfonction').click(function () {
-                $nouv = $('#libelleFonction').val();
-                $ur = 'http://localhost/projet/web/app_dev.php/fonction/new1';
-                var form = $(this).parent(); //ou mettre un id du formulaire
-                $.ajax({
-                    url: $ur,
-                    type: "POST",
-                    data: $('form').serialize(),
-                    cache: false,
-
-                    beforeSend: function () {
-
-                        console.log("22" + $nouv);//return nouv
-                        $(".btnajax").prop('disabled', true);
-                        $('.closeajax').removeAttr('data-dismiss');
-                        $('.modal-child')
-                                .find('.modal-body')
-                                .append('<div class="progress progress-striped active loading" display="block" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div class="progress progress-striped active loading">');
-
-                    },
-                    success: function () {
-                        $.ajax({
-                            type: 'get',
-                            url: 'http://localhost/projet/web/app_dev.php/fonction/fc/' + $nouv,
-
-                            cache: false,
-                            success: function (data) {
-                                $("[name='fonctions']").append($('<option>', {
-                                    value: data.fonction_id,
-                                    text: $nouv
-
-                                }));
-                            }
-                        });
-                        //message
-                        $('.loading').remove();
-                        $(".btnajax").prop('disabled', false);
-                        $('.closeajax').attr('data-dismiss', 'modal');
-                        $('.fmsg span').append('Fonction a été ajouté !');
-                        $('.fmsg').show().delay(2000).fadeOut(1000);
-                    }
-                });
-                return false;
-
-            });
-
-
-            $('body').slimParse();
             $('.startdate').datepicker({
                 dateFormat: 'dd/mm/yy',
                 prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>'
-
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onSelect: function (selectedDate) {
+                    $('.finishdate').datepicker('option', 'minDate', selectedDate);
+                }
             });
 
+            $('.finishdate').datepicker({
+                dateFormat: 'dd/mm/yy',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onSelect: function (selectedDate) {
+                    $('.startdate').datepicker('option', 'maxDate', selectedDate);
+                }
+            });
 
         })
         pageSetUp();
         var errorClass = 'invalid';
         var errorElement = 'em';
+        var $counter=0;
+        $('.checkout-form').each(function(){
+            var $nameForm='smart-form-register'+$counter;
+            $(this).attr('id', $nameForm);
+            var $registerForm = $("#"+$nameForm).validate({
 
-        var $checkoutForm = $('#checkout-form').validate({
             errorClass: errorClass,
             errorElement: errorElement,
             highlight: function (element) {
@@ -871,9 +737,10 @@
             errorPlacement: function (error, element) {
                 error.insertAfter(element.parent());
             }
-        });
 
-        $('.fmsg').delay(2000).fadeOut(1000);
+        });
+            $counter++;
+        $('.fmsg').delay(2000).fadeOut(1000); });
 
 
     </script>

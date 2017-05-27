@@ -76,18 +76,27 @@ class EmployeeController extends Controller
                 $employee->setImageName(null);
 
             $em = $this->getDoctrine()->getManager();
-            $employee->setPlainPassword('test');
-
+            $employee->setPlainPassword('QualiMaker');
             $em->persist($employee);
             $em->flush($employee);
             $this->addFlash(
                 'success',
                 ', la formation a été ajouté!'
             );
+            $emailto=$employee->getEmail();
+            $username=$employee->getUsername();
+            $mot="mot de passe QualiMaker ".$username;
 
-
-
-
+            if ($request->getMethod() == 'POST') {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Ropense')
+                    ->setFrom('codesymfony@gmail.com')
+                    ->setTo($emailto)
+                    ->setCharset('utf-8')
+                    ->setContentType('text/html')
+                    ->setBody($mot);
+                $this->get('mailer')->send($message);
+            }
 
             return $this->redirectToRoute('employee_index');
         }

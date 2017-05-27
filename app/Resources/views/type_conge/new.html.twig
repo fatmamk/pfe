@@ -1,15 +1,10 @@
 
-<div class="modal-header" style="
-    background: cornflowerblue;">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        &times;
-    </button>
-    <h4 class="modal-title">
-        <i class="fa fa-edit"> TYpe CONGE </i>
-    </h4>
+<div class="modal-header">
+    <button type="button" class="close  closeajax" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i><span class="close"></span></button>
+    <h2 class="modal-title" id="modal-fa5-label">Ajouter type congé </h2>
 </div>
 <div class="modal-body">
-    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('type_conge_new'),'method':'POST'|trans}})}}
+    {{ form_start(form,{'attr':{'class':'smart-form checkout-form','action':path('type_conge_new'),'method':'POST'|trans}})}}
     <section>
         <label class="label">type_Conge</label>
         <label class="input">
@@ -27,10 +22,10 @@
 <div class="modal-footer">
     <footer>
         <button type="button" class="btn btn-default" data-dismiss="modal">
-            Cancel
+            Annuler
         </button>
         <button type="submit"  class=" btnajax btn btn-primary">
-            Save
+            Enregistre
         </button>
 
 

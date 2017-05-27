@@ -5,7 +5,7 @@
     <h2 class="modal-title" id="modal-fa5-label">Ajouter formateur </h2>
 </div>
 <div class="modal-body">
-    {{ form_start(form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('formateur_new'),'method':'POST'|trans}})}}
+    {{ form_start(form,{'attr':{'class':'smart-form checkout-form','id':'smart-form-register','action':path('formateur_new'),'method':'POST'|trans}})}}
     <div class="row">
         <section class="col col-6">
             <label class="label">nom</label>
@@ -23,13 +23,15 @@
                 {{ form_errors(form.prenom)}}
             </label>
         </section>
-
-        <section class="col col-6">
-            <label class="label">cv</label>
-
-            {{ form_widget(form.file,{'attr':{'required':'flase'}})}}
-            {{ form_errors(form.file)}}
+        <section class="col col-10">
+            <div class="input input-file" type="file">
+                                <span class="button"><input type="file" id="file"
+                                                            name="file"
+                                                            onchange="this.parentNode.nextSibling.value = this.value">Feuilleter</span><input
+                        type="text" placeholder="Fichier contrat" readonly="">
+            </div>
         </section>
+
     </div>
 </div>
 

@@ -222,7 +222,7 @@
                                                 <td width="25%">
                                                     <div id="rateYo{{ formation.id }}"></div>
                                                          <br>
-                                                         {% if  formation.evalutionformation<2.5  %}
+                                                         {% if  formation.evalutionformation>0 and formation.evalutionformation<2.5   %}
                                                              <div class="text-right"><a href="#formationcomplimentaire" data-toggle="modal"
                                                                                         id="modal_link" class="btn bg-color-magenta txt-color-white btn-xs">
                                                                      <i class="fa fa-hand-o-up"> Formation Complimentaire</i></a>
@@ -446,7 +446,8 @@
 <script src="{{ asset('js/plugin/datatable-responsive/datatables.responsive.min.js') }}"></script>
 <script src="{{ asset('js/plugin/jquery-form/jquery-form.min.js') }}"></script>
 <script src="{{ asset('js/plugin/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ asset('js/plugin/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+
+    <script src="{{ asset('js/plugin/bootstrap-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 <script src="{{ asset('js/jquery.rateyo.min.js') }}"></script>
 <script type="text/javascript">
 
@@ -569,6 +570,15 @@
 
 
 <script type="text/javascript">
+
+
+        $('.number-only').keypress(function(e) {
+                    if(isNaN(this.value+""+String.fromCharCode(e.charCode))) return false;
+                })
+                .on("cut copy paste",function(e){
+                    e.preventDefault();
+                });
+
     $('.reccurence').click(function () {
         if ($(this).is(":checked")) {
             $(".dv").show(1000);
@@ -857,6 +867,154 @@
                 /* END TABLETOOLS */
 
             })
+            pageSetUp();
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+            var $counter=0;
+            $('.checkout-form').each(function(){
+                var $nameForm='smart-form-register'+$counter;
+                $(this).attr('id', $nameForm);
+                var $registerForm = $("#"+$nameForm).validate({
+                    errorClass: errorClass,
+                    errorElement: errorElement,
+                    highlight: function (element) {
+                        $(element).parent().removeClass('state-success').addClass("state-error");
+                        $(element).removeClass('valid');
+                    },
+                    unhighlight: function (element) {
+                        $(element).parent().removeClass("state-error").addClass('state-success');
+                        $(element).addClass('valid');
+                    },
+
+                    // Rules for form validation
+                    rules: {
+                        titre: {
+                            required: true
+                        },
+
+                        theme: {
+                            required: true
+                        },
+                        coutImateriel: {
+                            required: true,
+                        },
+                        coutMateriel: {
+                            required: true
+
+                        },
+
+
+                        objectif: {
+                            required: true
+                        },
+                        dateDebut: {
+                            required: true
+                        },dateFin: {
+                            required: true
+                        },
+                        typeFormation: {
+                            required: true
+                        },
+
+                        OcurranceNbj: {
+                            required: true
+                        },
+                        Ocurrancedate: {
+                            required: true
+                        },
+                        periode: {
+                            required: true
+                        },
+                        contenue: {
+                            required: true
+                        },
+                        formateur: {
+                            required: true,
+
+                        },
+                        lieu: {
+                            required: true,
+
+                        },
+                        chaque: {
+                            required: true,
+
+                        },
+
+                        formationsemployee: {
+                            required: true,
+
+                        }
+                    },
+
+                    // Messages for form validation
+                    messages: {
+                        titre: {
+                            required: 'Veuillez saisir titre'
+                        },
+                        theme: {
+                            required: "S'il vous plaît entrer théme "
+                        },
+                        coutImateriel: {
+                            required: "S'il vous plaît entrer cout imateriel"
+                        },
+
+
+                        dateDebut: {
+                            required: "S'il vous plaît entrer  date début"
+                        }, dateFin: {
+                            required: "S'il vous plaît entrer date fin"
+                        },
+                        coutMateriel: {
+                            required: "S'il vous plaît entrer cout materiel"
+                        },
+
+                        objectif: {
+                            required:  "S'il vous plaît entrer objectif",
+                        },
+                        contenue: {
+                            required: "S'il vous plaît entrer contenue",
+                        },
+                        typeFormation: {
+                            required: "S'il vous plaît entrer type formation",
+                        },
+                        chaque: {
+                            required: "S'il vous plaît entrer  chaque",
+                        },
+                        cINEmployee: {
+                            required: 'Please enter le numero cin '
+                        },
+
+                        periode: {
+                            required: "S'il vous plaît entrer periode",
+                        },
+                        Ocurrancedate: {
+                            required: "S'il vous plaît entrer ocurrance date",
+                        },
+
+                        formateur: {
+                            required: 'Enter competance',
+                        },
+                        lieu: {
+                            required: "S'il vous plaît entrer lieu",
+                        },
+                        OcurranceNbj: {
+                            required: "S'il vous plaît entrer ocurrance nombre de jours",
+                        }
+                        , formationsemployee: {
+                            required: "S'il vous plaît entrer formation semployee",
+                        }
+                    },
+
+                    // Do not change code below
+                    errorPlacement: function (error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
+                $counter++;
+
+                $('.fmsg').delay(2000).fadeOut(1000)
+            });
 
         </script>
 

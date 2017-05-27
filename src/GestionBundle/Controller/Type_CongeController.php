@@ -112,7 +112,7 @@ class Type_CongeController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\Type_CongeType', $type_Conge);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('type_conge_index');

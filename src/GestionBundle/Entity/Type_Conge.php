@@ -28,7 +28,7 @@ class Type_Conge
     private $libelleType;
 
     /**
-     *  @ORM\OneToMany(targetEntity="DemandeConge", mappedBy="typeconge",cascade={"persist"})
+     *  @ORM\OneToMany(targetEntity="DemandeConge", mappedBy="typeconge")
      */
     private $demandeconges;
 

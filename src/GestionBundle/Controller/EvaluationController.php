@@ -43,18 +43,26 @@ class EvaluationController extends Controller
         $name=$request->get("nameemployee");
         $form = $this->createForm('GestionBundle\Form\EvaluationType', $evaluation);
         $form->handleRequest($request);
+        $user = $this->get('security.context')->getToken()->getUser();
 
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
+            $evaluation->setEmploye($user);
+
             $evaluation->setEmploye($name);
             $em->persist($evaluation);
             $moy=($evaluation->getAchaud()+$evaluation->getAfroid()+$evaluation->getDatePrevue()+$evaluation->getEfficace()+
                 $evaluation->getMethodePedalogique()+$evaluation->getConference()+$evaluation->getSupportDeCours()+$evaluation->getLieu()
                 +$evaluation->getDuree()+$evaluation->getRecpectHumain()+$evaluation->getContenueCours()+$evaluation->getTravauxPratique()+$evaluation->getObjectif()+
                 $evaluation->getAmbianceGenerale())/14;
-            $evaluation->setMoyenne($moy);
+            $evaluation->setMoyenne(sprintf('%0.2f', $moy));
+
 
             $em->flush();
+            $this->addFlash(
+                'Evalution',
+                ", l'évalution  a été ajouter!"
+            );
             return $this->redirectToRoute('evaluation_index');
         }
 
@@ -93,8 +101,16 @@ class EvaluationController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted()) {
+            $moy=($evaluation->getAchaud()+$evaluation->getAfroid()+$evaluation->getDatePrevue()+$evaluation->getEfficace()+
+                    $evaluation->getMethodePedalogique()+$evaluation->getConference()+$evaluation->getSupportDeCours()+$evaluation->getLieu()
+                    +$evaluation->getDuree()+$evaluation->getRecpectHumain()+$evaluation->getContenueCours()+$evaluation->getTravauxPratique()+$evaluation->getObjectif()+
+                    $evaluation->getAmbianceGenerale())/14;
+            $evaluation->setMoyenne(sprintf('%0.2f', $moy));
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'Evalution',
+                ", l'évalution  a été modiifer!"
+            );
             return $this->redirectToRoute('evaluation_index');
         }
 

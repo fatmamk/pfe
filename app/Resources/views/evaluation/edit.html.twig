@@ -1,0 +1,300 @@
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Ajouter evaluation</h4>
+</div>
+<div class="modal-body" style="height: 420px; overflow-y: auto;">
+    {{ form_start(edit_form,{ 'attr': {'class': 'smart-form ','action': path('evaluation_edit',{'id':evaluation.id}), 'method': 'POST'|trans }} ) }}
+
+
+
+
+    <section >
+        <label class="label">Formation</label>
+        <label class="select">
+            {{form_widget ( edit_form.formation,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}
+            <i></i> </label>
+    </section>
+
+
+    <section class="col col-6">
+        <label class="label">Nom et Prénom</label>
+        <label class="input"> <i class="icon-append fa fa-user"></i>
+            <div class="col-lg-12 form-group">
+                <input type="text" class="form-control" value="{{ app.user.getNom() }}&nbsp;{{ app.user.getPrenom() }}" name="nameemployee">
+            </div>
+        </label>
+    </section>
+    <div class="row">
+
+        <section class="col col-4">
+            <div class="rating" >
+
+                {% for child in edit_form.afroid %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                A froid
+            </div>
+
+        </section>
+
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.achaud %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                A chaud
+            </div>
+
+        </section>
+
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.datePrevue %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Date prévue
+            </div>
+
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.efficace %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                efficace
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.methodePedalogique %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Méthode pédagogique
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.conference %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Conférence
+            </div>
+
+        </section>
+    </div>
+    <div class="row">
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.supportDeCours%}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Support de cours
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.lieu %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Lieu
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.duree %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Durée
+            </div>
+
+        </section>
+    </div>
+    <div class="row">
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.recpectHumain%}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Respect humaine
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.contenueCours %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Contenus cours
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.travauxPratique %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Travaux pratiques
+            </div>
+
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.objectif%}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Objectif
+            </div>
+
+        </section>    <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.annimateur%}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Objectif
+            </div>
+
+        </section>
+        <section class="col col-4">
+            <div class="rating">
+
+                {% for child in edit_form.ambianceGenerale %}
+                    {% set a=child.vars.label %}
+
+                    {{ form_widget(child, { 'id': a ,'attr': {'type':'radio'}}) }}
+                    <label for="{{ a }}"><i class="fa fa-star"></i></label>
+
+                {% endfor %}
+
+                Ambiance génerale
+            </div>
+
+        </section>
+
+    </div>
+    <section >
+        <label class="label">Commentaire</label>
+        <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+            {{ form_widget ( edit_form.commantaire,{ 'attr': {'type': 'text','name':'username'|trans } } ) }}
+            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+    </section>
+
+</div>
+<div class="modal-footer">
+    {{ form_widget(edit_form._token) }}
+
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+        Annuler
+    </button>
+    <button type="submit" class="btn btn-primary">
+        Modidier
+    </button>
+</div>
+
+{{ form_end(edit_form, {'render_rest': false})  }}
+
+</div>
+
+
+
+
+
+
+
+
+

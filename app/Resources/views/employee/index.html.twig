@@ -752,8 +752,11 @@
         pageSetUp();
         var errorClass = 'invalid';
         var errorElement = 'em';
-
-        var $checkoutForm = $('#checkout-form').validate({
+        var $counter=0;
+        $('.checkout-form').each(function(){
+            var $nameForm='smart-form-register'+$counter;
+            $(this).attr('id', $nameForm);
+            var $registerForm = $("#"+$nameForm).validate({
             errorClass: errorClass,
             errorElement: errorElement,
             highlight: function (element) {
@@ -851,6 +854,9 @@
 
             // Messages for form validation
             messages: {
+                username: {
+                    required: 'Veuillez saisir username'
+                    },
                 nom: {
                     required: 'Veuillez saisir le nom '
                 },
@@ -943,8 +949,10 @@
                 error.insertAfter(element.parent());
             }
         });
+            $counter++;
 
-        $('.fmsg').delay(2000).fadeOut(1000);
+        $('.fmsg').delay(2000).fadeOut(1000)
+        });
 
 
     </script>

@@ -13,7 +13,7 @@
 
 
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(form,{ 'attr': {'enctype':'multipart/form-data','id':'checkout-form','class': 'smart-form','action': path('employee_new'), 'method': 'POST'|trans }} ) }}
+    {{ form_start(form,{ 'attr': {'enctype':'multipart/form-data','id':'checkout-form','class': 'smart-form checkout-form','action': path('employee_new'), 'method': 'POST'|trans }} ) }}
 
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
@@ -80,7 +80,7 @@
                         </article>
                         <article class="col col-6 ">
                             <section class="" style="width: 200px; height: 200px; margin: 0 auto; ">
-                                <div class="slim " data-label="Drop profile photo here" data-ratio="1:1"
+                                <div class="slim " data-label="Déposez la photo de profil ici" data-ratio="1:1"
                                      style="border-radius: 50%; ">
                                     <input type="file" name="imageFile"/>
                                 </div>

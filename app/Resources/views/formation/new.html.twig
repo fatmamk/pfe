@@ -5,7 +5,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Ajouter Formation </h2>
 </div>
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(form,{'attr':{'id':'smart-form-register','action':path('formation_new'),'method':'POST'|trans}}) }}
+    {{ form_start(form,{'attr':{'class':'checkout-form','id':'smart-form-register','action':path('formation_new'),'method':'POST'|trans}}) }}
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading " style="background-color: #71843F">
@@ -67,15 +67,16 @@
                                 <section class="col col-6">
                                     <label class="label">Coût immatériel </label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
-                                        {{ form_widget(form.coutImateriel ) }}
+                                        {{ form_widget(form.coutImateriel,{'attr':{'type':'text','class':'number-only'|trans}}) }}
 
 
                                     </label>
                                 </section>
+
                                 <section class="col col-6">
                                     <label class="label">Coût matériel </label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
-                                        {{ form_widget(form.coutMateriel) }}
+                                        {{ form_widget(form.coutMateriel,{'attr':{'type':'text','class':'number-only'|trans}}) }}
 
                                     </label>
                                 </section>
@@ -109,7 +110,7 @@
                                     </label>
                                 </section>
 
-                                <section class="col col-4">
+                                <section class="col col-6">
                                     <label class="label">Lieu</label>
                                     <label class="input"> <i class="icon-append fa fa-comment"></i>
                                         {{ form_widget(form.lieu ) }}

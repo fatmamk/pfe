@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Modifier demande formation </h2>
 </div>
 <div class="modal-body">
-            {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demande_formation_edit',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
+            {{ form_start(edit_form,{'attr':{'class':'smart-form checkout-form','id':'smart-form-register','action':path('demande_formation_edit',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
 
     {% if  (demande_Formation.etat=='accepter' or demande_Formation.etat=='Refusee' ) %}
 
@@ -24,7 +24,8 @@
             <section class="col col-6">
                 <label class="label">Date de demande </label>
                 <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget ( edit_form.dateDedemande,{'attr': { 'disabled':'disabled', 'class':'startdate'|trans}}) }}
+                    {{ form_widget(edit_form.dateDedemande,{'id':'dateDedemande'~demande_Formation.id,'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
+
                 </label>
             </section>
 
@@ -32,8 +33,7 @@
                 <label class="label">Date Souhaite </label>
 
                 <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                    {{ form_widget(edit_form.dateSouhaite,{'attr':{'disabled':'disabled','class':'finishdate'|trans}})}}
-                    {{ form_errors(edit_form.dateSouhaite)}}
+                    {{ form_widget(edit_form.dateSouhaite,{'id':'dateSouhaite'~demande_Formation.id,'attr':{'disabled':'disabled','class':'finishdate'|trans}})}}
                 </label>
             </section>
 
@@ -136,8 +136,10 @@
         </button>
 
     {% else %}
-        <a href="{{ path('demande_formation_refusee', { 'id': demande_Formation.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refusé</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('demande_formation_refusee', { 'id': demande_Formation.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refuser</a>
         <a  href="#myNewformationModal" data-toggle="modal"class="btn bg-color-green txt-color-white" ><i class="glyphicon glyphicon-thumbs-up"></i> Accepter</a>
+    {% endif %}
         <button type="submit" class="btn btn-primary">
             Modifier
         </button>

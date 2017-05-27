@@ -44,6 +44,7 @@ class DemandeCongeController extends Controller
         $form = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $form->handleRequest($request);
         $user = $this->get('security.context')->getToken()->getUser();
+
         if ($form->isSubmitted() ) {
             $em = $this->getDoctrine()->getManager();
             $demandeConge->setEmploye($user);

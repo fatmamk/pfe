@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Mofdifier demande conge</h2>
 </div>
 <div class="modal-body">
-    {{ form_start(edit_form,{'attr':{'class':'smart-form','id':'smart-form-register','action':path('demandeconge_edit',{'id':demandeConge.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'class':'smart-form checkout-form','id':'smart-form-register','action':path('demandeconge_edit',{'id':demandeConge.id}),'method':'POST'|trans}})}}
 
     {% if  (demandeConge.statutsConge=='accepter' or demandeConge.statutsConge=='Refusee' ) %}
 
@@ -15,17 +15,15 @@
                     <label class="label">Date de demande </label>
 
                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                        {{ form_widget(edit_form.dateDebutConge,{'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
-
-                        {{ form_errors(edit_form.dateDebutConge)}}
+                        {{ form_widget(edit_form.dateDebutConge,{'id':'dateDebutConge'~demandeConge.id,'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
                     </label>
                 </section>
                 <section class="col col-6">
                     <label class="label">Date Fin Conge </label>
 
                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                        {{ form_widget(edit_form.dateFinConge,{'attr':{'disabled':'disabled','class':'startdate'|trans}})}}
-                        {{ form_errors(edit_form.dateFinConge)}}
+                        {{ form_widget(edit_form.dateFinConge,{'id':'dateDebutConge'~demandeConge.id,'attr':{'disabled':'disabled','class':'finishdate'|trans}})}}
+
                     </label>
                 </section>
             </fieldset>
@@ -121,9 +119,11 @@
         </button>
 
 {% else %}
-    <a href="{{ path('demandeconge_refuse', { 'id': demandeConge.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refusé</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('demandeconge_refuse', { 'id': demandeConge.id }) }} "class="btn btn-danger"><i class="fa fa-remove"></i> Refuser</a>
     <a  href="{{ path('demandeconge_accepte', { 'id': demandeConge.id }) }} " class="btn bg-color-green txt-color-white" ><i class="glyphicon glyphicon-thumbs-up"></i> Accepter</a>
-    <button type="submit" class="btn btn-primary">
+    {% endif %}
+        <button type="submit" class="btn btn-primary">
         Modifier
     </button>
     {% endif %}

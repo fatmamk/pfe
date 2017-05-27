@@ -124,16 +124,7 @@ class FormationController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             //nb jours between 2 date and generate jours fields
-            $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
-            $dif=$int->format('%a');
-            for ($i = 1; $i <= $dif+1; $i++) {
-                ${'jour'.'$i'} = new Jour();
-                ${'jour'.'$i'}->setFormation($formation);
-                $formation->getJours()->add(${'jour'.'$i'});
-            }
-            if($formation->getReccurence()=='0')
-                $formation->setFinApres(null);
-
+            
             $formation->setEtat("Programmée");
             $em->persist($formation);
             $em->flush($formation);

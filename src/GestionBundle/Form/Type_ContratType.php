@@ -31,7 +31,7 @@ class Type_ContratType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'gestionbundle_type_contrat';
+        return null;
     }
 
 

@@ -1,9 +1,22 @@
-{% extends "base.html.twig" %}
+{% extends "login_layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block fos_user_content %}
 
-<div class="fos_user_user_show">
-    <h1>helloo </h1>
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-</div>
-{% endblock %}
+    <form action="" method="post" id="login-form" class="fos_user_user_show">
+
+        <fieldset>
+            <section>
+                <div class="">
+                    <h1> </h1>
+                    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+                    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+                </div>
+            </section>
+        </fieldset>
+        <footer>
+        </footer>
+    </form>
+
+{% endblock fos_user_content %}

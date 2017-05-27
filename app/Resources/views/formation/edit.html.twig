@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Ajouter Formation </h2>
 </div>
 <div class="modal-body" style=" max-height: 470px; overflow-y: auto;">
-    {{ form_start(edit_form,{'attr':{'id':'smart-form-register','action':path('formation_edit',{'id':formation.id}),'method':'POST'|trans}})}}
+    {{ form_start(edit_form,{'attr':{'class':'checkout-form','id':'smart-form-register','action':path('formation_edit',{'id':formation.id}),'method':'POST'|trans}})}}
     <div class="panel-group smart-accordion-default" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading " style="background-color: #AC5287">

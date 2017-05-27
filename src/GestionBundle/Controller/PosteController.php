@@ -106,18 +106,17 @@ class PosteController extends Controller
      */
     public function deleteAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
-        $poste= $em->getRepository('GestionBundle:Fonction')->find($id);
+        $poste = $em->getRepository('GestionBundle:Poste')->find($id);
+
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($poste);
         $em->flush($poste);
         $this->addFlash(
             'deletesuccess',
-            ', la formation a été supprimé!'
+            ', poste a été supprimé!'
         );
-
-
         return $this->redirectToRoute('poste_index');
     }
 

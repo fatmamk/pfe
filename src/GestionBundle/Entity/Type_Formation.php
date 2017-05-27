@@ -35,7 +35,7 @@ class Type_Formation
 
 
 
-    
+
     
     public function __toString() {
         return $this->libelleTypeF;
