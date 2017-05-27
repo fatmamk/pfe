@@ -24,7 +24,15 @@ class EvaluationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $evaluations = $em->getRepository('GestionBundle:Evaluation')->findAll();
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $evaluations = array();
+
+        if ( $user->getRole() == 'ROLE_ADMIN') {
+            $evaluations = $em->getRepository('GestionBundle:Evaluation')->findAll();
+        } else {
+            $evaluations = $em->getRepository('GestionBundle:Evaluation')->findBy(array('employee' => $user ));
+        }
 
         return $this->render('evaluation/index.html.twig', array(
             'evaluations' => $evaluations,
@@ -47,7 +55,7 @@ class EvaluationController extends Controller
 
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
-            $evaluation->setEmploye($user);
+            $evaluation->setEmployee($user);
 
             $evaluation->setEmploye($name);
             $em->persist($evaluation);

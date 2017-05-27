@@ -24,7 +24,16 @@ class DemandeCongeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $demandeConges = $em->getRepository('GestionBundle:DemandeConge')->findAll();
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $demandeConges = array();
+
+        if ( $user->getRole() == 'ROLE_ADMIN') {
+            $demandeConges = $em->getRepository('GestionBundle:DemandeConge')->findAll();
+        } else {
+            $demandeConges = $em->getRepository('GestionBundle:DemandeConge')->findBy(array('employe' => $user));
+        }
+
 
         return $this->render('demandeconge/index.html.twig', array(
             'demandeConges' => $demandeConges,

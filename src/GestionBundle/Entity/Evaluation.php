@@ -156,6 +156,13 @@ class Evaluation
     private $formation;
 
 
+    /**
+     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="employeDemande",cascade={"persist"})
+     *@ORM\JoinColumn(name="employe_id",referencedColumnName="id" )
+     */
+    private $employee;
+
+
 
 
     /**
@@ -603,5 +610,28 @@ class Evaluation
     public function getEmploye()
     {
         return $this->employe;
+    }
+
+    /**
+     * Set employee
+     *
+     * @param \GestionBundle\Entity\Employee $employee
+     * @return Demande_Formation
+     */
+    public function setEmployee(\GestionBundle\Entity\Employee $employee = null)
+    {
+        $this->employee = $employee;
+
+        return $this;
+    }
+
+    /**
+     * Get employee
+     *
+     * @return \GestionBundle\Entity\Employee
+     */
+    public function getEmployee()
+    {
+        return $this->employee;
     }
 }

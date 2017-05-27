@@ -26,8 +26,16 @@ class Demande_FormationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $user = $this->get('security.context')->getToken()->getUser();
 
-        $demande_Formations = $em->getRepository('GestionBundle:Demande_Formation')->findAll();
+        $demande_Formations = array();
+
+
+        if ( $user->getRole() == 'ROLE_ADMIN') {
+            $demande_Formations = $em->getRepository('GestionBundle:Demande_Formation')->findAll();
+        } else {
+            $demande_Formations = $em->getRepository('GestionBundle:Demande_Formation')->findBy(array('employee' => $user));
+        }
 
         return $this->render('demande_formation/index.html.twig', array(
             'demande_Formations' => $demande_Formations,
