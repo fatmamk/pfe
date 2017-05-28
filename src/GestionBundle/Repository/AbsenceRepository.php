@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class AbsenceRepository extends EntityRepository
 {
+
+    function absenceCount($month){
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->select('count(a)');
+
+        $year = date("Y");
+
+
+
+        $qb->where("a.dateDebut >= '$year-$month-01'");
+        $qb->andWhere("a.dateFin <= '$year-$month-31'");
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

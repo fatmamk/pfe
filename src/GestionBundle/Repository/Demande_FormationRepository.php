@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class Demande_FormationRepository extends EntityRepository
 {
+
+    function demandeFormationCount($month){
+        $qb = $this->createQueryBuilder('df');
+
+        $qb->select('count(df)');
+
+        $year = date("Y");
+
+        $qb->where("df.dateSouhaite >= '$year-$month-01'");
+
+        $qb->andWhere("df.dateSouhaite <= '$year-$month-31'");
+
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class DemandeCongeRepository extends EntityRepository
 {
+
+
+    function demandeCongeCount($month){
+        $qb = $this->createQueryBuilder('d');
+
+        $qb->select('count(d)');
+
+        $year = date("Y");
+
+
+
+        $qb->where("d.dateDebutConge >= '$year-$month-01'");
+        $qb->andWhere("d.dateFinConge <= '$year-$month-31'");
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

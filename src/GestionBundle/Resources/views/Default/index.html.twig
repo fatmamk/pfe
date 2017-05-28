@@ -1,11 +1,336 @@
-{%extends '::base.html.twig'%}
+{% extends '::base.html.twig' %}
+
 {% block main %}
+    <div id="main" role="main">
+        <div id="content">
+            <section id="widget-grid" class="">
 
-    {% if is_granted ('ROLE_ADMIN') %}
-        <h1>ROLE ADMIN</h1>
-    {% else %}
-        <h1>ROLE USER</h1>
-    {% endif %}
+                <!-- row -->
+                <div class="row">
 
 
+                    <!-- NEW WIDGET START -->
+                    <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false"
+                             data-widget-fullscreenbutton="false" data-widget-editbutton="false"
+                             data-widget-sortable="false">
+                            <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                            -->
+                            <header>
+
+                                <h2> Statistiques Absences/Demandes de Congés </h2>
+
+                            </header>
+
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                    <input class="form-control" type="text">
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body">
+
+                                    <!-- this is what the user will see -->
+                                    <canvas id="lineChart" height="120"></canvas>
+
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+                        <!-- end widget -->
+                    </article>
+
+                    <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-2" data-widget-colorbutton="false"
+                             data-widget-fullscreenbutton="false" data-widget-editbutton="false"
+                             data-widget-sortable="false">
+                            <!-- widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+
+                            -->
+                            <header>
+
+                                <h2>Statistiques Demandes de formations/Formations </h2>
+
+                            </header>
+
+                            <!-- widget div-->
+                            <div>
+
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                    <!-- This area used as dropdown edit box -->
+                                    <input class="form-control" type="text">
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <!-- widget content -->
+                                <div class="widget-body">
+
+                                    <!-- this is what the user will see -->
+                                    <canvas id="barChart" height="120"></canvas>
+
+                                </div>
+                                <!-- end widget content -->
+
+                            </div>
+                            <!-- end widget div -->
+
+                        </div>
+
+                    </article>
+
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}
+
+
+    {% block javascripts %}
+
+
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="{{ asset('js/libs/jquery-2.1.1.min.js') }}"><\/script>');
+            }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="{{ asset('js/libs/jquery-ui-1.10.3.min.js') }}"><\/script>');
+            }
+        </script>
+
+        <!-- IMPORTANT: APP CONFIG -->
+        <script src="{{ asset('js/app.config.js') }}"></script>
+
+        <!-- BOOTSTRAP JS -->
+        <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+
+        <!-- JARVIS WIDGETS -->
+        <script src="{{ asset('js/smartwidgets/jarvis.widget.min.js') }}"></script>
+
+        <!-- EASY PIE CHARTS -->
+        <script src="{{ asset('js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js') }}"></script>
+
+        <!-- SPARKLINES -->
+        <script src="{{ asset('js/plugin/sparkline/jquery.sparkline.min.js') }}"></script>
+
+
+        <!-- JQUERY UI + Bootstrap Slider -->
+        <script src="{{ asset('js/plugin/bootstrap-slider/bootstrap-slider.min.js') }}"></script>
+
+        <!-- browser msie issue fix -->
+        <script src="{{ asset('js/plugin/msie-fix/jquery.mb.browser.min.js') }}"></script>
+
+        <!-- FastClick: For mobile devices -->
+        <script src="{{ asset('js/plugin/fastclick/fastclick.min.js') }}"></script>
+
+        <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+        <![endif]-->
+
+        <!-- Demo purpose only -->
+        <script src="{{ asset('js/demo.min.js') }}"></script>
+
+        <!-- MAIN APP JS FILE -->
+        <script src="{{ asset('js/app.min.js') }}"></script>
+
+
+
+        <!-- PAGE RELATED PLUGIN(S)
+        <script src="..."></script>-->
+        <script src="{{ asset('js/plugin/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('js/plugin/chartjs/chart.min.js') }}"></script>
+
+
+        <script type="text/javascript">
+
+            jQuery(document).ready(function () {
+
+                pageSetUp();
+
+                window.onload = function () {
+                    window.myLine = new Chart(document.getElementById("lineChart"), LineConfig);
+                    window.myBar = new Chart(document.getElementById("barChart"), {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                        }
+                    });
+                };
+
+                var randomScalingFactor = function () {
+                    return Math.round(Math.random() * 100);
+                    //return 0;
+                };
+                var randomColorFactor = function () {
+                    return Math.round(Math.random() * 255);
+                };
+                var randomColor = function (opacity) {
+                    return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+                };
+
+                var LineConfig = {
+                    type: 'line',
+                    data: {
+                        labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+                        datasets: [{
+                            label: "Absence",
+                            data: [{{ absence01 }},
+                                {{ absence02 }},
+                                {{ absence03 }},
+                                {{ absence04 }} ,
+                                {{ absence05 }},
+                                {{ absence06 }},
+                                {{ absence07 }},
+                                {{ absence08 }},
+                                {{ absence09 }},
+                                {{ absence10 }},
+                                {{ absence11 }},
+                                {{ absence12 }}
+                            ],
+
+                        }, {
+                            label: "Demande de Congé",
+                            data: [{{ demandeCongeCount01 }},
+                                {{ demandeCongeCount01 }},
+                                {{ demandeCongeCount02 }},
+                                {{ demandeCongeCount03 }},
+                                {{ demandeCongeCount04 }},
+                                {{ demandeCongeCount05 }},
+                                {{ demandeCongeCount06 }},
+                                {{ demandeCongeCount07 }},
+                                {{ demandeCongeCount08 }},
+                                {{ demandeCongeCount09 }},
+                                {{ demandeCongeCount10 }},
+                                {{ demandeCongeCount11 }},
+                                {{ demandeCongeCount12 }}
+                            ],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        tooltips: {
+                            mode: 'label'
+                        },
+                        hover: {
+                            mode: 'dataset'
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    show: true,
+                                    labelString: 'Month'
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    show: true,
+                                    labelString: 'Value'
+                                },
+                                ticks: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 10,
+                                }
+                            }]
+                        }
+                    }
+                };
+
+                $.each(LineConfig.data.datasets, function (i, dataset) {
+                    dataset.borderColor = 'rgba(0,0,0,0.15)';
+                    dataset.backgroundColor = randomColor(0.5);
+                    dataset.pointBorderColor = 'rgba(0,0,0,0.15)';
+                    dataset.pointBackgroundColor = randomColor(0.5);
+                    dataset.pointBorderWidth = 1;
+                });
+
+
+                // bar chart example
+
+                var barChartData = {
+                    labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+                    datasets: [{
+                        label: 'Demande de formation',
+                        backgroundColor: "rgba(220,220,220,0.5)",
+                        data: [{{ demandeFormation01 }},
+                               {{ demandeFormation02 }},
+                               {{ demandeFormation03 }},
+                               {{ demandeFormation04 }},
+                               {{ demandeFormation05 }},
+                               {{ demandeFormation06 }},
+                               {{ demandeFormation07 }},
+                               {{ demandeFormation08 }},
+                               {{ demandeFormation09 }},
+                               {{ demandeFormation10 }},
+                               {{ demandeFormation11 }},
+                               {{ demandeFormation12 }}
+                        ]
+                    }, {
+                        label: 'Formation',
+                        backgroundColor: "rgba(151,187,205,0.5)",
+                        data:
+                            [   {{ formation01 }},
+                                {{ formation02 }},
+                                {{ formation03 }},
+                                {{ formation04 }},
+                                {{ formation05 }},
+                                {{ formation06 }},
+                                {{ formation07 }},
+                                {{ formation08 }},
+                                {{ formation09 }},
+                                {{ formation10 }},
+                                {{ formation11 }},
+                                {{ formation12 }}
+                            ]
+                    }
+                    ]
+
+                };
+
+
+            });
+        </script>
+
+    {% endblock %}

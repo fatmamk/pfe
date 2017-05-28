@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class FormationRepository extends EntityRepository
 {
+
+    function formationCount($month){
+        $qb = $this->createQueryBuilder('f');
+
+        $qb->select('count(f)');
+
+        $year = date("Y");
+
+        $qb->where("f.dateDebut >= '$year-$month-01'");
+
+        $qb->andWhere("f.dateFin <= '$year-$month-31'");
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
