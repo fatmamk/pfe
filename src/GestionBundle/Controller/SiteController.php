@@ -139,7 +139,10 @@ class SiteController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", site a été modifié!"
+            );
             return $this->redirectToRoute('site_index');// tab3thek lil index win tab3the q
         }
 

@@ -22,9 +22,6 @@ class Evaluation
      */
     private $id;
 
-   
-
-
     /**
      * @var string
      *
@@ -38,7 +35,6 @@ class Evaluation
      * @ORM\Column(name="achaud", type="integer",  nullable=true)
      */
     private $achaud;
-
 
 
     /**
@@ -154,17 +150,7 @@ class Evaluation
      * @ORM\JoinColumn(name="evaluationsFormation_id" ,referencedColumnName="id" , nullable=true, onDelete="SET NULL")
      */
     private $formation;
-
-
-    /**
-     *@ORM\ManyToOne(targetEntity="Employee",inversedBy="employeDemande",cascade={"persist"})
-     *@ORM\JoinColumn(name="employe_id",referencedColumnName="id" )
-     */
-    private $employee;
-
-
-
-
+    
     /**
      * Get id
      *

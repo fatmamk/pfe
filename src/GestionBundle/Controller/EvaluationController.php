@@ -52,11 +52,9 @@ class EvaluationController extends Controller
         $form = $this->createForm('GestionBundle\Form\EvaluationType', $evaluation);
         $form->handleRequest($request);
         $user = $this->get('security.context')->getToken()->getUser();
-
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $evaluation->setEmployee($user);
-
             $evaluation->setEmploye($name);
             $em->persist($evaluation);
             $moy=($evaluation->getAchaud()+$evaluation->getAfroid()+$evaluation->getDatePrevue()+$evaluation->getEfficace()+
@@ -117,7 +115,7 @@ class EvaluationController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash(
                 'Evalution',
-                ", l'évalution  a été modiifer!"
+                ", évalution  a été modiifer!"
             );
             return $this->redirectToRoute('evaluation_index');
         }

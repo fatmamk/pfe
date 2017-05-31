@@ -2,6 +2,27 @@
 
 {% block main %}
     <div id="main" role="main">
+        <div id="ribbon">
+
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li>Accueil</li>
+
+            </ol>
+            <!-- end breadcrumb -->
+
+            <!-- You can also add more buttons to the
+            ribbon for further usability
+
+            Example below:
+
+            <span class="ribbon-button-alignment pull-right">
+            <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+            <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+            <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+            </span> -->
+
+        </div>
         <div id="content">
             <section id="widget-grid" class="">
 
@@ -307,7 +328,9 @@
                                {{ demandeFormation11 }},
                                {{ demandeFormation12 }}
                         ]
-                    }, {
+                    },
+
+                        {
                         label: 'Formation',
                         backgroundColor: "rgba(151,187,205,0.5)",
                         data:
@@ -327,7 +350,8 @@
                     }
                     ]
 
-                };
+                }
+                        ;
 
 
             });

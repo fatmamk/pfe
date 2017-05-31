@@ -87,7 +87,10 @@ class PosteController extends Controller
 
         if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", poste a été modifié!"
+            );
             return $this->redirectToRoute('poste_index');
         }
 

@@ -87,7 +87,10 @@ class FormationComplementaireController extends Controller
 
         if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", formation complémentaire a été modifié!"
+            );
             return $this->redirectToRoute('formationcomplementaire_index');
         }
 

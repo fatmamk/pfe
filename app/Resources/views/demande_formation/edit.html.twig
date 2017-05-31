@@ -3,7 +3,7 @@
     <h2 class="modal-title" id="modal-fa5-label"> Modifier demande formation </h2>
 </div>
 <div class="modal-body">
-            {{ form_start(edit_form,{'attr':{'class':'smart-form checkout-form','id':'smart-form-register','action':path('demande_formation_edit',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
+            {{ form_start(edit_form,{'attr':{'class':'smart-form checkout','id':'smart-form-register','action':path('demande_formation_edit',{'id':demande_Formation.id}),'method':'POST'|trans}})}}
 
     {% if  (demande_Formation.etat=='accepter' or demande_Formation.etat=='Refusee' ) %}
 

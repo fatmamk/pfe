@@ -126,9 +126,11 @@ class DemandeCongeController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\DemandeCongeType', $demandeConge);
         $editForm->handleRequest($request);
 
-
         if ($editForm->isSubmitted() ) {
-
+            $this->addFlash(
+                'succes',
+                ", demantde congé a été modifié!"
+            );
             $p=$demandeConge->getStatutsConge();
           
             if($p=='En attente')
@@ -153,7 +155,6 @@ class DemandeCongeController extends Controller
 
             return $this->redirectToRoute('demandeconge_index');
         }
-
         return $this->render('demandeconge/edit.html.twig', array(
             'demandeConge' => $demandeConge,
             'edit_form' => $editForm->createView(),

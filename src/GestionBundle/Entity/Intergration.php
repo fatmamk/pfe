@@ -71,7 +71,7 @@ class Intergration
 
     /**
      * @ORM\OneToOne(targetEntity="Employee",inversedBy="intergation" )
-     * @ORM\JoinColumn(name="employe_id" ,referencedColumnName="id",nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(name="employe_id" ,referencedColumnName="id")
      */
     private $employe;
 
@@ -82,7 +82,7 @@ class Intergration
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -105,7 +105,7 @@ class Intergration
     /**
      * Get responsable
      *
-     * @return string 
+     * @return string
      */
     public function getResponsable()
     {
@@ -128,7 +128,7 @@ class Intergration
     /**
      * Get dateDebut
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateDebut()
     {
@@ -151,7 +151,7 @@ class Intergration
     /**
      * Get dateFin
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateFin()
     {
@@ -174,7 +174,7 @@ class Intergration
     /**
      * Get etat
      *
-     * @return string 
+     * @return string
      */
     public function getEtat()
     {
@@ -197,7 +197,7 @@ class Intergration
     /**
      * Get informations
      *
-     * @return string 
+     * @return string
      */
     public function getInformations()
     {
@@ -220,7 +220,7 @@ class Intergration
     /**
      * Get pointfaible
      *
-     * @return string 
+     * @return string
      */
     public function getPointfaible()
     {
@@ -243,7 +243,7 @@ class Intergration
     /**
      * Get pointforte
      *
-     * @return string 
+     * @return string
      */
     public function getPointforte()
     {
@@ -266,7 +266,7 @@ class Intergration
     /**
      * Get employe
      *
-     * @return \GestionBundle\Entity\Employee 
+     * @return \GestionBundle\Entity\Employee
      */
     public function getEmploye()
     {

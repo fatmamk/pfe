@@ -101,7 +101,10 @@ class Demande_FormationController extends Controller
         $editForm = $this->createForm('GestionBundle\Form\Demande_FormationType', $demande_Formation);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() ) {
-
+            $this->addFlash(
+                'succes',
+                ", demantde formation a été modifié!"
+            );
             $p=$demande_Formation->getEtat();
             if($p=='En attente')
             {
@@ -122,9 +125,7 @@ class Demande_FormationController extends Controller
                 $em->persist($demande_Formation);
                 $em->flush($demande_Formation);
             }
-
-
-
+            
             return $this->redirectToRoute('demande_formation_index');
         }
 

@@ -87,7 +87,10 @@ class DiscplineController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", Discpline  a été modifié!"
+            );
             return $this->redirectToRoute('discpline_index');
         }
 

@@ -41,7 +41,12 @@ Send_Mail:
     path:     /SendMail
     defaults: { _controller: GestionBundle:Employee:SendMail }
 
-
+user_role_Admin:
+    path:     /{id}/admin
+    defaults: { _controller: GestionBundle:Employee:promoteAdmin }
+user_role_User:
+    path:     /{id}/user
+    defaults: { _controller: GestionBundle:Employee:promoteUser }
 
 gestion_formation_complementaire:
     resource: "@GestionBundle/Controller/FormationComplementaireController.php"

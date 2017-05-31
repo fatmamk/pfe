@@ -87,7 +87,10 @@ class Type_FormationController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", type formation a été modifié!"
+            );
             return $this->redirectToRoute('type_formation_index');
         }
 

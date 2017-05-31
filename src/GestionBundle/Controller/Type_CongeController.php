@@ -114,7 +114,10 @@ class Type_CongeController extends Controller
 
         if ($editForm->isSubmitted()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", type congé a été modifié!"
+            );
             return $this->redirectToRoute('type_conge_index');
         }
 

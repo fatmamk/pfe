@@ -83,9 +83,7 @@ class DepartementController extends Controller
         //die($site);
         $response = new JsonResponse(); // return une valeur json pour notre ajax
         return $response->setData(array('depatement_id'=>$depatement_id));//tarja3li
-
     }
-
     /**
      * Creates a new departement entity.
      *
@@ -139,23 +137,21 @@ class DepartementController extends Controller
      */
     public function editAction(Request $request, Departement $departement)
     {
-        $deleteForm = $this->createDeleteForm($departement);
         $editForm = $this->createForm('GestionBundle\Form\DepartementType', $departement);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('departement_edit', array('id' => $departement->getId()));
+            $this->addFlash(
+                'succes',
+                ", Departement a été modifié!"
+            );
+            return $this->redirectToRoute('departement_index');
         }
-
         return $this->render('departement/edit.html.twig', array(
             'departement' => $departement,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
-
 
     /**
      * Deletes a departement entity.

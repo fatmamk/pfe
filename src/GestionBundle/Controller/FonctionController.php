@@ -114,7 +114,10 @@ class FonctionController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", fonction a été modifié!"
+            );
             return $this->redirectToRoute('fonction_index');
         }
 

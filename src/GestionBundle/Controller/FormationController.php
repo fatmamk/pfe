@@ -140,7 +140,6 @@ class FormationController extends Controller
 
     }
 
-
     /**
      * Creates a new formation entity.
      *
@@ -156,25 +155,13 @@ class FormationController extends Controller
         if ($form->isSubmitted() ) {
             $id =$formation->getDemandeFormation();
             $em = $this->getDoctrine()->getManager();
-            //nb jours between 2 date and generate jours fields
-            $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
-            $dif=$int->format('%a');
-
-            for ($i = 1; $i <= $dif+1; $i++) {
-
-                ${'jour'.'$i'} = new Jour();
-                ${'jour'.'$i'}->setFormation($formation);
-                $formation->getJours()->add(${'jour'.'$i'});
-
-            }
             $demandeformation=$em->getRepository('GestionBundle:Demande_Formation')->findOneBy(array('id'=>$id))->SetEtat("accepter");
             $em->persist($demandeformation);
             $em->flush($demandeformation);
             $formation->setEtat('Programmée');
             $em->persist($formation);
             $em->flush($formation);
-
-            return $this->redirectToRoute('formation_index');
+            return $this->redirectToRoute('demande_formation_index');
         }
 
         return $this->render('formation/new1.html.twig', array(
@@ -212,23 +199,12 @@ class FormationController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() ) {
-            $int=date_diff($formation->getDateDebut(), $formation->getDateFin());
-            $dif=$int->format('%a');
-            $length=$formation->getJours()->count();/*length nombre de jour le9dima*/
-            if($dif>$length)
-                for ($i = 1; $i <= $dif+1-$length; $i++) {
 
-                    ${'jour'.'$i'} = new Jour();
-                    ${'jour'.'$i'}->setFormation($formation);
-                    $formation->getJours()->add(${'jour'.'$i'});
-
-                }
-            else if($dif<$length)
-                for ($i = $dif+1; $i <= $length-1; $i++) {
-                    $formation->getJours()->remove($i);
-                }
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", formation a été modifié!"
+            );
             return $this->redirectToRoute('formation_index');
         }
 
@@ -262,7 +238,6 @@ class FormationController extends Controller
         return $this->render('formation/edit1.html.twig', array(
             'formation' => $formation,
             'edit_form' => $editForm->createView(),
-
         ));
     }
 

@@ -19,11 +19,9 @@ class EmployeeType extends AbstractType
     {
         $builder->add('nom')
             ->add('prenom')
-
             ->add('cINEmployee')
             ->add('lieunais')
             ->add('dateNaiss','date',array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy'))
-
             ->add('sexe', 'choice', array('choices' => array('Féminin' => 'Féminin','Masculin' => 'Masculin'),
                 'required' => false))
             ->add('adresseEmploye')
@@ -46,7 +44,6 @@ class EmployeeType extends AbstractType
             ->add('rIBEmployee')
             ->add('maison')
             ->add('numSecuriteSocialeEmployee')
-
             ->add('type', 'choice', array('choices' => array('formateur' => 'Féminin','Masculin' => 'Masculin')))
             ->add('diplome',TextareaType::class,array('required' => false,
                 'attr'=>array('rows'=>'3',),
@@ -63,14 +60,10 @@ class EmployeeType extends AbstractType
 
 
             ->add('fonctions')
-
             ->add('site')
-
             ->add('delivreA')
             ->add('departement')
-
             ->add("imageFile", "text", array("mapped"=>false))
-
 
             ->add('delivreLe','date', array('widget' => 'single_text','html5' => false,'format' => 'dd/MM/yyyy'))
             ->add('fonctions',EntityType::class,

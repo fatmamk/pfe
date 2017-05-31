@@ -224,7 +224,7 @@ class Employee extends BaseUser
     
 
     /**
-     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formationsemployee",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Formation", mappedBy="formationsemployee",cascade={"remove"}, orphanRemoval=true)
      */
 
     private $employeeinterne;
@@ -248,7 +248,7 @@ class Employee extends BaseUser
      */
     private $intergation;
 
-
+  
 
     public function __toString()
     {

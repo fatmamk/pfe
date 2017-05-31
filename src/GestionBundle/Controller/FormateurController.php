@@ -137,7 +137,10 @@ class FormateurController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", forateur a été modifié!"
+            );
             return $this->redirectToRoute('formateur_index');
         }
 

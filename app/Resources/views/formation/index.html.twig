@@ -179,6 +179,10 @@
                                                 </th>
                                                 <th class="hasinput" style="width:17%">
                                                 </th>
+                                                <th  style="width:17%">
+                                                </th>
+
+
                                             </tr>
                                         <tr>
                                             <th data-hide="phone,tablet">Titre</th>
@@ -190,7 +194,8 @@
                                             <th>Etat</th>
                                             <th>evaluation</th>
                                             <th>Fichier Joins</th>
-                                            <th width="17%">Actions</th>
+                                            <th>Modifier</th>
+                                            <th>Supprimer</th>
                                         </tr>
 
 
@@ -243,7 +248,25 @@
                                                 </td>
 
                                                 <td width="40%">
-
+                                                    <a href="#myEditModal{{ formation.id }}"
+                                                       class="ui-pg-button ui-corner-all" rel="tooltip"
+                                                       id="jqgrid_iledit" title="" data-toggle="modal"
+                                                       data-original-title="modifier">
+                                                        <div class="btn btn-sm btn-primary">
+                                                            <span class="fa fa-pencil"></span></div>
+                                                    </a>
+                                                    <!-- Modal edit formation -->
+                                                    <div class="modal fade" id="myEditModal{{ formation.id }}"
+                                                         tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                {{ render(controller('GestionBundle:formation:edit',{ 'id': formation.id })) }}
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div class="modal fade" id="deleteModal{{ formation.id }}"
                                                          tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                                          aria-hidden="true">
@@ -283,45 +306,6 @@
                                                             <span class="fa fa-trash-o"></span></div>
                                                     </a>
 
-                                                    <a class="ui-pg-button ui-corner-all" rel="tooltip" id="del_jqgrid"
-                                                       data-original-title="#plannig" title=""
-                                                       aria-describedby="tooltip450112" data-toggle="modal"
-                                                       data-target="#palnnig{{ formation.id }}">
-                                                        <div class="btn bg-color-pinkDark txt-color-white">
-                                                            <span class="fa fa-clock-o"></span></div>
-                                                    </a>
-
-                                                    <!-- Modal paln formation -->
-                                                    <div class="modal fade" id="palnnig{{ formation.id }}" tabindex="-1"
-                                                         role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                {{ render(controller('GestionBundle:formation:edit1',{ 'id': formation.id })) }}
-
-                                                            </div><!-- /.modal-content -->
-                                                        </div><!-- /.modal-dialog -->
-                                                    </div>
-
-                                                    <!-- /.modal -->
-                                                    <a href="#myEditModal{{ formation.id }}"
-                                                       class="ui-pg-button ui-corner-all" rel="tooltip"
-                                                       id="jqgrid_iledit" title="" data-toggle="modal"
-                                                       data-original-title="modifier">
-                                                        <div class="btn btn-sm btn-primary">
-                                                            <span class="fa fa-pencil"></span></div>
-                                                    </a>
-                                                    <!-- Modal edit formation -->
-                                                    <div class="modal fade" id="myEditModal{{ formation.id }}"
-                                                         tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                         aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                {{ render(controller('GestionBundle:formation:edit',{ 'id': formation.id })) }}
-                                                            </div><!-- /.modal-content -->
-                                                        </div><!-- /.modal-dialog -->
-                                                    </div>
-
-                                                    <!-- /.modal -->
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -567,7 +551,6 @@
     })
 
 </script>
-
 
 <script type="text/javascript">
 

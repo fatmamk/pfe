@@ -212,7 +212,6 @@
                                             </thead>
                                             <tbody>
                                             {% for employee in employees %}
-                                            {% if employee.username !='administrateur' %}
                                                 <tr>
                                                     <td>{{ employee.nom }}</td>
                                                     <td>{{ employee.prenom }}</td>
@@ -258,10 +257,10 @@
                                                         </div>
                                                     <td>
                                                         {% if employee.role == 'Administrateur' %}
-                                                            <a href="{{ path('User', { 'id': employee.id }) }}"> <button  class="btn btn-warning"><i class="icon md-account-o" aria-hidden="true"></i>user</button><br>
+                                                            <a href="{{ path('user_role_User', { 'id': employee.id }) }}"> <button  class="btn btn-warning"><i class="icon md-account-o" aria-hidden="true"></i>user</button><br>
                                                             </a>
                                                         {% else %}
-                                                            <a href="{{ path('Admin', { 'id': employee.id }) }}"><button class="btn bg-color-blueLight txt-color-white"><i class="icon md-account" aria-hidden="true"></i>admin</button>
+                                                            <a href="{{ path('user_role_Admin', { 'id': employee.id }) }}"><button class="btn bg-color-blueLight txt-color-white"><i class="icon md-account" aria-hidden="true"></i>admin</button>
                                                             </a><br>
                                                         {% endif %}
                                                         </td>
@@ -298,7 +297,6 @@
                                                     </td>
 
                                                 </tr>
-                                            {% endif %}
                                             {% endfor %}
                                             </tbody>
                                         </table>

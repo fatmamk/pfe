@@ -162,14 +162,15 @@ class EmployeeController extends Controller
                         $employee->setImageName($file['name']);//emlpoyee entity
                     }
                 }
-
-
             }
             else
                 $employee->setImageName(null);
 
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", employé a été modifié!"
+            );
             return $this->redirectToRoute('employee_index');
         }
 
@@ -217,7 +218,7 @@ class EmployeeController extends Controller
             ->getForm()
         ;
     }
-   
+// activer ou désactiver utlisateur
     public function activeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -225,42 +226,18 @@ class EmployeeController extends Controller
         if($user->isEnabled()==true){
             $user->setEnabled(false);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('info'," Compte est desactive.");
+            $this->get('session')->getFlashBag()->add('info', "Vos modifications ont ete enregistrees vos compte est desactive.");
         }else{
             $user->setEnabled(true);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('info', " Compte est desactive.");
+            $this->get('session')->getFlashBag()->add('info', "Vos modifications ont ete enregistrees  vos compte est active.");
         }
 
         return $this->redirectToRoute('employee_index');
 
     }
 
-    /**
-     * Creates a new demandeConge entity.
-     *
-     * @Route("/user/{id}", name="User")
-     * @Method({"GET"})
-     */
-    public function promoteUserAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getDoctrine()->getRepository("GestionBundle:Employee")->find($id);
-        $user->removeRole('ROLE_ADMIN');
-        $user->addRole("ROLE_User");
-        $em->persist($user);
-        $em->flush();
-        $this->get('session')->getFlashBag()->add('info', " modification enregistres .");
-
-        return $this->redirectToRoute('employee_index');
-    }
-    /**
-     * Creates a new demandeConge entity.
-     *
-     * @Route("/admin/{id}", name="Admin")
-     * @Method({"GET"})
-     */
-
+    // change role utlisateur to Role Admin
     public function promoteAdminAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -268,11 +245,23 @@ class EmployeeController extends Controller
         $user->addRole("ROLE_ADMIN");
         $em->persist($user);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('info', " modification enregistres .");
+        $this->get('session')->getFlashBag()->add('info', "Vos modifications ont ete enregistrees .");
 
         return $this->redirectToRoute('employee_index');
     }
+    // change role utlisateur to Role User
+    public function promoteUserAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository("GestionBundle:Employee")->find($id);
+        $user->removeRole('ROLE_ADMIN');
+        $user->addRole("ROLE_USER");
+        $em->persist($user);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('info', "Vos modifications ont ete enregistrees .");
 
+        return $this->redirectToRoute('employee_index');
+    }
     public function SendMailAction(Request $request )
     {
         $emailto=$request->get("inputmail");

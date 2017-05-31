@@ -6,17 +6,22 @@
     {{ form_start(form,{'attr':{'class':'smart-form','id':'checkout-form','action':path('demandeconge_new'),'method':'POST'|trans}})}}
 
     <fieldset>
-        <div class="row">
-            <section class="col col-6">
-                <label class="label">Nom et Prénom</label>
-                <label class="input"> <i class="icon-append fa fa-user"></i>
-                        <div class="col-lg-12 form-group">
-                            <input type="text" class="form-control" value="{{ app.user.getNom() }}&nbsp;{{ app.user.getPrenom() }}" name="nameemployee">
-                        </div>
-                </label>
-            </section>
-        </div>
+
+        {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') %}
             <div class="row">
+                <section class="col col-6">
+                    <label class="label">Nom et Prénom</label>
+                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                        <div class="col-lg-12 form-group">
+                            <input type="text" class="form-control" value="{{ app.user.getNom() }}&nbsp;{{ app.user.getPrenom() }}" name="nameemployee" disabled>
+                        </div>
+                    </label>
+                </section>
+            </div>
+        {%  endif %}
+
+
+        <div class="row">
             <section class="col col-6">
                 <label class="label">Date de demande </label>
 
@@ -44,9 +49,7 @@
 
 
             <section class="col col-4">
-                <label class="label">type congé
-                    <a href="#myNewtypeconge" class="open ajouter"  data-toggle="modal"> <i class=" glyphicon glyphicon-plus-sign " style="color: #3cb131"></i></a>
-                </label>
+               
                 <label class="select">
                     {{ form_widget(form.typeconge ) }}
                     <i></i>

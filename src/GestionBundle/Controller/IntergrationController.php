@@ -105,7 +105,10 @@ class IntergrationController extends Controller
 
         if ($editForm->isSubmitted() ) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'succes',
+                ", intégration a été modifié!"
+            );
             return $this->redirectToRoute('intergration_index');
         }
 
